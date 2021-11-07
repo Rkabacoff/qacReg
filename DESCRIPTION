@@ -1,0 +1,16 @@
+Package: qacReg
+Title: Multiple Regression and Logistic Regression
+Version: 0.0.1
+Authors@R: 
+    person(given = "Robert",
+           family = "Kabacoff",
+           role = c("aut", "cre"),
+           email = "rkabacoff@wesleyan.edu")
+Description: This package performs either multiple linear regression or
+    logistic regression and includes extensive performance metrics,
+    plots and diagnostics.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
