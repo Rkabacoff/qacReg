@@ -63,13 +63,13 @@ diagnostics.mreg <- function(x, output = "brief"){
     # linearity
 
     crPlots(x, main="", cex.lab=0.9)
-    title(main="Component + Residual Plots: Check for Linearity", font.main=2, line=3.1)
+    title(main="Component + Residual Plots: Test for Linearity", font.main=2, line=3.1)
 
     # homoscedasticity plot
     cat("--------------","\n",
         "What power transform of the dependent variable would make our model have constant conditional variance?",
         "\n")
-    print(spreadLevelPlot(x, main="Spread-Level Plot: \n Checking for Homoscedasticity"))
+    print(spreadLevelPlot(x, main="Spread-Level Plot: \n Test for Homoscedasticity"))
     #spreadLevelPlot(x)
 
 
@@ -101,7 +101,7 @@ diagnostics.mreg <- function(x, output = "brief"){
         "What are the influential observations?",
         "\n")
 
-    print(influencePlot(x, main="Influence Plot: Checking for Influential Observations"))
+    print(influencePlot(x, main="Influence Plot: \n Test for Influential Observations"))
 
     #influencePlot(x)
 
