@@ -4,7 +4,7 @@
 \alias{mreg}
 \title{Multiple Regression}
 \usage{
-mreg(formula, data, ...)
+mreg(formula, data)
 }
 \arguments{
 \item{formula}{an object of class formula.}
