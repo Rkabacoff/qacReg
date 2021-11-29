@@ -4,7 +4,7 @@
 \alias{diagnostics.mreg}
 \title{Diagnostics for Multiple Regressions}
 \usage{
-diagnostics.mreg(x, output = "brief")
+\method{diagnostics}{mreg}(x, output = "brief")
 }
 \arguments{
 \item{x}{an object of class \code{c("mreg", "lm")}}
