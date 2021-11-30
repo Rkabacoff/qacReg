@@ -147,7 +147,7 @@ and a graph for evaluating influential observations
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; --------------- 
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; --------------- 
 #&gt;  Non-normal Observations 
 #&gt;  Which observations seem to make the model 
 #&gt;  violate the normality assumption? </div><div class='img'><img src='diagnostics.mreg-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;       Fiat 128 Toyota Corolla 
@@ -164,7 +164,7 @@ and a graph for evaluating influential observations
 #&gt;  Which observations seem to make the model 
 #&gt;  violate the normality assumption? </div><div class='img'><img src='diagnostics.mreg-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;       Fiat 128 Toyota Corolla 
 #&gt;             18             20 </div><div class='img'><img src='diagnostics.mreg-6.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; -------------- 
-#&gt;  What power transform of the dependent variable would make our model have constant conditional variance? </div><div class='output co'>#&gt; 
+#&gt;  What power transform of the dependent variable would make our model have constant conditional variance? </div><div class='img'><img src='diagnostics.mreg-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
 #&gt; Suggested power transformation:  0.08866484 
 #&gt; ------------- 
 #&gt;  Test for Heteroskedasticity: 
@@ -174,7 +174,21 @@ and a graph for evaluating influential observations
 #&gt; --------------------- 
 #&gt;  EXTENDED DIAGNOSTICS 
 #&gt; --------------------- 
-#&gt;  Is there multicolinearity among any regressors? </div><div class='output co'>#&gt; <span class='error'>Error in vif(x)[, 1]: incorrect number of dimensions</span></div><div class='img'><img src='diagnostics.mreg-8.png' alt='' width='700' height='433' /></div></pre>
+#&gt;  Is there multicolinearity among any regressors? 
+#&gt;   cyl    wt 
+#&gt; FALSE FALSE 
+#&gt; --------------- 
+#&gt;  Are there any outliers? 
+#&gt; No Studentized residuals with Bonferroni p &lt; 0.05
+#&gt; Largest |rstudent|:
+#&gt;                rstudent unadjusted p-value Bonferroni p
+#&gt; Toyota Corolla 2.773607           0.009755      0.31216
+#&gt; --------------- 
+#&gt;  What are the influential observations? </div><div class='img'><img src='diagnostics.mreg-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                        StudRes        Hat        CookD
+#&gt; Lincoln Continental 0.03689786 0.24212252 0.0001501537
+#&gt; Chrysler Imperial   1.90687633 0.22303287 0.3189363624
+#&gt; Fiat 128            2.55455390 0.08019462 0.1592990291
+#&gt; Toyota Corolla      2.77360749 0.09681350 0.2233281268</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -186,7 +200,7 @@ and a graph for evaluating influential observations
 
       <footer>
       <div class="copyright">
-  <p>Developed by Robert Kabacoff.</p>
+  <p>Developed by QAC356 Advanced R Students.</p>
 </div>
 
 <div class="pkgdown">

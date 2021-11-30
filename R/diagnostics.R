@@ -86,7 +86,7 @@ diagnostics.mreg <- function(x, output = "brief"){
     cat("---------------------","\n",
         "Is there multicolinearity among any regressors?",
         "\n")
-    print(vif(x)[ , 1] > 10)
+    print(vif(x) > 10)
 
     # outliers
     cat("---------------","\n",
