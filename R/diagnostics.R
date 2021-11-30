@@ -36,7 +36,7 @@
 #'diagnostics(fit, output = "extended")
 
 diagnostics.mreg <- function(x, output = "brief"){
-  require(car)
+  suppressMessages(require(car))
 
   if (output != "brief" & output != "extended") {
     stop("output must equal either brief or extended")
