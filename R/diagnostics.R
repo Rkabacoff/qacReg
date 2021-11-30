@@ -31,11 +31,9 @@
 #'@return NULL
 #'
 #'@examples
-#'\dontrun{
-#'myreg <- mreg(mpg ~ cyl + wt, mtcars)
-#'diagnostics.mreg(myreg)
-#'diagnostics.mreg(myreg, output = "extended")
-#'}
+#'fit <- mreg(mpg ~ cyl + wt, mtcars)
+#'diagnostics(fit)
+#'diagnostics(fit, output = "extended")
 
 diagnostics.mreg <- function(x, output = "brief"){
   require(car)

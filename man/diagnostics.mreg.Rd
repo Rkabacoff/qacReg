@@ -30,9 +30,7 @@ and a graph for evaluating influential observations
 (\code{influencePlot}).
 }
 \examples{
-\dontrun{
-myreg <- mreg(mpg ~ cyl + wt, mtcars)
-diagnostics.mreg(myreg)
-diagnostics.mreg(myreg, output = "extended")
-}
+fit <- mreg(mpg ~ cyl + wt, mtcars)
+diagnostics(fit)
+diagnostics(fit, output = "extended")
 }
