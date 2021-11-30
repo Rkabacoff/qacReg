@@ -22,4 +22,5 @@ mreg function
 \examples{
 fit <- mreg(mpg ~ hp + wt + am, mtcars)
 plot(fit)
+plot(fit, points=TRUE)
 }

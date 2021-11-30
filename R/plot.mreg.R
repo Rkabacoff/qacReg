@@ -22,6 +22,7 @@
 #'@examples
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
 #'plot(fit)
+#'plot(fit, points=TRUE)
 
 plot.mreg <- function(x, points = FALSE){
   vars <- names(x$model)[names(x$model) != x$terms[[2]]]

@@ -16,8 +16,8 @@
 #'@export
 #'
 #'@examples
-#'fit.mreg <- mreg(mpg ~ cyl + hp + wt, mtcars)
-#'summary.mreg(fit.mreg)
+#'fit <- mreg(mpg ~ cyl + hp + wt, mtcars)
+#'summary(fit)
 
 
 summary.mreg <- function(x){
