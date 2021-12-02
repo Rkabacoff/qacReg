@@ -25,4 +25,5 @@ Fit a linear model of the form
 }
 \examples{
 fit <- mreg(mpg ~ hp + wt + am, mtcars)
+fit
 }

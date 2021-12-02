@@ -15,10 +15,12 @@
 #'
 #'@examples
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
+#'fit
 mreg <- function(formula, data){
   fit <- lm(formula, data)
   fit$call <- str2lang(paste("lm(formula=", deparse(substitute(formula)),
                              ", data=", deparse(substitute(data)), ")"))
   class(fit) <- c("mreg", "lm")
-  return (fit)
+  return(fit)
 }
+

@@ -39,6 +39,7 @@
 #'mtcars$am <- as.factor(mtcars$am)
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
 #'plot(fit)
+#'plot(fit, points=TRUE)
 
 
 plot.mreg <- function(x, points = FALSE, dot.size = 1, dot.alpha=.5, ci= TRUE, ...){

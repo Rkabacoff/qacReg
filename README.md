@@ -1,3 +1,4 @@
+![](duck.png)
 
 # qacReg
 
