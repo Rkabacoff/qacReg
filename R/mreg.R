@@ -14,6 +14,7 @@
 #'@return an object of type \code{c("mreg", "lm")}
 #'
 #'@examples
+#'mtcars$am <- factor(mtcars$am)
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
 #'fit
 mreg <- function(formula, data){

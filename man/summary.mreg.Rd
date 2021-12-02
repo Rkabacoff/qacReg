@@ -20,6 +20,7 @@ It computes summary statistics and results for a fitted linear model.
 
 }
 \examples{
-fit <- mreg(mpg ~ cyl + hp + wt, mtcars)
+mtcars$am <- factor(mtcars$am)
+fit <- mreg(mpg ~ ., mtcars)
 summary(fit)
 }

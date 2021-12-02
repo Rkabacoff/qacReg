@@ -31,7 +31,8 @@
 #'@return NULL
 #'
 #'@examples
-#'fit <- mreg(mpg ~ cyl + wt, mtcars)
+#'mtcars$am <- factor(mtcars$am)
+#'fit <- mreg(mpg ~ hp + wt + am, mtcars)
 #'diagnostics(fit)
 #'diagnostics(fit, output = "extended")
 #'
