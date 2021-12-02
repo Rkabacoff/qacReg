@@ -1,4 +1,4 @@
-#'@title Diagnostics for Multiple Regressions
+#'@title Diagnostics for Multiple Regression
 #'
 #'@description
 #'
@@ -33,6 +33,10 @@
 #'@examples
 #'fit <- mreg(mpg ~ cyl + wt, mtcars)
 #'diagnostics(fit)
+#'diagnostics(fit, output = "extended")
+#'
+#'mtcars$am <- factor(mtcars$am, labels = c("automatic", "manual"))
+#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
 #'diagnostics(fit, output = "extended")
 
 diagnostics.mreg <- function(x, output = "brief"){
