@@ -36,7 +36,11 @@
 #'@import patchwork
 #'
 #'@examples
+<<<<<<< HEAD
 #'mtcars$am <- as.factor(mtcars$am)
+=======
+#'mtcars$am <- factor(mtcars$am)
+>>>>>>> upstream/main
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
 #'plot(fit)
 #'plot(fit, points=TRUE)

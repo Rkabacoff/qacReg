@@ -24,6 +24,7 @@ Fit a linear model of the form
 \code{mreg} is a wrapper for the \code{\link{lm}} function.
 }
 \examples{
+mtcars$am <- factor(mtcars$am)
 fit <- mreg(mpg ~ hp + wt + am, mtcars)
 fit
 }

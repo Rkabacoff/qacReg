@@ -28,6 +28,7 @@ To see more details about the ggeffects package for better understanding see
 \link[https://strengejacke.github.io/ggeffects/]{here}
 }
 \examples{
+mtcars$am <- factor(mtcars$am)
 fit <- mreg(mpg ~ hp + wt + am, mtcars)
 plot(fit)
 plot(fit, points=TRUE)

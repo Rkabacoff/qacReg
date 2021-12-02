@@ -136,39 +136,54 @@ It computes summary statistics and results for a fitted linear model.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   R.Squared.. Adj..R.Squared..    AIC..   RMSE..
-#&gt; 1     0.84315        0.8263446 155.4766 2.349338</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; $Metrics
+#&gt; 1   0.8690158        0.8066423 163.7098 2.146905</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; $Metrics
 #&gt;   R.Squared.. Adj..R.Squared..    AIC..   RMSE..
-#&gt; 1     0.84315        0.8263446 155.4766 2.349338
+#&gt; 1   0.8690158        0.8066423 163.7098 2.146905
 #&gt; 
 #&gt; $`K-Fold Cross Validation, K=10`
 #&gt;   K.Fold.CV.R.squared K.fold.CV.RMSE
-#&gt; 1             0.93574       2.625501
+#&gt; 1            0.900815       3.227743
 #&gt; 
 #&gt; $`F-statistic, P-Value`
-#&gt; [1] "F(df1: 3, df2: 28) = 50.1715, p &lt; 0"
+#&gt; [1] "F(df1: 10, df2: 21) = 13.9325, p &lt; 0"
 #&gt; 
 #&gt; $`Anova Table (Type III)`
 #&gt; Anova Table (Type III tests)
 #&gt; 
 #&gt; Response: mpg
-#&gt;              Sum Sq Df  F value    Pr(&gt;F)    
-#&gt; (Intercept) 2966.77  1 470.3276 &lt; 2.2e-16 ***
-#&gt; cyl           18.43  1   2.9213 0.0984801 .  
-#&gt; hp            14.55  1   2.3069 0.1400152    
-#&gt; wt           115.35  1  18.2873 0.0001995 ***
-#&gt; Residuals    176.62 28                       
+#&gt;              Sum Sq Df F value  Pr(&gt;F)  
+#&gt; (Intercept)   3.035  1  0.4321 0.51812  
+#&gt; cyl           0.080  1  0.0114 0.91609  
+#&gt; disp          3.917  1  0.5576 0.46349  
+#&gt; hp            6.840  1  0.9739 0.33496  
+#&gt; drat          1.627  1  0.2317 0.63528  
+#&gt; wt           27.014  1  3.8463 0.06325 .
+#&gt; qsec          8.864  1  1.2621 0.27394  
+#&gt; vs            0.160  1  0.0228 0.88142  
+#&gt; am           10.547  1  1.5016 0.23399  
+#&gt; gear          1.353  1  0.1926 0.66521  
+#&gt; carb          0.407  1  0.0579 0.81218  
+#&gt; Residuals   147.494 21                  
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt; 
 #&gt; $`Multiple Linear Regression Coefficients`
-#&gt;                      B            B*      SE(B)         t      p-value
-#&gt; (Intercept) 38.7517874  3.675702e-17 1.78686403 21.687038 4.799399e-19
-#&gt; cyl         -0.9416168 -2.790225e-01 0.55091638 -1.709183 9.848010e-02
-#&gt; hp          -0.0180381 -2.052024e-01 0.01187625 -1.518838 1.400152e-01
-#&gt; wt          -3.1669731 -5.141489e-01 0.74057588 -4.276365 1.994765e-04
+#&gt;                       B          B*       SE(B)          t    p-value
+#&gt; (Intercept) 12.30337416 -0.19294399 18.71788443  0.6573058 0.51812440
+#&gt; cyl         -0.11144048 -0.03302235  1.04502336 -0.1066392 0.91608738
+#&gt; disp         0.01333524  0.27422706  0.01785750  0.7467585 0.46348865
+#&gt; hp          -0.02148212 -0.24438168  0.02176858 -0.9868407 0.33495531
+#&gt; drat         0.78711097  0.06982829  1.63537307  0.4813036 0.63527790
+#&gt; wt          -3.71530393 -0.60316876  1.89441430 -1.9611887 0.06325215
+#&gt; qsec         0.82104075  0.24343220  0.73084480  1.1234133 0.27394127
+#&gt; vs           0.31776281  0.05272367  2.10450861  0.1509915 0.88142347
+#&gt; am1          2.52022689  0.41815972  2.05665055  1.2254035 0.23398971
+#&gt; gear         0.65541302  0.08023404  1.49325996  0.4389142 0.66520643
+#&gt; carb        -0.19941925 -0.05344363  0.82875250 -0.2406258 0.81217871
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
