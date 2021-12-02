@@ -28,11 +28,7 @@ summary.mreg <- function(x){
   four <- anova.mreg(x)
   five <- solution.mreg(x)
 
- output <- list("Metrics" = one,
-                "K-Fold Cross Validation, K=10" = two,
-                "F-statistic, P-Value" = three,
-                "Anova Table (Type III)" = four,
-                "Multiple Linear Regression Coefficients" = five)
- return(output)
+  cat("Multiple Linear Regression")
+
 }
 

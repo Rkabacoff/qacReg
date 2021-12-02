@@ -13,11 +13,12 @@ rsqr.mreg <- function(x){
   rmse <- sqrt(mean(model1$residuals^2))
 
   output <- data.frame()
-  output <- rbind(output, data.frame("R-Squared: " = r2,
-                                     "Adj. R-Squared: " = ar2,
-                                     "AIC: " = aic,
-                                     "RMSE: " = rmse))
+  output <- rbind(output, data.frame(`R-Squared` = r2,
+                                     `Adj.R-Squared` = ar2,
+                                     `AIC` = aic,
+                                     `RMSE` = rmse))
 
-  print(output)
+    row.names(output) <- c("Fit Indices:")
+    return(output)
 }
 

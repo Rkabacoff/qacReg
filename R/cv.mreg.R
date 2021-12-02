@@ -10,8 +10,9 @@ cv.mreg <- function(x){
   cv_res <- cv_$results
 
   cv <- data.frame()
-  cv <- rbind(cv, data.frame("K-Fold CV R-squared" = cv_res$Rsquared,
-                             "K-fold CV RMSE" = cv_res$RMSE))
+  cv <- rbind(cv, data.frame(`R squared` = cv_res$Rsquared,
+                             `RMSE` = cv_res$RMSE))
+  row.names(cv) <- c("10 Fold Cross Validated Fit Indices:")
 
 
   return(cv)
