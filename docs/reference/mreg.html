@@ -141,14 +141,15 @@
     <p><code>mreg</code> is a wrapper for the <code><a href='https://rdrr.io/r/stats/lm.html'>lm</a></code> function.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>mreg</span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>mreg</span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>fit</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
 #&gt; lm(formula = mpg ~ hp + wt + am, data = mtcars)
 #&gt; 
 #&gt; Coefficients:
-#&gt; (Intercept)           hp           wt           am  
+#&gt; (Intercept)           hp           wt          am1  
 #&gt;    34.00288     -0.03748     -2.87858      2.08371  
 #&gt; </div></pre>
   </div>
