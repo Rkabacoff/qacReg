@@ -78,20 +78,20 @@ diagnostics.mreg <- function(x, output = "brief"){
           side=1, line=4,  adj=-0.2, cex=.65)
 
     # homoscedasticity test
-    cat("Test for Heteroscedasticity:","\n")
+    cat("Test for Heteroskedasticity:","\n")
 
     print(ncvTest(x))
 
     if(ncvTest(x)$p < 0.05) cat("\n The test suggests that there is Heteroskedasticity \n")
 
     else
-      cat("\n The test suggests the model may satistfy the Homoscedasicity assumption \n")
+      cat("\n The test suggests the model may satistfy the Homoskedasticity assumption \n")
 
     #power transformation
-    cat("\n What power transformation of the dependent variable \n would make our model have constant conditional variance? \n")
-    power <- spreadLevelPlot(x,main="Spread-Level Plot: \n Test for Homoscedasticity")
+    power <- spreadLevelPlot(x,main="Spread-Level Plot: \n Test for Homoskedasticity")
     mtext("Note: homogeneity of variance is met if the residuals and fitted values exhibit a horizontal line",
           line=4, side=1, cex=0.65, adj=-0.1)
+    cat("\n What power transformation of the dependent variable \n would make our model have constant conditional variance? \n")
     cat("Suggested Variance-Stabilizing Power Transformation:", power[[1]], "\n")
 
   }
