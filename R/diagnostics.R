@@ -26,87 +26,105 @@
 #'and a graph for evaluating influential observations
 #'(\code{influencePlot}).
 #'
+#'If the plots do not look right, you may need to clear your plots
+#'by clicking the broom in the plots window in the bottom right corner
+#'of Rstudio
+#'
+#'If " Error in plot.new() : figure margins too large" is returned,
+#'you must expand the plots window in the bottom right pane of
+#'Rstudio. The error is because this pane is not large enough for the plot,
+#'so by making the plot area larger the function will work.
+#'
+#'
 #'
 #'
 #'@return NULL
 #'
 #'@examples
-#'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ hp + wt + am, mtcars)
+#'fit <- mreg(mpg ~ cyl + wt, mtcars)
 #'diagnostics(fit)
-#'diagnostics(fit, output = "extended")
-#'
-#'mtcars$am <- factor(mtcars$am, labels = c("automatic", "manual"))
-#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
 #'diagnostics(fit, output = "extended")
 
 diagnostics.mreg <- function(x, output = "brief"){
-  suppressMessages(require(car))
+  require(car)
 
   if (output != "brief" & output != "extended") {
     stop("output must equal either brief or extended")
   }
 
   if (output %in% c("brief", "extended")){
-    # normality
-    cat("---------------",
-        "\n",
-        "Non-normal Observations",
-        "\n",
-        "Which observations seem to make the model \n violate the normality assumption?",
-        "\n")
 
-    print(qqPlot(x))
+    #heading for brief diagnostics
 
-    qqPlot(x, main = "Q-Q Plot: \n Test for Normality Assumption")
+    cat("---------------------",
+        "\n",
+        "DIAGNOSTICS FOR MULTIPLE REGRESSION \n",
+        "--------------------- \n")
+
+    qqPlot(x, main = "Q-Q Plot: \n Test for Normality Assumption",
+           xlab="t Quantiles", ylab="Studentized Residuals")
+
+    mtext("Note: observations should lie approximately on the straight line to meet normality",
+          line=4, side=1, cex=0.65, adj=-0.1)
+
 
 
 
 
     # linearity
 
-    crPlots(x, main="", cex.lab=0.9)
-    title(main="Component + Residual Plots: Test for Linearity", font.main=2, line=3.1)
+    crPlots(x, main="Components + Residuals Plots: Test for Linearity Assumption")
+    mtext("Note: numerical variables should approximately match with the blue dotted-line to meet linearity",
+          side=1, line=4,  adj=-0.2, cex=.65)
 
-    # homoscedasticity plot
-    cat("--------------","\n",
-        "What power transform of the dependent variable would make our model have constant conditional variance?",
-        "\n")
-    print(spreadLevelPlot(x, main="Spread-Level Plot: \n Test for Homoscedasticity"))
-    #spreadLevelPlot(x)
+    # homoscedasticity test
+    cat("Test for Heteroscedasticity:","\n")
 
-
-    # homoskedasticity test
-    cat("------------- \n",
-        "Test for Heteroskedasticity:",
-        "\n")
     print(ncvTest(x))
+
+    if(ncvTest(x)$p < 0.05) cat("\n The test suggests that there is Heteroskedasticity \n")
+
+    else
+      cat("\n The test suggests the model may satistfy the Homoscedasicity assumption \n")
+
+    #power transformation
+    cat("\n What power transformation of the dependent variable \n would make our model have constant conditional variance? \n")
+    power <- spreadLevelPlot(x,main="Spread-Level Plot: \n Test for Homoscedasticity")
+    mtext("Note: homogeneity of variance is met if the residuals and fitted values exhibit a horizontal line",
+          line=4, side=1, cex=0.65, adj=-0.1)
+    cat("Suggested Variance-Stabilizing Power Transformation:", power[[1]], "\n")
 
   }
 
   if (output %in% c("extended")){
-    cat("---------------------","\n","EXTENDED DIAGNOSTICS \n")
+    cat("\n",
+        "---------------------",
+        "\n",
+        "EXTENDED DIAGNOSTICS \n",
+        "--------------------- \n")
 
     #multicolinearity
-    cat("---------------------","\n",
-        "Is there multicolinearity among any regressors?",
-        "\n")
-    print(vif(x) > 10)
+    cat("Is there multicolinearity among any regressors? \n",
+        "GVIF Values above 5 suggest there is some multicolinearity \n",
+        "GVIF Values above 10 suggest strong multicolinearity \n")
+    print(vif(x))
+
 
     # outliers
-    cat("---------------","\n",
+    cat("\n",
+        "---------------","\n",
         "Are there any outliers?",
         "\n")
     print(outlierTest(x))
 
     # influential observations
-    cat("---------------","\n",
-        "What are the influential observations?",
-        "\n")
+    cat("\n",
+        "--------------- \n What are the influential observations? \n")
 
-    print(influencePlot(x, main="Influence Plot: \n Test for Influential Observations"))
+    print(influencePlot(x, main="Influence Plot: \n  Assessment for Influential Observations"))
+    mtext("Note: Influential observations have disproprotionate impact on the model",
+          line=4, side=1, cex=0.65, adj=-0.1)
 
     #influencePlot(x)
-
   }
 }
