@@ -20,7 +20,7 @@ lreg <- function(formula, data){
   fit <- glm(formula, data, family=binomial)
   fit$call <- str2lang(paste("glm(formula=", deparse(substitute(formula)),
                              ", family = binomial, data=", deparse(substitute(data)), ")"))
-  class(fit) <- c("lreg", "glm")
+  class(fit) <- c("lreg", "glm", "lm")
   return(fit)
 }
 
