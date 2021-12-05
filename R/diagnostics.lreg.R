@@ -57,7 +57,9 @@ diagnostics.lreg <- function(x){
     abline(h=cutoff, lty=2, col="red")
 
     cat("\n",
-        "--------------- \n What are the influential observations? \n")
+        "--------------- \n",
+        "What are the influential observations? \n")
+
     influencePlot(x)
 
 }
