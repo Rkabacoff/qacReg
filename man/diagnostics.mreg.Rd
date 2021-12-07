@@ -18,28 +18,34 @@ Provides diagnostics tests and graphs for a linear model
 }
 \details{
 Provides diagnostics including a graph
-for evaluating normality (\code{qqplot}),
-, a graph for evaluating linearity (\code{crPlots}),
-, a graph for evaluating homoscedasticity
-(\code{spreadLevelPlot}), and a test for
-evaluating homoscedasticity (\code{ncvTest}).
+for evaluating normality (\code{\link[car]{qqplot}}),
+, a graph for evaluating linearity (\code{\link[car]{crPlots}}),
+, a graph for evaluating homoscedasticity (\code{\link[car]{spreadLevelPlot}})
+as well as a test for heteroscedasticity (\code{\link[car]{ncvTest}})
+with a suggested power transformation when it is found.
 In addition, if \code{output = "extended"} it provides
-a test of multicollinearity (\code{vif}),
-a test for identifying outliers (\code{outlierTest}),
+a test of multicollinearity (\code{\link[car]{vif}}),
+a test for identifying outliers (\code{\link[car]{outlierTest}}),
 and a graph for evaluating influential observations
-(\code{influencePlot}).
+(\code{\link[car]{influencePlot}}).
 
 If the plots do not look right, you may need to clear your plots
 by clicking the broom in the plots window in the bottom right corner
 of Rstudio
 
-If " Error in plot.new() : figure margins too large" is returned,
+If " Error in plot.new : figure margins too large" is returned,
 you must expand the plots window in the bottom right pane of
 Rstudio. The error is because this pane is not large enough for the plot,
 so by making the plot area larger the function will work.
 }
 \examples{
-fit <- mreg(mpg ~ cyl + wt, mtcars)
+mtcars$am <- factor(mtcars$am)
+fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
 diagnostics(fit)
 diagnostics(fit, output = "extended")
+}
+\seealso{
+\code{\link[qacReg]{diagnostics}}, \code{\link[car]{vif}},
+\code{\link[car]{qqplot}}, \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}},
+\code{\link[car]{crPlots}}, \code{\link[car]{spreadLevelPlot}}, \code{\link[car]{ncvTest}}
 }

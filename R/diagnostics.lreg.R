@@ -7,10 +7,20 @@
 #'
 #'@param x an object of class \code{lreg}
 #'
+#'@import car
 #'
 #'@export
 #'
 #'@details
+#'Provides diagnostics including a test of
+#'multicollinearity (\code{\link[car]{vif}}),
+#'a graph for evaluating linearity (\code{\link[car]{ceresPlots}}),
+#'a test for identifying outliers (\code{\link[car]{outlierTest}}),
+#'and a graph for evaluating influential observations
+#'(\code{\link[car]{influencePlot}}).
+#'
+#'@seealso \code{\link[qacReg]{diagnostics}}, \code{\link[car]{vif}},
+#' \code{\link[car]{ceresPlots}}, \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}}
 #'
 #'
 #'@return NULL
