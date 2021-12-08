@@ -4,14 +4,14 @@
 #'
 #'@param x an object of class "mreg", a result of a call to \link[qacReg]{mreg} (which is a wrapper for \link[base]{lm})
 #'
-#'@return The function \emph{summary.mreg} computes summary statistics and results for a fitted linear model with measures
+#'@return The function \strong{summary.mreg} computes summary statistics and results for a fitted linear model with measures
 #'of robustness including:
 #' \describe{
-#'   \item{fit indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
-#'   \item{10-fold cross validated fit indices}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
-#'   \item{omnibus test}{includes F-statistic, degrees of freedom, p-value}
-#'   \item{anova table (type 3 tests)}{a type-III analysis of variance table (outputted from the \link[car]{Anova} function in the \strong{car} package)}
-#'   \item{coefficients table}{includes a table of regression coefficients, standardised regression coefficients, standard errors, t-values, p-values, significance codes}
+#'   \item{\strong{Fit Indices}}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
+#'   \item{\strong{10-fold Cross Validated Fit Indices}}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
+#'   \item{\strong{Omnibus Test}}{includes F-statistic, Degrees of Freedom, p-value}
+#'   \item{\strong{Anova Table (Type 3 Tests)}}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
+#'   \item{\strong{Regression Coefficients}}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
 #' }
 #'
 #'
