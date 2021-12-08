@@ -36,26 +36,27 @@ summary.mreg <- function(x){
   four <- anova.mreg(x)
   five <- solution.mreg(x)
 
-  cat("\n", " Multiple Linear Regression Summary",
-      "\n", "______________________________", "\n", "\n")
+  cat("\n", "Multiple Linear Regression Summary",
+      "\n", "----------------------------------",
+      "\n", "\n", sep="")
 
   cat("Formula:", as.character(x$call["formula"]),
       "\n",
-      "Data:", as.character(x$call["data"]),
-      "\n", "\n")
+      "Data   :", as.character(x$call["data"]),
+      "\n", "\n", sep="")
 
   cat("Fit Indices:", "\n",
-      "______________________________", "\n")
+      "------------", "\n", sep="")
   print(one)
   cat("\n")
 
   cat("10-Fold Cross Validated Fit Indices:", "\n",
-      "______________________________", "\n")
+      "------------------------------------", "\n", sep="")
   print(two)
   cat("\n")
 
   cat("Omnibus Test:", "\n",
-      "______________________________", "\n")
+      "-------------", "\n", sep="")
   three <- fstat.mreg(x)
   cat("---", "\n")
   cat("Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1", "\n")
@@ -63,12 +64,12 @@ summary.mreg <- function(x){
 
 
   cat("Anova Table (type III tests):", "\n",
-      "______________________________", "\n")
+      "-----------------------------", "\n", sep="")
   print(four[1:4])
   cat("\n")
 
   cat("Multiple Linear Regression Coefficients:", "\n",
-      "______________________________", "\n")
+      "----------------------------------------", "\n", sep="")
   print(five)
   cat("---", "\n")
   cat("Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1")
