@@ -1,8 +1,6 @@
 
 cv.mreg <- function(x){
 
-  if(!inherits(x, "mreg")) stop("x must  be class 'mreg'")
-
   cv_ <- (caret::train(as.formula(x$call),
                          data= model.frame(x),
                          method="lm",
@@ -12,7 +10,7 @@ cv.mreg <- function(x){
   cv <- data.frame()
   cv <- rbind(cv, data.frame(`R squared` = cv_res$Rsquared,
                              `RMSE` = cv_res$RMSE))
-  row.names(cv) <- c("10 Fold Cross Validated Fit Indices:")
+  row.names(cv) <- c("")
 
 
   return(cv)

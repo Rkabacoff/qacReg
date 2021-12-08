@@ -2,9 +2,7 @@ rsqr.mreg <- function(x){
 
   class(x) <- c("lm", "mreg")
 
-  if(!inherits(x, "mreg")) stop("x must  be class 'mreg'")
-
-  model1 <- summary(x)
+  model1 <- summary.lm(x)
   model2 <- broom::glance(x)
 
   r2 <- model1$r.squared
@@ -14,11 +12,11 @@ rsqr.mreg <- function(x){
 
   output <- data.frame()
   output <- rbind(output, data.frame(`R-Squared` = r2,
-                                     `Adj.R-Squared` = ar2,
+                                     `Adj R-Squared` = ar2,
                                      `AIC` = aic,
                                      `RMSE` = rmse))
 
-    row.names(output) <- c("Fit Indices:")
+    row.names(output) <- c("")
     return(output)
 }
 
