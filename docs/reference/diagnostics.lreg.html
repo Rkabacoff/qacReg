@@ -141,26 +141,27 @@ and a graph for evaluating influential observations
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lreg.html'>lreg</a></span><span class='op'>(</span><span class='va'>am</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.1</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; --------------------- 
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; --------------- 
 #&gt;  DIAGNOSTICS FOR LOGISTIC REGRESSION 
-#&gt;  --------------------- 
+#&gt; --------------- 
+#&gt; MULTICOLINEARITY 
+#&gt; --------------- 
 #&gt; Is there multicolinearity among any regressors? 
-#&gt;  GVIF Values above 5 suggest there is some multicolinearity 
-#&gt;  GVIF Values above 10 suggest strong multicolinearity 
+#&gt;  . GVIF Values above 5 suggest there is some multicolinearity 
+#&gt;  . GVIF Values above 10 suggest strong multicolinearity 
+#&gt; VIF Test: 
 #&gt;        hp        wt       mpg 
-#&gt; 18.073863  1.762413 15.545025 </div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: algorithm did not converge</span></div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: algorithm did not converge</span></div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: algorithm did not converge</span></div><div class='output co'>#&gt; <span class='warning'>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></div><div class='img'><img src='diagnostics.lreg-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  --------------- 
-#&gt;  Are there any outliers? 
+#&gt; 18.073863  1.762413 15.545025 </div><div class='img'><img src='diagnostics.lreg-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; --------------- 
+#&gt; OUTLIERS 
+#&gt; --------------- 
+#&gt; Are there any outliers? 
 #&gt; No Studentized residuals with Bonferroni p &lt; 0.05
 #&gt; Largest |rstudent|:
 #&gt;               rstudent unadjusted p-value Bonferroni p
-#&gt; Toyota Corona -2.49821           0.018871      0.60387</div><div class='img'><img src='diagnostics.lreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  --------------- 
-#&gt;  What are the influential observations? </div><div class='img'><img src='diagnostics.lreg-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                   StudRes       Hat       CookD
-#&gt; Mazda RX4 Wag   1.6836873 0.2530516 0.222287192
-#&gt; Duster 360     -0.5559253 0.6080241 0.088190264
-#&gt; Toyota Corona  -2.4982101 0.3131263 0.910436274
-#&gt; Ford Pantera L  0.2437528 0.4062533 0.006429664</div></pre>
+#&gt; Toyota Corona -2.49821           0.018871      0.60387</div><div class='img'><img src='diagnostics.lreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; --------------- 
+#&gt; INFLUENTIAL OBSERVATIONS 
+#&gt; --------------- 
+#&gt; What are the influential observations? </div><div class='img'><img src='diagnostics.lreg-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
