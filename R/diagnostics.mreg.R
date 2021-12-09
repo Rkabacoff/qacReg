@@ -60,10 +60,10 @@ diagnostics.mreg <- function(x, output = "brief"){
 
     #heading for brief diagnostics
 
-    cat("---------------------",
-        "\n",
+    cat("----------------------------------- \n",
         "DIAGNOSTICS FOR MULTIPLE REGRESSION \n",
-        "--------------------- \n")
+        "----------------------------------- \n",
+        sep="")
 
     qqPlot(x, main = "Q-Q Plot: \n Test for Normality Assumption",
            xlab="t Quantiles", ylab="Studentized Residuals")
@@ -82,7 +82,10 @@ diagnostics.mreg <- function(x, output = "brief"){
           side=1, line=4,  adj=-0.2, cex=.65)
 
     # homoscedasticity test
-    cat("Test for Heteroskedasticity:","\n")
+    cat("----------------------------","\n",
+        "Test for Heteroskedasticity:","\n",
+        "----------------------------", "\n",
+        sep="")
 
     print(ncvTest(x))
 
@@ -102,10 +105,9 @@ diagnostics.mreg <- function(x, output = "brief"){
 
   if (output %in% c("extended")){
     cat("\n",
-        "---------------------",
-        "\n",
+        "--------------------","\n",
         "EXTENDED DIAGNOSTICS \n",
-        "--------------------- \n")
+        "--------------------- \n", sep="")
 
     #multicolinearity
     cat("Is there multicolinearity among any regressors? \n",

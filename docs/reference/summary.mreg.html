@@ -159,29 +159,34 @@ of robustness including:</p><dl>
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: lattice</span></div><div class='output co'>#&gt; 
+</div><div class='output co'>#&gt; 
+#&gt; ----------------------------------
 #&gt; Multiple Linear Regression Summary
 #&gt; ----------------------------------
 #&gt; 
 #&gt; Formula:mpg ~ hp + wt + am
 #&gt; Data   :mtcars
 #&gt; 
+#&gt; ------------
 #&gt; Fit Indices:
 #&gt; ------------
 #&gt;  R.Squared Adj.R.Squared      AIC     RMSE
 #&gt;  0.8398903     0.8227357 156.1348 2.373625
 #&gt; 
+#&gt; ------------------------------------
 #&gt; 10-Fold Cross Validated Fit Indices:
 #&gt; ------------------------------------
 #&gt;  R.squared     RMSE
 #&gt;  0.8359868 2.573404
 #&gt; 
+#&gt; -------------
 #&gt; Omnibus Test:
 #&gt; -------------
 #&gt; F(df1: 3, df2: 28) = 48.96, p &lt; 0  *** 
 #&gt; --- 
 #&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 #&gt; 
+#&gt; -----------------------------
 #&gt; Anova Table (type III tests):
 #&gt; -----------------------------
 #&gt;              Sum Sq Df  F value    Pr(&gt;F)    
@@ -191,8 +196,9 @@ of robustness including:</p><dl>
 #&gt; am            14.76  1   2.2918 0.1412682    
 #&gt; Residuals    180.29 28                       
 #&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #&gt; 
+#&gt; ----------------------------------------
 #&gt; Multiple Linear Regression Coefficients:
 #&gt; ----------------------------------------
 #&gt;                       B         B*          SE         t      p-value    
@@ -213,7 +219,7 @@ of robustness including:</p><dl>
 
       <footer>
       <div class="copyright">
-  <p>Developed by QAC356 Advanced R Students.</p>
+  <p>Developed by Kabacoff Robert.</p>
 </div>
 
 <div class="pkgdown">

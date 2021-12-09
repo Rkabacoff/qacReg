@@ -36,13 +36,16 @@ diagnostics.lreg <- function(x){
 
     #heading for brief diagnostics
 
-  cat("--------------- \n DIAGNOSTICS FOR LOGISTIC REGRESSION \n")
+  cat("----------------------------------- \n",
+      "DIAGNOSTICS FOR LOGISTIC REGRESSION \n",
+      "----------------------------------- \n",
+      sep="")
 
 
   # Multicolinearity
-  cat("--------------- \n")
+  cat("---------------- \n")
   cat("MULTICOLINEARITY \n")
-  cat("--------------- \n")
+  cat("---------------- \n")
   cat("Is there multicolinearity among any regressors? \n",
       ". GVIF Values above 5 suggest there is some multicolinearity \n",
       ". GVIF Values above 10 suggest strong multicolinearity",
@@ -58,9 +61,9 @@ diagnostics.lreg <- function(x){
 
 
   # Outliers
-  cat("--------------- \n")
+  cat("-------- \n")
   cat("OUTLIERS \n")
-  cat("--------------- \n")
+  cat("-------- \n")
   cat("Are there any outliers? \n")
   print(outlierTest(x))
 
@@ -72,9 +75,9 @@ diagnostics.lreg <- function(x){
   mtext("Note: anything above the red-dotted line could be considered an outlier",
         line=4, side=1, cex=0.65, adj=-0.2)
 
-  cat("--------------- \n")
+  cat("------------------------ \n")
   cat("INFLUENTIAL OBSERVATIONS \n")
-  cat("--------------- \n")
+  cat("------------------------ \n")
   cat("What are the influential observations? \n")
 
   influencePlot(x, main="Influence Plot: Assessment for Influential Obs.")

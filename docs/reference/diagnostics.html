@@ -160,9 +160,11 @@ Run and print regression diagnostics</h1>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'>diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; --------------------- 
-#&gt;  DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt;  --------------------- </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Test for Heteroskedasticity: 
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; ----------------------------------- 
+#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
+#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
+#&gt; Test for Heteroskedasticity:
+#&gt; ----------------------------
 #&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
 #&gt; Chisquare = 1.733814, Df = 1, p = 0.18792
@@ -182,7 +184,7 @@ Run and print regression diagnostics</h1>
 
       <footer>
       <div class="copyright">
-  <p>Developed by QAC356 Advanced R Students.</p>
+  <p>Developed by Kabacoff Robert.</p>
 </div>
 
 <div class="pkgdown">

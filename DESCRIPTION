@@ -2,10 +2,18 @@ Package: qacReg
 Title: Multiple Regression and Logistic Regression
 Version: 0.0.1
 Authors@R: 
-    person(given = "QAC356",
-           family = "Advanced R Students",
+    c(person(given = "Kabacoff",
+           family = "Robert",
            role = c("aut", "cre"),
-           email = "rkabacoff@wesleyan.edu")
+           email = "rkabacoff@wesleyan.edu"),
+    person("Abbas", "Arifa", role = "ctb"),
+    person("Belden", "Jackson Fletcher", role = "ctb"),
+    person("Devlin", "Lars Stuyvesant", role = "ctb"),
+    person("Nguyen", "Justin", role = "ctb"),
+    person("Oren", "Neve", role = "ctb"),
+    person("Sreewastav", "Preksha", role = "ctb"),
+    person("Westfahl", "Grant Isaac", role = "ctb")
+    )
 Description: This package performs either multiple linear regression or
     logistic regression and includes extensive performance metrics,
     plots and diagnostics.

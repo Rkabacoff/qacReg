@@ -32,11 +32,12 @@ summary.mreg <- function(x){
   if(!inherits(x, "mreg")) stop("x must  be class 'mreg'")
 
   one <- suppressWarnings(rsqr.mreg(x))
-  two <- cv.mreg(x)
+  two <- suppressMessages(cv.mreg(x))
   four <- anova.mreg(x)
   five <- solution.mreg(x)
 
-  cat("\n", "Multiple Linear Regression Summary",
+  cat("\n", "----------------------------------",
+      "\n", "Multiple Linear Regression Summary",
       "\n", "----------------------------------",
       "\n", "\n", sep="")
 
@@ -45,30 +46,34 @@ summary.mreg <- function(x){
       "Data   :", as.character(x$call["data"]),
       "\n", "\n", sep="")
 
-  cat("Fit Indices:", "\n",
+  cat("------------", "\n",
+      "Fit Indices:", "\n",
       "------------", "\n", sep="")
   print(one)
   cat("\n")
 
-  cat("10-Fold Cross Validated Fit Indices:", "\n",
+  cat("------------------------------------", "\n",
+      "10-Fold Cross Validated Fit Indices:", "\n",
       "------------------------------------", "\n", sep="")
   print(two)
   cat("\n")
 
-  cat("Omnibus Test:", "\n",
+  cat("-------------", "\n",
+      "Omnibus Test:", "\n",
       "-------------", "\n", sep="")
   three <- fstat.mreg(x)
   cat("---", "\n")
   cat("Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1", "\n")
   cat("\n")
 
-
-  cat("Anova Table (type III tests):", "\n",
+  cat("-----------------------------", "\n",
+      "Anova Table (type III tests):", "\n",
       "-----------------------------", "\n", sep="")
   print(four[1:4])
   cat("\n")
 
-  cat("Multiple Linear Regression Coefficients:", "\n",
+  cat("----------------------------------------", "\n",
+      "Multiple Linear Regression Coefficients:", "\n",
       "----------------------------------------", "\n", sep="")
   print(five)
   cat("---", "\n")

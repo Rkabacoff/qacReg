@@ -178,9 +178,11 @@ so by making the plot area larger the function will work.</p>
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>disp</span> <span class='op'>+</span> <span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; --------------------- 
-#&gt;  DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt;  --------------------- </div><div class='img'><img src='diagnostics.mreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Test for Heteroskedasticity: 
+</div><div class='output co'>#&gt; ----------------------------------- 
+#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
+#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics.mreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
+#&gt; Test for Heteroskedasticity:
+#&gt; ----------------------------
 #&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
 #&gt; Chisquare = 2.170062, Df = 1, p = 0.14072
@@ -189,9 +191,11 @@ so by making the plot area larger the function will work.</p>
 #&gt;  What power transformation of the dependent variable 
 #&gt;  would make our model have constant conditional variance? 
 #&gt; Suggested Variance-Stabilizing Power Transformation: -0.1166469 </div><div class='input'><span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span>, output <span class='op'>=</span> <span class='st'>"extended"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; --------------------- 
-#&gt;  DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt;  --------------------- </div><div class='img'><img src='diagnostics.mreg-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Test for Heteroskedasticity: 
+</div><div class='output co'>#&gt; ----------------------------------- 
+#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
+#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics.mreg-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
+#&gt; Test for Heteroskedasticity:
+#&gt; ----------------------------
 #&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
 #&gt; Chisquare = 2.170062, Df = 1, p = 0.14072
@@ -201,9 +205,9 @@ so by making the plot area larger the function will work.</p>
 #&gt;  would make our model have constant conditional variance? 
 #&gt; Suggested Variance-Stabilizing Power Transformation: -0.1166469 
 #&gt; 
-#&gt;  --------------------- 
-#&gt;  EXTENDED DIAGNOSTICS 
-#&gt;  --------------------- 
+#&gt; --------------------
+#&gt; EXTENDED DIAGNOSTICS 
+#&gt; --------------------- 
 #&gt; Is there multicolinearity among any regressors? 
 #&gt;  GVIF Values above 5 suggest there is some multicolinearity 
 #&gt;  GVIF Values above 10 suggest strong multicolinearity 
@@ -235,7 +239,7 @@ so by making the plot area larger the function will work.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by QAC356 Advanced R Students.</p>
+  <p>Developed by Kabacoff Robert.</p>
 </div>
 
 <div class="pkgdown">
