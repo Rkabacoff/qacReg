@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>diagnostics
+<title>diagnostics:
 
 Run and print regression diagnostics — diagnostics • qacReg</title>
 
@@ -41,10 +41,10 @@ Run and print regression diagnostics — diagnostics • qacReg</title>
 
 
 
-<meta property="og:title" content="diagnostics
+<meta property="og:title" content="diagnostics:
 
 Run and print regression diagnostics — diagnostics" />
-<meta property="og:description" content="diagnostics
+<meta property="og:description" content="diagnostics:
 Run and print regression diagnostics" />
 
 
@@ -108,7 +108,7 @@ Run and print regression diagnostics" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>diagnostics
+    <h1>diagnostics:
 
 Run and print regression diagnostics</h1>
     
@@ -116,7 +116,7 @@ Run and print regression diagnostics</h1>
     </div>
 
     <div class="ref-description">
-    <p>diagnostics</p>
+    <p>diagnostics:</p>
 <p>Run and print regression diagnostics</p>
     </div>
 
@@ -127,7 +127,7 @@ Run and print regression diagnostics</h1>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of type <code>mreg</code>.</p></td>
+      <td><p>an object of type <code>mreg</code> or <code>lreg</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -137,23 +137,22 @@ Run and print regression diagnostics</h1>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The results of</p>
+    <p>The results of the methods <code><a href='diagnostics.mreg.html'>diagnostics.mreg</a></code> or <code><a href='diagnostics.lreg.html'>diagnostics.lreg</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'>diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; --------------- 
-#&gt;  Non-normal Observations 
-#&gt;  Which observations seem to make the model 
-#&gt;  violate the normality assumption? </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;       Fiat 128 Ford Pantera L 
-#&gt;             18             29 </div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; -------------- 
-#&gt;  What power transform of the dependent variable would make our model have constant conditional variance? </div><div class='img'><img src='diagnostics-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; Suggested power transformation:  0.2910809 
-#&gt; ------------- 
-#&gt;  Test for Heteroskedasticity: 
+</div><div class='output co'>#&gt; --------------------- 
+#&gt;  DIAGNOSTICS FOR MULTIPLE REGRESSION 
+#&gt;  --------------------- </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Test for Heteroskedasticity: 
 #&gt; Non-constant Variance Score Test 
 #&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 1.733814, Df = 1, p = 0.18792</div></pre>
+#&gt; Chisquare = 1.733814, Df = 1, p = 0.18792
+#&gt; 
+#&gt;  The test suggests the model may satistfy the Homoskedasticity assumption </div><div class='img'><img src='diagnostics-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt;  What power transformation of the dependent variable 
+#&gt;  would make our model have constant conditional variance? 
+#&gt; Suggested Variance-Stabilizing Power Transformation: 0.2910809 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
