@@ -13,14 +13,14 @@ solution.mreg <- function(x){
   coeff <- coeff[, c(1, 5, 2, 3, 4)]
 
 
-  signif <- ifelse(round(coeff[[5]], 3) == 0, "***",
-         ifelse(round(coeff[[5]], 3) < 0.001, "**",
-                ifelse(round(coeff[[5]], 3) < 0.01, "*",
-                       ifelse(round(coeff[[5]], 3) < 0.05, ".",
-                              ifelse(round(coeff[[5]], 3) < 0.1, " ", "")))))
+  signif <- ifelse(coeff[[5]] < .001, "***",
+                   ifelse(coeff[[5]] < 0.01, "**",
+                          ifelse(coeff[[5]] < 0.05, "*",
+                                 ifelse(coeff[[5]] < 0.1, ".", " "))))
 
   coeff <- cbind(coeff, signif)
   names(coeff) <- c("B", "B*", "SE", "t", "p-value", "")
+  coeff[["p-value"]] <- format.pval(coeff[["p-value"]], 4)
 
 
   return(coeff)
