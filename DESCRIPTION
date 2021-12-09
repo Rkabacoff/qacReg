@@ -22,3 +22,7 @@ Imports:
     ggeffects,
     ggplot2,
     patchwork
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
