@@ -2,6 +2,7 @@
 
 S3method(diagnostics,lreg)
 S3method(diagnostics,mreg)
+S3method(plot,lreg)
 S3method(plot,mreg)
 S3method(summary,lreg)
 S3method(summary,mreg)
