@@ -9,11 +9,11 @@ pseudor2.lreg <- function(x){
   aug_df <- broom::augment(fit, type.predict="response")
 
   # pseudo R-squared
-  R2 <- aug_df %>%
-    group_by(df[deparse(formula[[2]])]) %>%
-    summarize(meanprob = mean(.fitted))
-  R2 <- abs(R2$meanprob[1] - R2$meanprob[2])
-  R2
+  temp <- dplyr::group_by(aug_df, df[deparse(formula[[2]])])
+  temp <- dplyr::summarize(temp, meanprob = mean(.fitted))
+  R2 <- abs(temp$meanprob[1] - temp$meanprob[2])
+
+
 
   return(R2)
 }

@@ -6,9 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>diagnostics:
-
-Run and print regression diagnostics — diagnostics • qacReg</title>
+<title>Summarise an 'lreg' object — summary.lreg • qacReg</title>
 
 
 <!-- jquery -->
@@ -41,11 +39,8 @@ Run and print regression diagnostics — diagnostics • qacReg</title>
 
 
 
-<meta property="og:title" content="diagnostics:
-
-Run and print regression diagnostics — diagnostics" />
-<meta property="og:description" content="diagnostics:
-Run and print regression diagnostics" />
+<meta property="og:title" content="Summarise an 'lreg' object — summary.lreg" />
+<meta property="og:description" content="This function serves as a summary method for class &quot;lreg&quot;." />
 
 
 
@@ -126,53 +121,96 @@ Run and print regression diagnostics" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>diagnostics:
-
-Run and print regression diagnostics</h1>
+    <h1>Summarise an 'lreg' object</h1>
     
-    <div class="hidden name"><code>diagnostics.Rd</code></div>
+    <div class="hidden name"><code>summary.lreg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>diagnostics:</p>
-<p>Run and print regression diagnostics</p>
+    <p>This function serves as a summary method for class "lreg".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>diagnostics</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for lreg</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of type <code>mreg</code> or <code>lreg</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>further arguments passed to or from other methods.</p></td>
+      <td><p>an object of class "lreg", a result of a call to <a href='lreg.html'>lreg</a> (which is a wrapper for glm)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The results of the methods <code><a href='diagnostics.mreg.html'>diagnostics.mreg</a></code> or <code><a href='diagnostics.lreg.html'>diagnostics.lreg</a></code></p>
+    <p>The function <strong>summary.lreg</strong> computes and prints summary statistics and results for a fitted logistic regression model with measures
+of robustness including:</p><dl>
+<dt><strong>Goodness of Fit Measures</strong></dt><dd><p>includes robust goodness of fit measures such as Stukel's test, Psuedo R-squared, and Akaike Information Criterion</p></dd>
+<dt><strong>Anova Table (Type 3 Tests)</strong></dt><dd><p>includes a Type-III Analysis of Variance Table (outputted from the <a href='https://rdrr.io/pkg/car/man/Anova.html'>Anova</a> function in the <strong>car</strong> package)</p></dd>
+<dt><strong>Regression Coefficients</strong></dt><dd><p>includes Coefficients, Standard Errors, t-values, and p-values with significan codes</p></dd>
+<dt><strong>Odds Ratios</strong></dt><dd><p>includes odd's ratios (i.e. exponentiated coefficients) with 95% confidence intervals</p></dd>
+
+</dl><p>Additionally, summary.lreg also returns tibbles outputted using <a href='https://broom.tidymodels.org/reference/glance.lm.html'>glance.lm</a> and <a href='https://broom.tidymodels.org/reference/augment.lm.html'>augment.lm</a> functions from the <strong>broom</strong> package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
-<span class='fu'>diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ----------------------------------- 
-#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
-#&gt; Test for Heteroskedasticity:
-#&gt; ----------------------------
-#&gt; Non-constant Variance Score Test 
-#&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 1.733814, Df = 1, p = 0.18792
+    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lreg.html'>lreg</a></span><span class='op'>(</span><span class='va'>am</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
+#&gt; ______________________________
+#&gt; <span style='font-weight: bold;'>Logistic Regression Summary</span>
+#&gt; ______________________________
 #&gt; 
-#&gt;  The test suggests the model may satistfy the Homoskedasticity assumption </div><div class='img'><img src='diagnostics-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  What power transformation of the dependent variable 
-#&gt;  would make our model have constant conditional variance? 
-#&gt; Suggested Variance-Stabilizing Power Transformation: 0.2910809 </div></pre>
+#&gt; Formula:am ~ hp + wt + mpg
+#&gt; Data:mtcars
+#&gt; 
+#&gt; Model Fit Measures:
+#&gt; ______________________________
+#&gt; Stukel's Test:
+#&gt; Analysis of Deviance Table
+#&gt; 
+#&gt; Model 1: am ~ hp + wt + mpg
+#&gt; Model 2: am ~ hp + wt + mpg + za + zb
+#&gt;   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+#&gt; 1        28     8.7661                       
+#&gt; 2        26     0.0000  2   8.7661  0.01249 *
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; -----
+#&gt; Tjura's Psuedo R-squared:
+#&gt; 0.8216206
+#&gt; -----
+#&gt; Akaike Information Criterion:
+#&gt; 
+#&gt; -----
+#&gt; 
+#&gt; Anova Table (type III tests):
+#&gt; ______________________________
+#&gt;     LR Chisq Df Pr(&gt;Chisq)   
+#&gt; hp    8.4181  1   0.003715 **
+#&gt; wt   10.4664  1   0.001216 **
+#&gt; mpg   1.2930  1   0.255496   
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Logistic Regression Coefficients:
+#&gt; ______________________________
+#&gt;                        B          SE          t    p-value  
+#&gt; (Intercept) -15.72137053 40.00280658 -0.3930067 0.69431454  
+#&gt; hp            0.08389345  0.08227765  1.0196385 0.30789996  
+#&gt; wt           -6.95492382  3.35297483 -2.0742547 0.03805566 .
+#&gt; mpg           1.22930209  1.58108577  0.7775050 0.43686089  
+#&gt; ---
+#&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Odds Ratios (with 95% Confidence Intervals):
+#&gt; ______________________________
+#&gt;       Odds Ratio         2.5%        97.5%
+#&gt; hp  1.0875130140 1.014187e+00    1.5531516
+#&gt; wt  0.0009539266 1.001762e-08    0.1163119
+#&gt; mpg 3.4188426555 6.195437e-01 1710.0900067
+#&gt; ---</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

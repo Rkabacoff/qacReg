@@ -6,7 +6,7 @@ aic.lreg <- function(x){
   fit <- glm(formula, df, family = binomial)
 
   # AIC
-  AIC <- stats_df$AIC
+  AIC <- fit$aic
 
   return(AIC)
 }

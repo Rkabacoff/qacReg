@@ -159,7 +159,7 @@ and a graph for evaluating influential observations
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lreg.html'>lreg</a></span><span class='op'>(</span><span class='va'>am</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ----------------------------------- 
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; ----------------------------------- 
 #&gt; DIAGNOSTICS FOR LOGISTIC REGRESSION 
 #&gt; ----------------------------------- 
 #&gt; ---------------- 
@@ -170,17 +170,68 @@ and a graph for evaluating influential observations
 #&gt;  . GVIF Values above 10 suggest strong multicolinearity 
 #&gt; VIF Test: 
 #&gt;        hp        wt       mpg 
-#&gt; 18.073863  1.762413 15.545025 </div><div class='img'><img src='diagnostics.lreg-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; -------- 
+#&gt; 18.073863  1.762413 15.545025 </div><div class='output co'>#&gt; -------- 
 #&gt; OUTLIERS 
 #&gt; -------- 
 #&gt; Are there any outliers? 
 #&gt; No Studentized residuals with Bonferroni p &lt; 0.05
 #&gt; Largest |rstudent|:
 #&gt;               rstudent unadjusted p-value Bonferroni p
-#&gt; Toyota Corona -2.49821           0.018871      0.60387</div><div class='img'><img src='diagnostics.lreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ------------------------ 
-#&gt; INFLUENTIAL OBSERVATIONS 
-#&gt; ------------------------ 
-#&gt; What are the influential observations? </div><div class='img'><img src='diagnostics.lreg-3.png' alt='' width='700' height='433' /></div></pre>
+#&gt; Toyota Corona -2.49821           0.018871      0.60387
+#&gt; 
+#&gt; ______________________________
+#&gt; <span style='font-weight: bold;'>Logistic Regression Summary</span>
+#&gt; ______________________________
+#&gt; 
+#&gt; Formula:am ~ hp + wt + mpg
+#&gt; Data:mtcars
+#&gt; 
+#&gt; Model Fit Measures:
+#&gt; ______________________________
+#&gt; Stukel's Test:
+#&gt; Analysis of Deviance Table
+#&gt; 
+#&gt; Model 1: am ~ hp + wt + mpg
+#&gt; Model 2: am ~ hp + wt + mpg + za + zb
+#&gt;   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+#&gt; 1        28     8.7661                       
+#&gt; 2        26     0.0000  2   8.7661  0.01249 *
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; -----
+#&gt; Tjura's Psuedo R-squared:
+#&gt; 0.8216206
+#&gt; -----
+#&gt; Akaike Information Criterion:
+#&gt; 
+#&gt; -----
+#&gt; 
+#&gt; Anova Table (type III tests):
+#&gt; ______________________________
+#&gt;     LR Chisq Df Pr(&gt;Chisq)   
+#&gt; hp    8.4181  1   0.003715 **
+#&gt; wt   10.4664  1   0.001216 **
+#&gt; mpg   1.2930  1   0.255496   
+#&gt; ---
+#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Logistic Regression Coefficients:
+#&gt; ______________________________
+#&gt;                        B          SE          t    p-value  
+#&gt; (Intercept) -15.72137053 40.00280658 -0.3930067 0.69431454  
+#&gt; hp            0.08389345  0.08227765  1.0196385 0.30789996  
+#&gt; wt           -6.95492382  3.35297483 -2.0742547 0.03805566 .
+#&gt; mpg           1.22930209  1.58108577  0.7775050 0.43686089  
+#&gt; ---
+#&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; 
+#&gt; Odds Ratios (with 95% Confidence Intervals):
+#&gt; ______________________________
+#&gt;       Odds Ratio         2.5%        97.5%
+#&gt; hp  1.0875130140 1.014187e+00    1.5531516
+#&gt; wt  0.0009539266 1.001762e-08    0.1163119
+#&gt; mpg 3.4188426555 6.195437e-01 1710.0900067
+#&gt; ---</div><div class='output co'>#&gt; <span class='error'>Error in sqrt(summary(x)$dispersion): non-numeric argument to mathematical function</span></div><div class='img'><img src='diagnostics.lreg-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

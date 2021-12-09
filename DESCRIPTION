@@ -29,7 +29,8 @@ Imports:
     effects,
     ggeffects,
     ggplot2,
-    patchwork
+    patchwork,
+    dplyr
 Suggests: 
     rmarkdown,
     knitr

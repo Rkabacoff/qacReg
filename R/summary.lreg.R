@@ -20,6 +20,7 @@
 #'@importFrom broom tidy
 #'@importFrom car Confint
 #'@importFrom crayon bold
+#'@importFrom dplyr group_by summarize
 #'
 #'@export
 #'
