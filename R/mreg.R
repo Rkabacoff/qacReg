@@ -1,7 +1,7 @@
 #'@title Multiple Regression
 #'
 #'@description Fit a linear model of the form
-#'  \eqn{y = \beta0 + \beta1*X1 + \beta2*X2 + ...+ \betak*Xk}.
+#'  \eqn{y = \beta0 + \beta1*X1 + \beta2*X2 + ...}.
 #'
 #'@param formula an object of class formula.
 #'@param data a data frame.
@@ -19,9 +19,15 @@
 #'fit
 mreg <- function(formula, data){
   fit <- lm(formula, data)
-  fit$call <- str2lang(paste("lm(formula=", deparse(substitute(formula)),
-                             ", data=", deparse(substitute(data)), ")"))
+  # fix call
+  fit$call <- str2lang(paste("lm(formula=",
+                             paste(deparse(substitute(formula)), collapse=""),
+                             ", data=",
+                             deparse(substitute(data)), ")"))
   class(fit) <- c("mreg", "lm")
   return(fit)
+
+
+
 }
 

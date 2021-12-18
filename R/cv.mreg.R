@@ -1,10 +1,10 @@
 
-cv.mreg <- function(x){
+cv.mreg <- function(x, k){
 
   cv_ <- (caret::train(as.formula(x$call),
                          data= model.frame(x),
                          method="lm",
-                         trControl=caret::trainControl(method="cv", number=10)))
+                         trControl=caret::trainControl(method="cv", number=k)))
   cv_res <- cv_$results
 
   cv <- data.frame()

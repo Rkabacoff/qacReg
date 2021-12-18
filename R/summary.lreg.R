@@ -3,7 +3,7 @@
 #'@description This function serves as a summary method for class "lreg".
 #'
 #'@param x an object of class "lreg", a result of a call to \link[qacReg]{lreg} (which is a wrapper for \link[base]{glm})
-#'
+#'@param digits number of significant digits to print
 #'@return The function \strong{summary.lreg} computes and prints summary statistics and results for a fitted logistic regression model with measures
 #'of robustness including:
 #' \describe{
@@ -30,7 +30,7 @@
 #'summary(fit)
 
 
-summary.lreg <- function(x){
+summary.lreg <- function(x, digits=4){
 
   if(!inherits(x, "lreg")) stop("x must  be class 'lreg'")
 
@@ -42,48 +42,44 @@ summary.lreg <- function(x){
   six <- suppressWarnings(oddsr.lreg(x))
 
 
-  cat("\n", "______________________________", "\n",
-      crayon::bold("Logistic Regression Summary"),
-      "\n", "______________________________", "\n", "\n", sep="")
+  cat("\n",
+      "---------------------------\n",
+      "Logistic Regression Summary\n",
+      "---------------------------\n\n",
+      sep="")
 
-  cat("Formula:", as.character(x$call["formula"]),
-      "\n",
-      "Data:", as.character(x$call["data"]),
-      "\n", "\n", sep="")
+  cat("Formula: ", as.character(x$call["formula"]), "\n",
+      "Data   : ", as.character(x$call["data"]), "\n\n", sep="")
 
   # Model Fit
-  cat("Model Fit Measures:", "\n",
-      "______________________________", "\n", sep="")
-  cat("Stukel's Test:", "\n", sep="")
-  print(one)
-  cat("-----", "\n", sep="")
-  cat("Tjura's Psuedo R-squared:", "\n", sep="")
-  cat(two, "\n", sep="")
-  cat("-----", "\n", sep="")
-  cat("Akaike Information Criterion:", "\n", sep="")
-  cat(three, "\n", sep="")
-  cat("-----", "\n", sep="")
-  cat("\n", sep="")
+  cat("-------------\n",
+      "Fit Measures:\n",
+      "-------------\n", sep="")
+
+  cat("Stukel's Test: p = ", round(one$`Pr(>Chi)`[2], digits), "\n")
+  cat("Tjura's Psuedo R-squared: ", round(two, digits), "\n")
+  cat("AIC:", round(three, digits), "\n\n")
 
   # ANOVA
-  cat("Anova Table (type III tests):", "\n",
-      "______________________________", "\n", sep="")
+  cat("-----------------------------\n",
+      "Anova Table (type III tests):\n",
+      "-----------------------------\n", sep="")
   print(four[1:3])
   cat("\n", sep="")
 
   # Coefficients
-  cat("Logistic Regression Coefficients:", "\n",
-      "______________________________", "\n", sep="")
-  print(five)
-  cat("---", "\n", sep="")
-  cat("Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1", "\n", sep="")
-  cat("\n", sep="")
+  cat("---------------------------------\n",
+      "Logistic Regression Coefficients:\n",
+      "---------------------------------\n", sep="")
+  print(five, digits=digits)
+
+  cat("\n")
 
   #Odds Ratios
-  cat("Odds Ratios (with 95% Confidence Intervals):", "\n",
-      "______________________________", "\n", sep="")
-  print(six)
-  cat("---", "\n", sep="")
+  cat("--------------------------------------------\n",
+      "Odds Ratios (with 95% Confidence Intervals):\n",
+      "--------------------------------------------\n", sep="")
+  print(six, digits=digits)
 
   # Augmented df, Model Statistics
   class(x) <- c("lm")

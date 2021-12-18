@@ -50,8 +50,16 @@ plot.mreg <- function(x, points = FALSE, dot.size = 1, dot.alpha=.5, ci= TRUE, .
     myplots[[i]] <- plot(ggeffect(x, i), add.data=points,
                          dot.size=dot.size, dot.alpha=dot.alpha, ci=ci, ...)+ labs(title="")
   }
-  final <- wrap_plots(myplots) + plot_annotation(title="Effects Plots",
-                                                 subtitle="Each variable controlling for the others")
+
+  if (length(vars) > 1){
+    caption <- "Plots show the relationship of each explanatory variable to\nthe outcome controlling for the other explanatory variables."
+
+  } else {
+    caption <- ""
+  }
+  final <- wrap_plots(myplots) +
+    plot_annotation(title="Effects Plots", caption=caption) &
+    theme(plot.caption=element_text(size=8))
   return(final)
 }
 

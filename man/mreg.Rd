@@ -18,7 +18,7 @@ an object of type \code{c("mreg", "lm")}
 }
 \description{
 Fit a linear model of the form
-\eqn{y = \beta0 + \beta1*X1 + \beta2*X2 + ...+ \betak*Xk}.
+\eqn{y = \beta0 + \beta1*X1 + \beta2*X2 + ...}.
 }
 \details{
 \code{mreg} is a wrapper for the \code{\link{lm}} function.

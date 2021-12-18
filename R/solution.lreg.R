@@ -4,12 +4,9 @@ solution.lreg <- function(x){
    rownames(sol) <- sol$term
    sol <- sol[, c(2, 3, 4, 5)]
 
-   signif <- ifelse(round(sol[[4]], 3) == 0, "***",
-                    ifelse(round(sol[[4]], 3) < 0.001, "**",
-                           ifelse(round(sol[[4]], 3) < 0.01, "*",
-                                  ifelse(round(sol[[4]], 3) < 0.05, ".",
-                                         ifelse(round(sol[[4]], 3) < 0.1, " ", "")))))
-
+   signif <- ifelse(sol[[4]] < .001, "***",
+                    ifelse(sol[[4]] < 0.01, "**",
+                           ifelse(sol[[4]] < 0.05, "*", " ")))
    sol <- cbind(sol, signif)
    names(sol) <- c("B", "SE", "t", "p-value", "")
 

@@ -4,10 +4,12 @@
 \alias{summary.lreg}
 \title{Summarise an 'lreg' object}
 \usage{
-\method{summary}{lreg}(x)
+\method{summary}{lreg}(x, digits = 4)
 }
 \arguments{
 \item{x}{an object of class "lreg", a result of a call to \link[qacReg]{lreg} (which is a wrapper for \link[base]{glm})}
+
+\item{digits}{number of significant digits to print}
 }
 \value{
 The function \strong{summary.lreg} computes and prints summary statistics and results for a fitted logistic regression model with measures

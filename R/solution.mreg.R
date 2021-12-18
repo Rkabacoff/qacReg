@@ -15,12 +15,11 @@ solution.mreg <- function(x){
 
   signif <- ifelse(coeff[[5]] < .001, "***",
                    ifelse(coeff[[5]] < 0.01, "**",
-                          ifelse(coeff[[5]] < 0.05, "*",
-                                 ifelse(coeff[[5]] < 0.1, ".", " "))))
+                          ifelse(coeff[[5]] < 0.05, "*", " ")))
 
   coeff <- cbind(coeff, signif)
-  names(coeff) <- c("B", "B*", "SE", "t", "p-value", "")
-  coeff[["p-value"]] <- format.pval(coeff[["p-value"]], 4)
+  names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)", "")
+  coeff[["Pr(>|t|)"]] <- format.pval(coeff[["Pr(>|t|)"]], 4)
 
 
   return(coeff)
