@@ -4,7 +4,15 @@
 \alias{plot.mreg}
 \title{Plotting multiple regression}
 \usage{
-\method{plot}{mreg}(x, points = FALSE, dot.size = 1, dot.alpha = 0.5, ci = TRUE, ...)
+\method{plot}{mreg}(
+  x,
+  points = TRUE,
+  dot.size = 1,
+  dot.alpha = 0.5,
+  ci = TRUE,
+  page = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{an object of type \code{c("mreg", "lm")}}
@@ -16,6 +24,8 @@
 \item{dot.alpha}{transparency of data points, default is 0.5}
 
 \item{ci}{if confidence intervals are to be shown, default is TRUE}
+
+\item{page}{logical. If \code{TRUE}, each graph will appear separately.}
 
 \item{...}{additional arguments to be added to adjust graphic}
 }

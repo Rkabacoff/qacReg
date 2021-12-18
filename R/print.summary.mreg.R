@@ -1,14 +1,23 @@
-heading <- function(x){
-  len <- nchar(x)
-  l <- paste(rep("-", len), collapse="")
-  cat(l, x, l, sep="\n")
+#' @title Print Summary of a Linear Model Fit
+#'
+#' @description
+#' \code{print} method for class \code{"summary.mreg"}.
+#'
+#' @param x an object of class \code{"summary.mreg"} produced by the
+#' \code{"summary.mreg"} function.
+#' @param digits number of significant digits to print.
+#' @param ... parameters passed to print.
+#' @return NULL
+#' @export
+#' @examples
+#' fit <- mreg(mpg ~ wt + hp + disp, data=mtcars)
+#' sfit <- summary(fit)
+#' print(sfit)
+print.summary.mreg <- function(x, digits=3, ...){
 
-}
-
-
-print.summary.mreg <- function(x, digits=3){
-
-  if(!inherits(x, "summary.mreg")) stop("x must  be class 'summary.mreg'")
+  if(!inherits(x, "summary.mreg")){
+    stop("x must  be class 'summary.mreg'")
+  }
 
   heading("Multiple Linear Regression Summary")
 
@@ -47,8 +56,5 @@ print.summary.mreg <- function(x, digits=3){
   cat("\n")
 
   heading("Regression Coefficients:")
-  print(x$coefficient.table, digits=digits)
-
+  print(x$coefficient.table, digits=digits, ...)
 }
-
-

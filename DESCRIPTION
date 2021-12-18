@@ -30,7 +30,9 @@ Imports:
     ggeffects,
     ggplot2,
     patchwork,
-    dplyr
+    dplyr,
+    ggrepel,
+    MASS
 Suggests: 
     rmarkdown,
     knitr

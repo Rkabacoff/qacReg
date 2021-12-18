@@ -10,6 +10,7 @@
 #'@param dot.size size of data points, default is 1
 #'@param dot.alpha transparency of data points, default is 0.5
 #'@param ci if confidence intervals are to be shown, default is TRUE
+#'@param page logical. If \code{TRUE}, each graph will appear separately.
 #'@param ... additional arguments to be added to adjust graphic
 #'
 #'@return a plot of class \code{ggplot2}
@@ -42,13 +43,17 @@
 #'plot(fit, points=TRUE)
 
 
-plot.mreg <- function(x, points = FALSE, dot.size = 1, dot.alpha=.5, ci= TRUE, ...){
+plot.mreg <- function(x, points = TRUE, dot.size = 1,
+                      dot.alpha=.5, ci= TRUE, page=FALSE, ...){
   vars <- names(x$model)[names(x$model) != x$terms[[2]]]
   myplots <- vector(mode="list", length=length(vars))
   names(myplots) <- vars
   for(i in vars){
     myplots[[i]] <- plot(ggeffect(x, i), add.data=points,
                          dot.size=dot.size, dot.alpha=dot.alpha, ci=ci, ...)+ labs(title="")
+  }
+  if(page){
+    return(myplots)
   }
 
   if (length(vars) > 1){

@@ -49,87 +49,68 @@
 #'diagnostics(fit)
 #'diagnostics(fit, output = "extended")
 
-diagnostics.mreg <- function(x, output = "brief"){
-  require(car)
+diagnostics.mreg <- function(x, output = c("brief", "extended")){
 
-  if (output != "brief" & output != "extended") {
-    stop("output must equal either brief or extended")
+  output <- match.arg(output)
+
+  heading("DIAGNOSTICS FOR MULTIPLE REGRESSION")
+
+  # normality
+  cat("Assessing normality of residuals\n")
+  cat("  * Q-Q Plot\n\n")
+  qqplot <- ggqqPlot(x)
+  print(qqplot)
+
+  # linearity
+  cat("Assessing linearity of relationships\n")
+  cat("  * Component + Residuals Plots \n\n")
+  crplots <- ggcrPlots(x)
+  print(crplots)
+
+  # homoscedasticity
+  cat("Assessing homoscedasticity\n")
+  cat("  * Spread-Level Plot \n\n")
+  slplot <- ggSpreadLevelPlot(x)
+  print(slplot)
+
+  cat("  * Score Test of Non-Constant Error Variance\n")
+  ncv <- car::ncvTest(x)
+  cat("    Null hypothesis: constant variance\n")
+  cat("    Chi-square(" , ncv$Df, ") = ", round(ncv$ChiSquare,4) ,
+      " p < ", format.pval(ncv$p, 4), "\n", sep="")
+
+  if(ncvTest(x)$p < 0.05){
+    cat("    The test suggest non-constant variance.\n")
+    resid <- log(abs(rstudent(x)))
+    fitval <- x$fitted.values
+    mod <- suppressWarnings(MASS::rlm(log(resid) ~ log(fitval)))
+    trans <- 1 - (coefficients(mod))[2]
+    ptrans <- c(2, 1, .5, 0, -.5, -1, -2)
+    ptranslbls <- c("y^2", "y", "sqrt(y)", "log(y)",
+                    "1/sqrt(y)", "1/y", "1/y^2" )
+    pos <- which.min(abs(ptrans-trans))
+    cat("    A", ptranslbls[pos], "transformation may",
+        "help to stabalize the variance.\n")
   }
 
-  if (output %in% c("brief", "extended")){
+  #multicolinearity
+  cat("\n")
+  cat("Assessing multicolinearity\n")
+  cat("  * Variance Inflation Plot \n\n")
 
-    #heading for brief diagnostics
+  vifplot <- ggvif(x)
+  print(vifplot)
 
-    cat("----------------------------------- \n",
-        "DIAGNOSTICS FOR MULTIPLE REGRESSION \n",
-        "----------------------------------- \n",
-        sep="")
+  #outliers
+  cat("\n")
+  cat("Assessing outliers, leverage, and influential observations\n")
+  cat("  * Outlier Test \n")
+  outliers <- outlierTest(x)
+  print(outliers)
+  cat("\n")
+  cat("  *Influence Plot\n")
 
-    qqPlot(x, main = "Q-Q Plot: \n Test for Normality Assumption",
-           xlab="t Quantiles", ylab="Studentized Residuals")
+  influenceplot <- gginfluencePlot(x)
+  print(influenceplot)
 
-    mtext("Note: observations should lie approximately on the straight line to meet normality",
-          line=4, side=1, cex=0.65, adj=-0.1)
-
-
-
-
-
-    # linearity
-
-    crPlots(x, main="Components + Residuals Plots: Test for Linearity Assumption")
-    mtext("Note: numerical variables should approximately match with the blue dotted-line to meet linearity",
-          side=1, line=4,  adj=-0.2, cex=.65)
-
-    # homoscedasticity test
-    cat("----------------------------","\n",
-        "Test for Heteroskedasticity:","\n",
-        "----------------------------", "\n",
-        sep="")
-
-    print(ncvTest(x))
-
-    if(ncvTest(x)$p < 0.05) cat("\n The test suggests that there is Heteroskedasticity \n")
-
-    else
-      cat("\n The test suggests the model may satistfy the Homoskedasticity assumption \n")
-
-    #power transformation
-    power <- spreadLevelPlot(x,main="Spread-Level Plot: \n Test for Homoskedasticity")
-    mtext("Note: homogeneity of variance is met if the residuals and fitted values exhibit a horizontal line",
-          line=4, side=1, cex=0.65, adj=-0.1)
-    cat("\n What power transformation of the dependent variable \n would make our model have constant conditional variance? \n")
-    cat("Suggested Variance-Stabilizing Power Transformation:", power[[1]], "\n")
-
-  }
-
-  if (output %in% c("extended")){
-    cat("\n",
-        "--------------------","\n",
-        "EXTENDED DIAGNOSTICS \n",
-        "--------------------- \n", sep="")
-
-    #multicolinearity
-    cat("Is there multicolinearity among any regressors? \n",
-        "GVIF Values above 5 suggest there is some multicolinearity \n",
-        "GVIF Values above 10 suggest strong multicolinearity \n")
-    print(vif(x))
-
-
-    # outliers
-    cat("\n",
-        "---------------","\n",
-        "Are there any outliers?",
-        "\n")
-    print(outlierTest(x))
-
-    # influential observations
-    cat("\n",
-        "--------------- \n What are the influential observations? \n")
-
-    print(influencePlot(x, main="Influence Plot: \n  Assessment for Influential Observations"))
-    mtext("Note: Influential observations have disproportionate impact on the model",
-          line=4, side=1, cex=0.65, adj=-0.1)
-
-  }
 }

@@ -1,25 +1,25 @@
 #'@title Summarise an 'mreg' object
 #'
-#'@description This function serves as a summary method for class "mreg".
+#'@description
+#'Summarize an object of class \code{"mreg"}.
 #'
-#'@param x an object of class "mreg", a result of a call to \link[qacReg]{mreg} (which is a wrapper for \link[base]{lm})
-#'@param digits number of significant digits to print
+#'@param x an object of class "mreg", a result
+#'of a call to \link{mreg} (which is a wrapper
+#'for \link{lm})
 #'@param k number of folds for cross validated performance
 #'
 #'@return The function \strong{summary.mreg} computes summary statistics and results for a fitted linear model with measures
 #'of robustness including:
 #' \describe{
-#'   \item{\strong{fit.indices}}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
-#'   \item{\strong{cv.indices}}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
-#'   \item{\strong{Ftest}}{includes F-statistic, Degrees of Freedom, p-value}
-#'   \item{\strong{anova.table}}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
-#'   \item{\strong{coefficient.table}}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
+#'   \item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
+#'   \item{cv.indices}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
+#'   \item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
+#'   \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
+#'   \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
+#'   \item{k}{number of folds for cross-validation}
 #' }
 #'
-#'
 #'@importFrom caret train trainControl
-#'@importFrom qacr standardize
-#'@importFrom broom glance tidy
 #'@importFrom car Anova
 #'
 #'@export
@@ -27,68 +27,71 @@
 #'@examples
 #'mtcars$am <- factor(mtcars$am)
 #'fit <- mreg(mpg ~ hp + wt + am, mtcars)
-#'summary(fit, k=5)
-
-
-summary.mreg <- function(x, k=5, digits=4){
+#'summary(fit, k=2)
+summary.mreg <- function(x, k=5){
 
   if(!inherits(x, "mreg")) stop("x must  be class 'mreg'")
 
-  one <- suppressWarnings(rsqr.mreg(x))
-  two <- suppressMessages(cv.mreg(x, k))
-  four <- suppressWarnings(anova.mreg(x))
-  five <- suppressWarnings(solution.mreg(x))
+  # fit indices
+  model <- summary.lm(x)
 
-  cat("\n",
-      "----------------------------------\n",
-      "Multiple Linear Regression Summary\n",
-      "----------------------------------\n\n",
-      sep="")
+  fit.indices <- data.frame(`R.Squared` = model$r.squared,
+                            `Adj.R.Squared` = model$adj.r.squared,
+                            AIC = AIC(x),
+                            RMSE = sqrt(mean(model$residuals^2)),
+                            row.names=NULL)
 
-  cat("Formula: ", as.character(x$call["formula"]),"\n",
-      "Data   : ", as.character(x$call["data"]), "\n\n",
-      sep="")
+  # omnibus test
+  F <- model$fstatistic
+  Ftest <- data.frame(value=F[1],
+                      numdf=F[2],
+                      dendf=F[3],
+                      p = pf(F[1], F[2],F[3], lower.tail = FALSE),
+                      row.names=NULL)
 
-  cat("------------\n",
-      "Fit Indices:\n",
-      "------------\n",
-      sep="")
-  print(one, digits=digits)
-  cat("\n")
 
-  cat("------------------------------------\n",
-      k, "-Fold Cross Validated Fit Indices:\n",
-      "------------------------------------\n",
-      sep="")
-  print(two, digits=digits)
-  cat("\n")
+  # cross validated fit indices
 
-  cat("-------------\n",
-      "Omnibus Test:\n",
-      "-------------\n",
-      sep="")
-  three <- fstat.mreg(x, digits)
-  cat("\n")
+    trainCntrl <- caret::trainControl(method="cv", number=k)
+    cv.results <- caret::train(as.formula(x$call),
+                       data= model.frame(x),
+                       method="lm",
+                       trControl=trainCntrl)$results
 
-  cat("-----------------------------\n",
-      "Anova Table (type III tests):\n",
-      "-----------------------------\n",
-      sep="")
-  printAnova(four, digits)
-  cat("\n")
 
-  cat("------------------------\n",
-      "Regression Coefficients:\n",
-      "------------------------\n",
-      sep="")
-  print(five, digits=digits)
+    cv.indices <- data.frame(`R.Squared` = cv.results$Rsquared,
+                             RMSE = cv.results$RMSE,
+                             row.names=NULL)
 
-  invisible(list("fit.indices" = one,
-                 "cv.indices" = two,
-                 "Ftest" = three,
-                 "anova.table" = four,
-                 "coefficient.table" = five))
+  # ANOVA Table
+    anova.table <- as.data.frame(car::Anova(x, type=3))
+
+  # coefficients table
+    coeff <- as.data.frame(summary.lm(x)$coefficients)
+
+    # standardized coefficients
+    stdata <- model.frame(x)
+    for (i in 1:ncol(stdata)){
+      if(is.numeric(stdata[[i]])){
+        stdata[[i]] <- scale(stdata[[i]])
+      }
+    }
+    std_fit <- lm(as.formula(x$call), stdata)
+    std_summary <- summary.lm(std_fit)
+    std_coeff <- std_summary$coefficients[,1]
+
+    coeff <- cbind(coeff, std_coeff)
+    coeff <- coeff[, c(1, 5, 2, 3, 4)]
+    names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)")
+
+    results <- list("fit.indices" = fit.indices,
+                    "cv.indices" = cv.indices,
+                    "Ftest" = Ftest,
+                    "anova.table" = anova.table,
+                    "coefficient.table" = coeff,
+                    "k" = k,
+                    "call" = x$call)
+    class(results) <- c("summary.mreg", "list")
+    return(results)
 
 }
-
-

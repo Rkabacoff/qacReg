@@ -4,31 +4,32 @@
 \alias{summary.mreg}
 \title{Summarise an 'mreg' object}
 \usage{
-\method{summary}{mreg}(x, k = 10, digits = 4)
+\method{summary}{mreg}(x, k = 5)
 }
 \arguments{
-\item{x}{an object of class "mreg", a result of a call to \link[qacReg]{mreg} (which is a wrapper for \link[base]{lm})}
+\item{x}{an object of class "mreg", a result
+of a call to \link{mreg} (which is a wrapper
+for \link{lm})}
 
 \item{k}{number of folds for cross validated performance}
-
-\item{digits}{number of significant digits to print}
 }
 \value{
 The function \strong{summary.mreg} computes summary statistics and results for a fitted linear model with measures
 of robustness including:
 \describe{
-\item{\strong{fit.indices}}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
-\item{\strong{cv.indices}}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
-\item{\strong{Ftest}}{includes F-statistic, Degrees of Freedom, p-value}
-\item{\strong{anova.table}}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
-\item{\strong{coefficient.table}}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
+\item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error}
+\item{cv.indices}{includes a more reliable and accurate measure of R-squared, Root Mean Squared Error}
+\item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
+\item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
+\item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
+\item{k}{number of folds for cross-validation}
 }
 }
 \description{
-This function serves as a summary method for class "mreg".
+Summarize an object of class \code{"mreg"}.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
 fit <- mreg(mpg ~ hp + wt + am, mtcars)
-summary(fit)
+summary(fit, k=2)
 }
