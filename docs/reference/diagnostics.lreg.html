@@ -98,10 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -159,7 +168,7 @@ and a graph for evaluating influential observations
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lreg.html'>lreg</a></span><span class='op'>(</span><span class='va'>am</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; ----------------------------------- 
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: car</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'car' was built under R version 4.1.1</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: carData</span></div><div class='output co'>#&gt; ----------------------------------- 
 #&gt; DIAGNOSTICS FOR LOGISTIC REGRESSION 
 #&gt; ----------------------------------- 
 #&gt; ---------------- 

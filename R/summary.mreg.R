@@ -17,6 +17,7 @@
 #'   \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
 #'   \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
 #'   \item{k}{number of folds for cross-validation}
+#'   \item{N}{sample size}
 #' }
 #'
 #'@importFrom caret train trainControl
@@ -25,15 +26,24 @@
 #'@export
 #'
 #'@examples
-#'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ hp + wt + am, mtcars)
-#'summary(fit, k=2)
+#'fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+#'summary(fit)
 summary.mreg <- function(x, k=5){
 
   if(!inherits(x, "mreg")) stop("x must  be class 'mreg'")
 
   # fit indices
   model <- summary.lm(x)
+
+  # missing coefficients
+  sumNA <- sum(is.na(coefficients(x)))
+  if (sumNA > 0){
+    print(coefficients(fit))
+    stop("Degenerate solution: some coefficients are NA.")
+  }
+
+  # sample size
+  N <- nrow(x$model)
 
   fit.indices <- data.frame(`R.Squared` = model$r.squared,
                             `Adj.R.Squared` = model$adj.r.squared,
@@ -64,6 +74,7 @@ summary.mreg <- function(x, k=5){
                              row.names=NULL)
 
   # ANOVA Table
+
     anova.table <- as.data.frame(car::Anova(x, type=3))
 
   # coefficients table
@@ -80,9 +91,13 @@ summary.mreg <- function(x, k=5){
     std_summary <- summary.lm(std_fit)
     std_coeff <- std_summary$coefficients[,1]
 
+
     coeff <- cbind(coeff, std_coeff)
     coeff <- coeff[, c(1, 5, 2, 3, 4)]
-    names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)")
+    coeff$signif <- ifelse(coeff$`Pr(>|t|)` < .001, "***",
+                           ifelse(coeff$`Pr(>|t|)` < 0.01, "**",
+                                  ifelse(coeff$`Pr(>|t|)` < 0.05, "*", " ")))
+    names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)", "")
 
     results <- list("fit.indices" = fit.indices,
                     "cv.indices" = cv.indices,
@@ -90,7 +105,8 @@ summary.mreg <- function(x, k=5){
                     "anova.table" = anova.table,
                     "coefficient.table" = coeff,
                     "k" = k,
-                    "call" = x$call)
+                    "call" = x$call,
+                    "N" = N)
     class(results) <- c("summary.mreg", "list")
     return(results)
 

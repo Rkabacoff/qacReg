@@ -1,9 +1,12 @@
-pandoc: '2.12'
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  diagnostics: diagnostics.html
   logistic: logistic.html
+  performance: performance.html
   qacReg: qacReg.html
   regression: regression.html
-last_built: 2021-12-09T21:58Z
+  varimp: varimp.html
+last_built: 2021-12-23T15:27Z
 

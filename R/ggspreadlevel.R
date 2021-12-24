@@ -6,7 +6,10 @@
 #' model.
 #'
 #' @param x an object of type \code{"mreg"} or \code{"lm"}.
-#' @param n.labels integer; the number of largest residuals to label.
+#' @param alpha numeric; degree of transparency for points (0 to 1, default=0.4).
+#' @param n.labels integer; the number of largest residuals to label
+#' (default=3).
+#' @param span numeric; smoothing parameter for loess fit line (default=0.75)
 #'
 #' @export
 #' @import ggplot2
@@ -23,10 +26,17 @@
 #' of the absolute studentized residuals. A robust linear fit line
 #' and a loess fit line are also plotted.
 #'
-#' @seealso \link[car]{spreadLevelPlot}
+#' @seealso \link[car]{spreadLevelPlot}, \link[MASS]{rlm}
 #'
+#' @return a \code{ggplot2} graph
+#'
+#' @examples
+#' mtcars$am <- factor(mtcars$am)
+#' fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#' ggspreadLevelPlot(fit)
 
-ggSpreadLevelPlot <- function(x, n.labels=3){
+
+ggspreadLevelPlot <- function(x, alpha=.4, n.labels=3, span=.75){
   require(ggplot2)
   y <- log(abs(rstudent(x)))
   x <- log(x$fitted)
@@ -38,16 +48,18 @@ ggSpreadLevelPlot <- function(x, n.labels=3){
   df2 <- tail(df[order(df$absres),], n.labels)
 
   p <- ggplot(df, aes(x, y)) +
-    geom_point() +
+    geom_point(alpha=alpha) +
     geom_smooth(method=MASS::rlm, formula= y~x, se=FALSE, color="blue", linetype="dashed") +
-    geom_smooth(se=FALSE, method="loess", formula=y~x, color="indianred2") +
+    geom_smooth(se=FALSE, method="loess", formula=y~x, color="indianred2",
+                span=span) +
     geom_text_repel(data=df2, aes(x=x, y=y, label=row.names(df2)), size=3) +
     theme_bw() +
-    labs(x="log ( Fitted Values )",
-         y="log | Studentized Residuals |",
+    theme(plot.subtitle=element_text(size=9)) +
+    labs(x=expression(paste(italic("log"),"(Fitted Values)")),
+         y=expression(paste(italic("log"), " |Studentized Residuals|")),
          title="Spread-Level Plot",
          subtitle="Assessing constant variance",
-         caption="For homoscedastic data, points should distribute evenly around a horizontal line")
+         caption="Homoscedastic data should distribute evenly around a horizontal line")
   return(p)
   }
 

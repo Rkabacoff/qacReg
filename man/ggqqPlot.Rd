@@ -4,17 +4,24 @@
 \alias{ggqqPlot}
 \title{Normal Q-Q Plot}
 \usage{
-ggqqPlot(x, reps = 100, conf = 0.95, n.labels = 3)
+ggqqPlot(x, reps = 100, conf = 0.95, n.labels = 3, alpha = 0.4)
 }
 \arguments{
 \item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
 
-\item{reps}{integer; number of bootstrap replications for
-confidence envelope.}
+\item{reps}{integer; number of bootstrap replications for the
+confidence envelope (default=100)}
 
-\item{conf}{size of confidence interval (default=\code{0.95}).}
+\item{conf}{numeric; size of confidence interval (default=\code{0.95}).}
 
-\item{n.labels}{integer; the number of largest residuals to label.}
+\item{n.labels}{integer; the number of largest residuals to label (
+default = 3).}
+
+\item{alpha}{numeric; transparency for plotted points
+(0 to 1, default=0.4).}
+}
+\value{
+a \code{ggplot2} graph
 }
 \description{
 Plots empirical quantiles of the studentized residuals
@@ -22,10 +29,17 @@ from a linear model against the theoretical quantiles of
 a the normal distribution.
 }
 \details{
-This function is a modification of the \link[car]{qqPlot} function
-in the \code{car} package, using \code{ggplot3} rather than
-\code{base} graphics.
+The function is a modification of the \link[car]{qqPlot} function
+in the \code{car} package, using \code{ggplot2} rather than
+\code{base} graphics. A robust linear regression line
+is provided by the \link[MASS]{rlm} function in the \code{MASS}
+package.
+}
+\examples{
+mtcars$am <- factor(mtcars$am)
+fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+ggqqPlot(fit)
 }
 \seealso{
-\link[car]{qqPlot}, \link[stats]{qqnorm}
+\link[car]{qqPlot}, \link[stats]{qqnorm}, \link[MASS]{rlm}
 }

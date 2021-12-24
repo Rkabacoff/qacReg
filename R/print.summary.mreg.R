@@ -12,20 +12,21 @@
 #' @examples
 #' fit <- mreg(mpg ~ wt + hp + disp, data=mtcars)
 #' sfit <- summary(fit)
-#' print(sfit)
+#' print(sfit, digits=5)
 print.summary.mreg <- function(x, digits=3, ...){
 
   if(!inherits(x, "summary.mreg")){
     stop("x must  be class 'summary.mreg'")
   }
 
-  heading("Multiple Linear Regression Summary")
+  heading("MULTIPLE REGRESSION SUMMARY")
 
-  cat("Formula: ", as.character(x$call["formula"]),"\n",
-      "Data   : ", as.character(x$call["data"]), "\n\n",
+  cat("Model: ", as.character(x$call["formula"]),"\n",
+      "Data : ", as.character(x$call["data"]), "\n",
+      "N    : ", x$N, "\n\n",
       sep="")
 
-  heading("Fit Indices:")
+  heading("Fit Indices")
   print(x$fit.indices, digits=digits, row.names=FALSE)
   cat("\n")
 
@@ -33,7 +34,7 @@ print.summary.mreg <- function(x, digits=3, ...){
   print(x$cv.indices, digits=digits, row.names=FALSE)
   cat("\n")
 
-  heading("Omnibus Test:")
+  heading("Omnibus Test")
 
   signif <- ifelse(x$Ftest$p < .001, "***",
                    ifelse(x$Ftest$p < 0.01, "**",
@@ -49,12 +50,11 @@ print.summary.mreg <- function(x, digits=3, ...){
 
   cat("\n")
 
-  heading("Anova Table (type III tests):")
-
+  heading("Anova Table (type III tests)")
   printAnova(x$anova.table, digits)
 
   cat("\n")
 
-  heading("Regression Coefficients:")
+  heading("Regression Coefficients")
   print(x$coefficient.table, digits=digits, ...)
 }

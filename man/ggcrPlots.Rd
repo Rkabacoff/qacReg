@@ -9,9 +9,12 @@ ggcrPlots(x, alpha = 0.4, span = 0.75)
 \arguments{
 \item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
 
-\item{alpha}{numeric; degree of transparency for points.}
+\item{alpha}{numeric; degree of transparency for points (0 to 1, default=0.4)}
 
-\item{span}{numeric; the  degree of smoothing for loess lines.}
+\item{span}{numeric; the  degree of smoothing for loess lines (default=0.75)}
+}
+\value{
+a \code{ggplot2} graph
 }
 \description{
 Produces component+residual (partial residual) plots for
@@ -24,8 +27,14 @@ in the \code{car} package, using \code{ggplot2} rather than
 }
 \note{
 The linear model can contain factors but not interactions. Plots are
-based on predictors, but only number variables are plotted. Each plot
+based on all predictors, but only the numeric variables are plotted. Each plot
 has a linear and loess fit line.
+}
+\examples{
+mtcars$am <- factor(mtcars$am)
+fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+ggcrPlots(fit)
+
 }
 \seealso{
 \link[car]{crPlot}, \link[car]{crPlots}

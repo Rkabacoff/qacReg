@@ -14,7 +14,7 @@ mreg(formula, data)
 \item{...}{arguments passed to the \code{lm} function.}
 }
 \value{
-an object of type \code{c("mreg", "lm")}
+an object of class \code{c("mreg", "lm")}
 }
 \description{
 Fit a linear model of the form
@@ -24,7 +24,6 @@ Fit a linear model of the form
 \code{mreg} is a wrapper for the \code{\link{lm}} function.
 }
 \examples{
-mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ hp + wt + am, mtcars)
+fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 fit
 }

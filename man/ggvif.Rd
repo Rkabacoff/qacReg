@@ -9,20 +9,30 @@ ggvif(x)
 \arguments{
 \item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
 }
+\value{
+a \code{ggplot2 graph}
+}
 \description{
 Plots the variance inflations factors (VIF) for a linear
 model.
 }
 \details{
-This function plots results from the \link[car]{vif} function.
+This function plots results from the \link[car]{vif} function from
+the \code{car} package. VIFs larger than 5 are highlighted.
+
 If all terms in an unweighted linear model have 1 df, then the usual variance-inflation factors are calculated.
 If any terms in an unweighted linear model have more than 1 df,
 then generalized variance-inflation factors (Fox and Monette, 1992)
 are calculated.
 }
+\examples{
+mtcars$am <- factor(mtcars$am)
+fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+ggvif(fit)
+}
 \references{
 Fox, J. and Monette, G. (1992) Generalized collinearity diagnostics.
-JASA, 87, 178–183.
+\emph{JASA}, \emph{87}, 178–183.
 }
 \seealso{
 \link[car]{vif}

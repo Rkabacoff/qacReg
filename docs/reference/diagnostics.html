@@ -103,10 +103,19 @@ Run and print regression diagnostics" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -158,21 +167,33 @@ Run and print regression diagnostics</h1>
     <p>The results of the methods <code><a href='diagnostics.mreg.html'>diagnostics.mreg</a></code> or <code><a href='diagnostics.lreg.html'>diagnostics.lreg</a></code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>accel</span> <span class='op'>+</span> <span class='va'>origin</span>, data <span class='op'>=</span> <span class='va'>auto_mpg</span><span class='op'>)</span>
 <span class='fu'>diagnostics</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ----------------------------------- 
-#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
-#&gt; Test for Heteroskedasticity:
-#&gt; ----------------------------
-#&gt; Non-constant Variance Score Test 
-#&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 1.733814, Df = 1, p = 0.18792
+</div><div class='output co'>#&gt; <span style='color: #0000BB; font-weight: bold;'>DIAGNOSTICS FOR MULTIPLE REGRESSION</span> 
 #&gt; 
-#&gt;  The test suggests the model may satistfy the Homoskedasticity assumption </div><div class='img'><img src='diagnostics-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  What power transformation of the dependent variable 
-#&gt;  would make our model have constant conditional variance? 
-#&gt; Suggested Variance-Stabilizing Power Transformation: 0.2910809 </div></pre>
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Normality</span> 
+#&gt; Robust Jarque Bera Test for Normality
+#&gt; Chi-square(2) = 73.4348, p &lt; &lt; 2.2e-16
+#&gt; 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Homoscedasticity</span> 
+#&gt; Score Test of Non-Constant Error Variance
+#&gt; Null hypothesis: constant variance
+#&gt; Chi-square(1) = 40.5685 p &lt; 1.898e-10
+#&gt; The test suggest non-constant variance.
+#&gt; A sqrt(y) transformation may help to stabilize the variance.
+#&gt; 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Multicollinearity</span> 
+#&gt;            GVIF Df GVIF^(1/(2*Df))
+#&gt; hp     8.369036  1        2.892929
+#&gt; wt     6.299228  1        2.509826
+#&gt; accel  2.535632  1        1.592367
+#&gt; origin 1.629384  2        1.129811
+#&gt; 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Outliers</span> 
+#&gt; No Studentized residuals with Bonferroni p &lt; 0.05
+#&gt; Largest |rstudent|:
+#&gt;     rstudent unadjusted p-value Bonferroni p
+#&gt; 321 3.646272         0.00030264      0.11864</div><div class='img'><img src='diagnostics-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

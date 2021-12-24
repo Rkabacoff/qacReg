@@ -11,11 +11,10 @@
 #'@details
 #'\code{mreg} is a wrapper for the \code{\link{lm}} function.
 #'
-#'@return an object of type \code{c("mreg", "lm")}
+#'@return an object of class \code{c("mreg", "lm")}
 #'
 #'@examples
-#'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ hp + wt + am, mtcars)
+#'fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 #'fit
 mreg <- function(formula, data){
   fit <- lm(formula, data)

@@ -32,7 +32,9 @@ Imports:
     patchwork,
     dplyr,
     ggrepel,
-    MASS
+    MASS,
+    crayon,
+    dominanceanalysis
 Suggests: 
     rmarkdown,
     knitr

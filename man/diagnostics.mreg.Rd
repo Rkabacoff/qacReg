@@ -4,48 +4,58 @@
 \alias{diagnostics.mreg}
 \title{Diagnostics for Multiple Regression}
 \usage{
-\method{diagnostics}{mreg}(x, output = c("brief", "extended"))
+\method{diagnostics}{mreg}(x, alpha = 0.4, span = 0.8)
 }
 \arguments{
 \item{x}{an object of class \code{c("mreg", "lm")}}
 
-\item{output}{A parameter with two levels which indicates
-whether to display brief diagnostics or
-extended (additional) diagnostics.}
+\item{alpha}{numeric; transparency for plot points (default=0.4)}
+
+\item{span}{numeric; smoothing parameter for loess fit lines (default=0.8)}
+}
+\value{
+a list containing the \code{ggplot2} graphs and statistical tests
 }
 \description{
 Provides diagnostics tests and graphs for a linear model
 }
 \details{
-Provides diagnostics including a graph
-for evaluating normality (\code{\link[car]{qqplot}}),
-, a graph for evaluating linearity (\code{\link[car]{crPlots}}),
-, a graph for evaluating homoscedasticity (\code{\link[car]{spreadLevelPlot}})
-as well as a test for heteroscedasticity (\code{\link[car]{ncvTest}})
-with a suggested power transformation when it is found.
-In addition, if \code{output = "extended"} it provides
-a test of multicollinearity (\code{\link[car]{vif}}),
-a test for identifying outliers (\code{\link[car]{outlierTest}}),
-and a graph for evaluating influential observations
-(\code{\link[car]{influencePlot}}).
-
-If the plots do not look right, you may need to clear your plots
-by clicking the broom in the plots window in the bottom right corner
-of Rstudio
-
-If " Error in plot.new : figure margins too large" is returned,
-you must expand the plots window in the bottom right pane of
-Rstudio. The error is because this pane is not large enough for the plot,
-so by making the plot area larger the function will work.
+The \code{diagnostics} function is a wrapper for several
+diagnostic graphing functions and tests. The function evaluates
+the following:
+\describe{
+\item{Normality}{Normality of the (studentized) residuals is assessed
+via a Q-Q plot (\link{ggqqPlot}), and Robust Jarque Bera Test
+(see notes).}
+\item{Linearity}{Linearity of the explanatory-response relationship
+are assessed via Component + Residual (partial residual) plots
+(\link{ggcrPlots}). If there is a single predictor, a scatter plot
+with linear and loess lines is produced.}
+\item{Constant variance}{Homoscedasticity is evaluated via
+a Spread-Level plot (\link{ggspreadLevelPlot}) and a Scores
+Test for Non-constant Error Variance. (\link[car]{ncvTest}),
+If the test is significant, a transformation of the response
+variable to stabilize the variance is offered.}
+\item{Multicollinearity}{Variance inflation factors (\link[car]{vif})
+are plotted. If there is a single predictor variable, this section
+is skipped.}
+\item{Outliers, leverage, and influence}{An influence plot
+(\link{gginfluencePlot}) and Bonferroni Outlier Test
+(\link[car]{outlierTest}) are provided.}
+}
+}
+\note{
+The Robust Jarque Bera Test is based on the test provided is
+the \code{DescTools} package. See \link[DescTools]{JarqueBeraTest}
+for details.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
 fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
 diagnostics(fit)
-diagnostics(fit, output = "extended")
 }
 \seealso{
-\code{\link[qacReg]{diagnostics}}, \code{\link[car]{vif}},
+\code{\link{diagnostics}}, \code{\link[car]{vif}},
 \code{\link[car]{qqplot}}, \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}},
 \code{\link[car]{crPlots}}, \code{\link[car]{spreadLevelPlot}}, \code{\link[car]{ncvTest}}
 }

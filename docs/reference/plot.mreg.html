@@ -100,10 +100,19 @@ mreg function" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -135,7 +144,15 @@ mreg function</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mreg</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, points <span class='op'>=</span> <span class='cn'>FALSE</span>, dot.size <span class='op'>=</span> <span class='fl'>1</span>, dot.alpha <span class='op'>=</span> <span class='fl'>0.5</span>, ci <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  points <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dot.size <span class='op'>=</span> <span class='fl'>1</span>,
+  dot.alpha <span class='op'>=</span> <span class='fl'>0.5</span>,
+  ci <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  page <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,6 +178,10 @@ mreg function</p>
       <td><p>if confidence intervals are to be shown, default is TRUE</p></td>
     </tr>
     <tr>
+      <th>page</th>
+      <td><p>logical. If <code>TRUE</code>, each graph will appear separately.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>additional arguments to be added to adjust graphic</p></td>
     </tr>
@@ -179,15 +200,12 @@ To see more details and gain better understanding of the ggeffects package see
 here</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://strengejacke.github.io/ggeffects/reference/ggpredict.html'>ggeffect</a>
-<a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></p></div>
+    <div class='dont-index'><p><a href='https://strengejacke.github.io/ggeffects/reference/ggpredict.html'>ggeffect</a>, <a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>accel</span> <span class='op'>+</span> <span class='va'>origin</span>, data <span class='op'>=</span> <span class='va'>auto_mpg</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.mreg-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>fit</span>, points<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.mreg-2.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='plot.mreg-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

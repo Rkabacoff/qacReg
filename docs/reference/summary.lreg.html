@@ -98,10 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -131,7 +140,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lreg</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span>, digits <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +148,10 @@
     <tr>
       <th>x</th>
       <td><p>an object of class "lreg", a result of a call to <a href='lreg.html'>lreg</a> (which is a wrapper for glm)</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>number of significant digits to print</p></td>
     </tr>
     </table>
 
@@ -158,35 +171,23 @@ of robustness including:</p><dl>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lreg.html'>lreg</a></span><span class='op'>(</span><span class='va'>am</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
-#&gt; ______________________________
-#&gt; <span style='font-weight: bold;'>Logistic Regression Summary</span>
-#&gt; ______________________________
+#&gt; ---------------------------
+#&gt; Logistic Regression Summary
+#&gt; ---------------------------
 #&gt; 
-#&gt; Formula:am ~ hp + wt + mpg
-#&gt; Data:mtcars
+#&gt; Formula: am ~ hp + wt + mpg
+#&gt; Data   : mtcars
 #&gt; 
-#&gt; Model Fit Measures:
-#&gt; ______________________________
-#&gt; Stukel's Test:
-#&gt; Analysis of Deviance Table
+#&gt; -------------
+#&gt; Fit Measures:
+#&gt; -------------
+#&gt; Stukel's Test: p =  0.0125 
+#&gt; Tjura's Psuedo R-squared:  0.8216 
+#&gt; AIC: 16.7661 
 #&gt; 
-#&gt; Model 1: am ~ hp + wt + mpg
-#&gt; Model 2: am ~ hp + wt + mpg + za + zb
-#&gt;   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
-#&gt; 1        28     8.7661                       
-#&gt; 2        26     0.0000  2   8.7661  0.01249 *
-#&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#&gt; -----
-#&gt; Tjura's Psuedo R-squared:
-#&gt; 0.8216206
-#&gt; -----
-#&gt; Akaike Information Criterion:
-#&gt; 16.76611
-#&gt; -----
-#&gt; 
+#&gt; -----------------------------
 #&gt; Anova Table (type III tests):
-#&gt; ______________________________
+#&gt; -----------------------------
 #&gt;     LR Chisq Df Pr(&gt;Chisq)   
 #&gt; hp    8.4181  1   0.003715 **
 #&gt; wt   10.4664  1   0.001216 **
@@ -194,23 +195,22 @@ of robustness including:</p><dl>
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt; 
+#&gt; ---------------------------------
 #&gt; Logistic Regression Coefficients:
-#&gt; ______________________________
-#&gt;                        B          SE          t    p-value  
-#&gt; (Intercept) -15.72137053 40.00280658 -0.3930067 0.69431454  
-#&gt; hp            0.08389345  0.08227765  1.0196385 0.30789996  
-#&gt; wt           -6.95492382  3.35297483 -2.0742547 0.03805566 .
-#&gt; mpg           1.22930209  1.58108577  0.7775050 0.43686089  
-#&gt; ---
-#&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#&gt; ---------------------------------
+#&gt;                     B       SE       t p-value  
+#&gt; (Intercept) -15.72137 40.00281 -0.3930 0.69431  
+#&gt; hp            0.08389  0.08228  1.0196 0.30790  
+#&gt; wt           -6.95492  3.35297 -2.0743 0.03806 *
+#&gt; mpg           1.22930  1.58109  0.7775 0.43686  
 #&gt; 
+#&gt; --------------------------------------------
 #&gt; Odds Ratios (with 95% Confidence Intervals):
-#&gt; ______________________________
-#&gt;       Odds Ratio         2.5%        97.5%
-#&gt; hp  1.0875130140 1.014187e+00    1.5531516
-#&gt; wt  0.0009539266 1.001762e-08    0.1163119
-#&gt; mpg 3.4188426555 6.195437e-01 1710.0900067
-#&gt; ---</div></pre>
+#&gt; --------------------------------------------
+#&gt;     Odds Ratio      2.5%     97.5%
+#&gt; hp   1.0875130 1.014e+00    1.5532
+#&gt; wt   0.0009539 1.002e-08    0.1163
+#&gt; mpg  3.4188427 6.195e-01 1710.0900</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

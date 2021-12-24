@@ -6,10 +6,13 @@
 #' a the normal distribution.
 #'
 #' @param x an object of type \code{"mreg"} or \code{"lm"}.
-#' @param reps integer; number of bootstrap replications for
-#' confidence envelope.
-#' @param conf size of confidence interval (default=\code{0.95}).
-#' @param n.labels integer; the number of largest residuals to label.
+#' @param reps integer; number of bootstrap replications for the
+#' confidence envelope (default=100)
+#' @param conf numeric; size of confidence interval (default=\code{0.95}).
+#' @param n.labels integer; the number of largest residuals to label (
+#' default = 3).
+#' @param alpha numeric; transparency for plotted points
+#' (0 to 1, default=0.4).
 #'
 #' @export
 #' @import ggplot2
@@ -17,13 +20,22 @@
 #' @import ggrepel
 #'
 #' @details
-#' This function is a modification of the \link[car]{qqPlot} function
-#' in the \code{car} package, using \code{ggplot3} rather than
-#' \code{base} graphics.
+#' The function is a modification of the \link[car]{qqPlot} function
+#' in the \code{car} package, using \code{ggplot2} rather than
+#' \code{base} graphics. A robust linear regression line
+#' is provided by the \link[MASS]{rlm} function in the \code{MASS}
+#' package.
 #'
-#' @seealso \link[car]{qqPlot}, \link[stats]{qqnorm}
+#' @seealso \link[car]{qqPlot}, \link[stats]{qqnorm}, \link[MASS]{rlm}
 #'
-ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3){
+#' @return a \code{ggplot2} graph
+#'
+#' @examples
+#'mtcars$am <- factor(mtcars$am)
+#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#'ggqqPlot(fit)
+
+ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3, alpha=.4){
 
   if(!inherits(x, "mreg") &
      !inherits(x, "lm")) stop("x must  be class 'mreg' or 'lm'")
@@ -46,11 +58,12 @@ ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3){
   P <- ppoints(n)
   z <- qt(P, df = res.df - 1)
 
-  yhat <- na.omit(fitted.values(x))
+  #yhat <- na.omit(fitted.values(x)) # deal with miss rstudent here
+  yhat <- fitted.values(x)[good]
   S <- sumry$sigma
   Y <- matrix(yhat, n, reps) +
     matrix(rnorm(n * reps, sd = S), n, reps)
-  X <- model.matrix(x)
+  X <- model.matrix(x)[good,]
   rstud <- apply(rstudent(lm(Y ~ X - 1)), 2, sort)
 
   lower <- apply(rstud, 1, quantile, prob = (1 - conf)/2)
@@ -61,23 +74,22 @@ ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3){
   df$absres <- abs(df$ord.x)
   df2 <- tail(df[order(df$absres),], n.labels)
 
-  coef <- coefficients(MASS::rlm(ord.x ~ z))
+  coef <- coefficients(suppressWarnings(MASS::rlm(ord.x ~ z)))
   a <- coef[1]
   b <- coef[2]
 
   p <- ggplot(df) +
-    geom_point(aes(x=z, y=ord.x)) +
-    # geom_line(aes(x=z, y=lower), color="red", linetype="dashed") +
-    # geom_line(aes(x=z, y=upper), color="red", linetype="dashed") +
     geom_ribbon(aes(x=z, ymin=lower, ymax=upper), fill="grey70", alpha=.6) +
     geom_abline(intercept=a, slope=b, color="blue") +
+    geom_point(aes(x=z, y=ord.x), alpha=alpha) +
     geom_text_repel(data=df2, aes(x=z, y=ord.x, label=labels), size=3) +
     labs(title="Normal Q-Q Plot",
-         x = "t Quantiles",
+         x = expression(paste(italic("t"), " Quantiles")),
          y = "Studentized Residuals",
          subtitle = "Assessing normality of residuals",
-         caption = "Normally distributed residuals will cluster around the line.") +
-    theme_bw()
+         caption = "Normally distributed residuals should cluster around the line.") +
+    theme_bw() +
+    theme(plot.subtitle=element_text(size=9))
 
   return(p)
 }

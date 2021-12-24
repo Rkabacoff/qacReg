@@ -3,7 +3,7 @@
 #' @description
 #' This function creates a “bubble” plot of
 #' studentized residuals versus hat values,
-#' with size of the points representing the Cook's distance.
+#' with size of the points representing Cook's distances.
 #'
 #' @note
 #' Vertical reference lines are drawn at twice and three
@@ -16,7 +16,8 @@
 #' Points meeting more than one criterion are only labeled once.
 #'
 #' @param x an object of type \code{"mreg"} or \code{"lm"}.
-#' @param n.labels integer; the number of points to label.
+#' @param n.labels integer; the number of points to label (default=2).
+#' @param alpha numeric; transparency of points (0 to 1, default=0.4).
 #'
 #' @export
 #' @import ggplot2
@@ -28,44 +29,54 @@
 #' in the \code{car} package, using \code{ggplot2} rather than
 #' \code{base} graphics.
 #'
+#' @note
+#' Color is used to identify points that are not influential (D < 0.5),
+#' possibly influential (0.5 <= D < 1), and likely to be influential (D >= 1).
+#'
 #' @seealso \link[car]{influencePlot}
 #'
+#' @return a \code{ggplot2} graph
+#'
+#' @examples
+#' mtcars$am <- factor(mtcars$am)
+#' fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#' gginfluencePlot(fit)
 
-gginfluencePlot <- function(x, n.labels=2){
-  x <- fit$model
+gginfluencePlot <- function(x, alpha=0.4, n.labels=2){
+  df <- x$model
 
-  x$rstudent <- rstudent(fit)
-  x$hat <- hatvalues(fit)
-  x$cooksd <- cooks.distance(fit)
-  x$influential <- ifelse(x$cooksd < .5, 0,
-                          ifelse(x$cooksd < 1, 1, 2))
-  x$influential <- factor(x$influential,
+  df$rstudent <- rstudent(x)
+  df$hat <- hatvalues(x)
+  df$cooksd <- cooks.distance(x)
+  df$influential <- ifelse(df$cooksd < .5, 0,
+                          ifelse(df$cooksd < 1, 1, 2))
+  df$influential <- factor(df$influential,
                           levels=c(0, 1, 2),
                           labels=c("no","possibly", "likely"))
-  p <- length(coef(fit))
-  n <- sum(!is.na(x$rstudent))
+  p <- length(coef(x))
+  n <- sum(!is.na(df$rstudent))
 
 
-  which.rstud <- order(abs(x$rstudent), decreasing = TRUE)[1:n.labels]
-  which.cook <- order(x$cooksd, decreasing = TRUE)[1:n.labels]
-  which.hatval <- order(x$hat, decreasing = TRUE)[1:n.labels]
-  #which.all <- union(x$which.rstud, union(which.cook, which.hatval))
+  which.rstud <- order(abs(df$rstudent), decreasing = TRUE)[1:n.labels]
+  which.cook <- order(df$cooksd, decreasing = TRUE)[1:n.labels]
+  which.hatval <- order(df$hat, decreasing = TRUE)[1:n.labels]
+  #which.all <- union(df$which.rstud, union(which.cook, which.hatval))
   which.all <- unique(c(which.rstud, which.cook, which.hatval))
 
 
-  x2 <- x[which.all, c("hat", "rstudent", "influential")]
-  x2$label <- row.names(x2)
+  df2 <- df[which.all, c("hat", "rstudent", "influential")]
+  df2$label <- row.names(df2)
 
   library(ggplot2)
   library(ggrepel)
 
-  p <- ggplot(x,
+  p <- ggplot(df,
          aes(x = hat, y = rstudent, size = cooksd,
-             color=influential)) +
-    geom_point(alpha = .5) +
-    scale_color_manual(values=c("cornflowerblue", "darkgreen", "red"),
+             fill=influential)) +
+    geom_point(alpha = alpha, shape=21, color="black") +
+    scale_fill_manual(values=c("cornflowerblue", "darkgreen", "red"),
                        drop=FALSE) +
-    geom_text_repel(data=x2, aes(x=hat, y=rstudent, label=label),
+    geom_text_repel(data=df2, aes(x=hat, y=rstudent, label=label),
                     color="black", size=3) +
     #scale_size_continuous(range = c(1, 8)) +
     scale_size_binned(n.breaks=5)+
@@ -73,12 +84,13 @@ gginfluencePlot <- function(x, n.labels=2){
     geom_hline(yintercept=c(-2, 0, 2), color="black", linetype="dashed") +
     geom_vline(xintercept=c(2*p/n, 3*p/n), color="black", linetype="dashed") +
     theme_bw() +
+    theme(plot.subtitle=element_text(size=9)) +
     labs(title="Influence Plot",
          subtitle="Assessing outliers, leverage, and influential observations",
          x = "Hat Values",
          y="Studentized Residuals",
          size = "Cook's D",
-         color="Influential?",
+         fill="Influential?",
          caption = "Point size represents Cook's D.\nLarger points are more influential.")
   return(p)
 }

@@ -25,8 +25,7 @@
 #'
 #'
 #'@seealso
-#'\link[ggeffects]{ggeffect}
-#'\link[ggplot2]{ggplot}
+#'\link[ggeffects]{ggeffect}, \link[ggplot2]{ggplot}
 #'
 #'
 #'@export
@@ -37,34 +36,38 @@
 #'@import patchwork
 #'
 #'@examples
-#'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ hp + wt + am, mtcars)
+#'fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 #'plot(fit)
-#'plot(fit, points=TRUE)
 
 
 plot.mreg <- function(x, points = TRUE, dot.size = 1,
                       dot.alpha=.5, ci= TRUE, page=FALSE, ...){
-  vars <- names(x$model)[names(x$model) != x$terms[[2]]]
-  myplots <- vector(mode="list", length=length(vars))
-  names(myplots) <- vars
-  for(i in vars){
-    myplots[[i]] <- plot(ggeffect(x, i), add.data=points,
-                         dot.size=dot.size, dot.alpha=dot.alpha, ci=ci, ...)+ labs(title="")
-  }
-  if(page){
-    return(myplots)
-  }
 
-  if (length(vars) > 1){
-    caption <- "Plots show the relationship of each explanatory variable to\nthe outcome controlling for the other explanatory variables."
-
+  if (length(names(coefficients(x))) < 3){
+    # scatterplot
+    final <- scatter_plot(x, alpha=dot.alpha)
   } else {
-    caption <- ""
+    vars <- names(x$model)[names(x$model) != x$terms[[2]]]
+    myplots <- vector(mode="list", length=length(vars))
+    names(myplots) <- vars
+    for(i in vars){
+      myplots[[i]] <- plot(ggeffect(x, i), add.data=points,
+                           dot.size=dot.size, dot.alpha=dot.alpha, ci=ci, ...)+ labs(title="")
+    }
+    if(page){
+      return(myplots)
+    }
+
+    if (length(vars) > 1){
+      caption <- "Plots show the relationship of each explanatory variable to\nthe outcome controlling for the other explanatory variables."
+
+    } else {
+      caption <- ""
+    }
+    final <- wrap_plots(myplots) +
+      plot_annotation(title="Effects Plots", caption=caption) &
+      theme(plot.caption=element_text(size=8))
   }
-  final <- wrap_plots(myplots) +
-    plot_annotation(title="Effects Plots", caption=caption) &
-    theme(plot.caption=element_text(size=8))
   return(final)
 }
 

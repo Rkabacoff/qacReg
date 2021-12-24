@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Summarise an 'mreg' object — summary.mreg" />
-<meta property="og:description" content="This function serves as a summary method for class &quot;mreg&quot;." />
+<meta property="og:description" content="Summarize an object of class &quot;mreg&quot;." />
 
 
 
@@ -98,10 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -127,18 +136,24 @@
     </div>
 
     <div class="ref-description">
-    <p>This function serves as a summary method for class "mreg".</p>
+    <p>Summarize an object of class <code>"mreg"</code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mreg</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>x</span>, k <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of class "mreg", a result of a call to <a href='mreg.html'>mreg</a> (which is a wrapper for lm)</p></td>
+      <td><p>an object of class "mreg", a result
+of a call to <a href='mreg.html'>mreg</a> (which is a wrapper
+for <a href='https://rdrr.io/r/stats/lm.html'>lm</a>)</p></td>
+    </tr>
+    <tr>
+      <th>k</th>
+      <td><p>number of folds for cross validated performance</p></td>
     </tr>
     </table>
 
@@ -146,68 +161,53 @@
 
     <p>The function <strong>summary.mreg</strong> computes summary statistics and results for a fitted linear model with measures
 of robustness including:</p><dl>
-<dt><strong>Fit Indices</strong></dt><dd><p>includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error</p></dd>
-<dt><strong>10-fold Cross Validated Fit Indices</strong></dt><dd><p>includes a more reliable and accurate measure of R-squared, Root Mean Squared Error</p></dd>
-<dt><strong>Omnibus Test</strong></dt><dd><p>includes F-statistic, Degrees of Freedom, p-value</p></dd>
-<dt><strong>Anova Table (Type 3 Tests)</strong></dt><dd><p>includes a Type-III Analysis of Variance Table (outputted from the Anova() function in the <strong>car</strong> package)</p></dd>
-<dt><strong>Regression Coefficients</strong></dt><dd><p>includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes</p></dd>
+<dt>fit.indices</dt><dd><p>includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error</p></dd>
+<dt>cv.indices</dt><dd><p>includes a more reliable and accurate measure of R-squared, Root Mean Squared Error</p></dd>
+<dt>Ftest</dt><dd><p>includes F-statistic, Degrees of Freedom, p-value</p></dd>
+<dt>anova.table</dt><dd><p>includes a Type-III Analysis of Variance Table (outputted from the Anova() function in the <strong>car</strong> package)</p></dd>
+<dt>coefficient.table</dt><dd><p>includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes</p></dd>
+<dt>k</dt><dd><p>number of folds for cross-validation</p></dd>
+<dt>N</dt><dd><p>sample size</p></dd>
 
 </dl>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>accel</span> <span class='op'>+</span> <span class='va'>origin</span>, data <span class='op'>=</span> <span class='va'>auto_mpg</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; ----------------------------------
-#&gt; Multiple Linear Regression Summary
-#&gt; ----------------------------------
+</div><div class='output co'>#&gt; <span style='color: #0000BB; font-weight: bold;'>MULTIPLE REGRESSION SUMMARY</span> 
+#&gt; Model: mpg ~ hp + wt + accel + origin
+#&gt; Data : auto_mpg
+#&gt; N    : 392
 #&gt; 
-#&gt; Formula:mpg ~ hp + wt + am
-#&gt; Data   :mtcars
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Fit Indices</span> 
+#&gt;  R.Squared Adj.R.Squared  AIC RMSE
+#&gt;      0.719         0.716 2238 4.13
 #&gt; 
-#&gt; ------------
-#&gt; Fit Indices:
-#&gt; ------------
-#&gt;  R.Squared Adj.R.Squared      AIC     RMSE
-#&gt;  0.8398903     0.8227357 156.1348 2.373625
+#&gt; <span style='color: #0000BB; font-weight: bold;'>5-Fold Cross Validated Fit Indices:</span> 
+#&gt;  R.Squared RMSE
+#&gt;      0.714 4.19
 #&gt; 
-#&gt; ------------------------------------
-#&gt; 10-Fold Cross Validated Fit Indices:
-#&gt; ------------------------------------
-#&gt;  R.squared     RMSE
-#&gt;  0.8359868 2.573404
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Omnibus Test</span> 
+#&gt; F(5,386) = 197.852, p &lt; &lt;2e-16  *** 
 #&gt; 
-#&gt; -------------
-#&gt; Omnibus Test:
-#&gt; -------------
-#&gt; F(3,28) = 48.96, p 2.908e-11  *** 
-#&gt; --- 
-#&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Anova Table (type III tests)</span> 
+#&gt;               Sum Sq  DF F value Pr(&gt;F)    
+#&gt; (Intercept) 5473.655   1 316.038 &lt;0.001 ***
+#&gt; hp           220.431   1  12.727 &lt;0.001 ***
+#&gt; wt          1017.753   1  58.763 &lt;0.001 ***
+#&gt; accel          1.117   1   0.065    0.8    
+#&gt; origin       308.474   2   8.905 &lt;0.001 ***
+#&gt; Residuals   6685.366 386                   
 #&gt; 
-#&gt; -----------------------------
-#&gt; Anova Table (type III tests):
-#&gt; -----------------------------
-#&gt;             Sum Sq Df F value   Pr(&gt;F)    
-#&gt; (Intercept) 1066.0  1 165.558 2.82e-13 ***
-#&gt; hp            98.0  1  15.224 0.000546 ***
-#&gt; wt            65.1  1  10.118 0.003574 ** 
-#&gt; am            14.8  1   2.292 0.141268    
-#&gt; Residuals    180.3 28                     
-#&gt; ---
-#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#&gt; 
-#&gt; ----------------------------------------
-#&gt; Multiple Linear Regression Coefficients:
-#&gt; ----------------------------------------
-#&gt;                    B      B*       SE      t   p-value    
-#&gt; (Intercept) 34.00288 -0.1405 2.642659 12.867 2.824e-13 ***
-#&gt; hp          -0.03748 -0.4264 0.009605 -3.902 0.0005464 ***
-#&gt; wt          -2.87858 -0.4673 0.904971 -3.181 0.0035740  **
-#&gt; am1          2.08371  0.3457 1.376420  1.514 0.1412682    
-#&gt; --- 
-#&gt; Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</div></pre>
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Regression Coefficients</span> 
+#&gt;                    B      B*       SE      t Pr(&gt;|t|)    
+#&gt; (Intercept) 43.29141 -0.0928 2.435185 17.777 4.41e-52 ***
+#&gt; hp          -0.05643 -0.2783 0.015818 -3.568 4.06e-04 ***
+#&gt; wt          -0.00477 -0.5188 0.000622 -7.666 1.46e-13 ***
+#&gt; accel       -0.03085 -0.0109 0.121477 -0.254 8.00e-01    
+#&gt; origin2      0.97656  0.1251 0.643910  1.517 1.30e-01    
+#&gt; origin3      2.75244  0.3527 0.653731  4.210 3.18e-05 ***</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,81 +6,108 @@
 #'
 #'
 #'@param x an object of class \code{c("mreg", "lm")}
-#'@param output A parameter with two levels which indicates
-#'whether to display brief diagnostics or
-#'extended (additional) diagnostics.
+#'@param alpha numeric; transparency for plot points (default=0.4)
+#'@param span numeric; smoothing parameter for loess fit lines (default=0.8)
 #'
 #'@export
 #'
 #'@import car
+#'@import ggplot2
 #'
 #'@details
-#'Provides diagnostics including a graph
-#'for evaluating normality (\code{\link[car]{qqplot}}),
-#', a graph for evaluating linearity (\code{\link[car]{crPlots}}),
-#', a graph for evaluating homoscedasticity (\code{\link[car]{spreadLevelPlot}})
-#'as well as a test for heteroscedasticity (\code{\link[car]{ncvTest}})
-#'with a suggested power transformation when it is found.
-#'In addition, if \code{output = "extended"} it provides
-#'a test of multicollinearity (\code{\link[car]{vif}}),
-#'a test for identifying outliers (\code{\link[car]{outlierTest}}),
-#'and a graph for evaluating influential observations
-#'(\code{\link[car]{influencePlot}}).
+#'The \code{diagnostics} function is a wrapper for several
+#'diagnostic graphing functions and tests. The function evaluates
+#'the following:
+#'\describe{
+#'  \item{Normality}{Normality of the (studentized) residuals is assessed
+#'  via a Q-Q plot (\link{ggqqPlot}), and Robust Jarque Bera Test
+#'   (see notes).}
+#'  \item{Linearity}{Linearity of the explanatory-response relationship
+#'  are assessed via Component + Residual (partial residual) plots
+#'  (\link{ggcrPlots}). If there is a single predictor, a scatter plot
+#'  with linear and loess lines is produced.}
+#'  \item{Constant variance}{Homoscedasticity is evaluated via
+#'  a Spread-Level plot (\link{ggspreadLevelPlot}) and a Scores
+#'  Test for Non-constant Error Variance. (\link[car]{ncvTest}),
+#'  If the test is significant, a transformation of the response
+#'  variable to stabilize the variance is offered.}
+#'  \item{Multicollinearity}{Variance inflation factors (\link[car]{vif})
+#'  are plotted. If there is a single predictor variable, this section
+#'  is skipped.}
+#'  \item{Outliers, leverage, and influence}{An influence plot
+#'  (\link{gginfluencePlot}) and Bonferroni Outlier Test
+#'  (\link[car]{outlierTest}) are provided.}
+#'}
 #'
-#'If the plots do not look right, you may need to clear your plots
-#'by clicking the broom in the plots window in the bottom right corner
-#'of Rstudio
-#'
-#'If " Error in plot.new : figure margins too large" is returned,
-#'you must expand the plots window in the bottom right pane of
-#'Rstudio. The error is because this pane is not large enough for the plot,
-#'so by making the plot area larger the function will work.
-#'
-#'
-#'@seealso \code{\link[qacReg]{diagnostics}}, \code{\link[car]{vif}},
+#'@note The Robust Jarque Bera Test is based on the test provided is
+#'the \code{DescTools} package. See \link[DescTools]{JarqueBeraTest}
+#'for details.
+
+#'@seealso \code{\link{diagnostics}}, \code{\link[car]{vif}},
 #' \code{\link[car]{qqplot}}, \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}},
 #' \code{\link[car]{crPlots}}, \code{\link[car]{spreadLevelPlot}}, \code{\link[car]{ncvTest}}
 #'
-#'@return NULL
+#'@return a list containing the \code{ggplot2} graphs and statistical tests
 #'
 #'@examples
 #'mtcars$am <- factor(mtcars$am)
 #'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
 #'diagnostics(fit)
-#'diagnostics(fit, output = "extended")
 
-diagnostics.mreg <- function(x, output = c("brief", "extended")){
+diagnostics.mreg <- function(x, alpha=.4, span=.8){
 
-  output <- match.arg(output)
 
   heading("DIAGNOSTICS FOR MULTIPLE REGRESSION")
+  cat("\n")
+  heading("Normality")
+
 
   # normality
-  cat("Assessing normality of residuals\n")
-  cat("  * Q-Q Plot\n\n")
-  qqplot <- ggqqPlot(x)
-  print(qqplot)
+  qqplot <- ggqqPlot(x, alpha=alpha)
+  # print(qqplot)
+
+  normality.test(x)
+  cat("\n")
 
   # linearity
-  cat("Assessing linearity of relationships\n")
-  cat("  * Component + Residuals Plots \n\n")
-  crplots <- ggcrPlots(x)
-  print(crplots)
+  if (length(coefficients(x)) > 2){
+    crplots <- ggcrPlots(x, alpha=alpha, span=span)
+    # print(crplots)
+  } else {
+    # simple scatter plot
+    yvar <- names(x$model)[1]
+    xvar <- names(x$model)[2]
+    crplots <- ggplot(data=x$model,
+           aes(x=.data[[xvar]], y=.data[[yvar]])) +
+      geom_point(alpha=alpha) +
+      geom_smooth(method="lm", formula=y ~ x,
+                  color="blue", linetype="dashed",
+                  se=FALSE) +
+      geom_smooth(method="loess", formula=y~x,
+                  color="indianred2", linetype="solid",
+                  se=FALSE, span=span) +
+      labs(title="Scatter plot",
+           subtitle=paste("Assessing linearity")) +
+      theme_bw() +
+      theme(plot.subtitle=element_text(size=9))
+    # print(crplots)
+  }
+
 
   # homoscedasticity
-  cat("Assessing homoscedasticity\n")
-  cat("  * Spread-Level Plot \n\n")
-  slplot <- ggSpreadLevelPlot(x)
-  print(slplot)
+  heading("Homoscedasticity")
+  slplot <- ggspreadLevelPlot(x, alpha=alpha, span=span)
+  #print(slplot)
 
-  cat("  * Score Test of Non-Constant Error Variance\n")
+  cat("Score Test of Non-Constant Error Variance\n")
   ncv <- car::ncvTest(x)
-  cat("    Null hypothesis: constant variance\n")
-  cat("    Chi-square(" , ncv$Df, ") = ", round(ncv$ChiSquare,4) ,
+  cat("Null hypothesis: constant variance\n")
+  cat("Chi-square(" , ncv$Df, ") = ", round(ncv$ChiSquare,4) ,
       " p < ", format.pval(ncv$p, 4), "\n", sep="")
 
+  trans <- NULL
   if(ncvTest(x)$p < 0.05){
-    cat("    The test suggest non-constant variance.\n")
+    cat("The test suggest non-constant variance.\n")
     resid <- log(abs(rstudent(x)))
     fitval <- x$fitted.values
     mod <- suppressWarnings(MASS::rlm(log(resid) ~ log(fitval)))
@@ -89,28 +116,47 @@ diagnostics.mreg <- function(x, output = c("brief", "extended")){
     ptranslbls <- c("y^2", "y", "sqrt(y)", "log(y)",
                     "1/sqrt(y)", "1/y", "1/y^2" )
     pos <- which.min(abs(ptrans-trans))
-    cat("    A", ptranslbls[pos], "transformation may",
-        "help to stabalize the variance.\n")
+    cat("A", ptranslbls[pos], "transformation may",
+        "help to stabilize the variance.\n")
   }
 
-  #multicolinearity
-  cat("\n")
-  cat("Assessing multicolinearity\n")
-  cat("  * Variance Inflation Plot \n\n")
+   cat("\n")
 
-  vifplot <- ggvif(x)
-  print(vifplot)
+  #multicolinearity
+  heading("Multicollinearity")
+  print(car::vif(x))
+  vifplot <- NULL
+  if (length(coefficients(x)) > 2){
+    vifplot <- ggvif(x)
+    #print(vifplot)
+  }
+
 
   #outliers
   cat("\n")
-  cat("Assessing outliers, leverage, and influential observations\n")
-  cat("  * Outlier Test \n")
+
+  influenceplot <- gginfluencePlot(x, alpha)
+  #print(influenceplot)
+
+  heading("Outliers")
   outliers <- outlierTest(x)
   print(outliers)
-  cat("\n")
-  cat("  *Influence Plot\n")
 
-  influenceplot <- gginfluencePlot(x)
+  # output graphs
+  print(qqplot)
+  print(crplots)
+  print(slplot)
+  print(vifplot)
   print(influenceplot)
 
+  results <- list(qqplot,
+                  crplots,
+                  slplot,
+                  ncv,
+                  trans,
+                  vifplot,
+                  influenceplot,
+                  outliers)
+
+  invisible(results)
 }

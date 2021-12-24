@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Multiple Regression — mreg" />
 <meta property="og:description" content="Fit a linear model of the form
-\(y = \beta0 + \beta1*X1 + \beta2*X2 + ...+ \betak*Xk\)." />
+\(y = \beta0 + \beta1*X1 + \beta2*X2 + ...\)." />
 
 
 
@@ -99,10 +99,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -129,7 +138,7 @@
 
     <div class="ref-description">
     <p>Fit a linear model of the form
-\(y = \beta0 + \beta1*X1 + \beta2*X2 + ...+ \betak*Xk\).</p>
+\(y = \beta0 + \beta1*X1 + \beta2*X2 + ...\).</p>
     </div>
 
     <pre class="usage"><span class='fu'>mreg</span><span class='op'>(</span><span class='va'>formula</span>, <span class='va'>data</span><span class='op'>)</span></pre>
@@ -153,22 +162,21 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an object of type <code><a href='https://rdrr.io/r/base/c.html'>c("mreg", "lm")</a></code></p>
+    <p>an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("mreg", "lm")</a></code></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>mreg</code> is a wrapper for the <code><a href='https://rdrr.io/r/stats/lm.html'>lm</a></code> function.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>mreg</span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span>, <span class='va'>mtcars</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>mreg</span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>hp</span> <span class='op'>+</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>accel</span> <span class='op'>+</span> <span class='va'>origin</span>, data <span class='op'>=</span> <span class='va'>auto_mpg</span><span class='op'>)</span>
 <span class='va'>fit</span>
 </div><div class='output co'>#&gt; 
 #&gt; Call:
-#&gt; lm(formula = mpg ~ hp + wt + am, data = mtcars)
+#&gt; lm(formula = mpg ~ hp + wt + accel + origin, data = auto_mpg)
 #&gt; 
 #&gt; Coefficients:
-#&gt; (Intercept)           hp           wt          am1  
-#&gt;    34.00288     -0.03748     -2.87858      2.08371  
+#&gt; (Intercept)           hp           wt        accel      origin2      origin3  
+#&gt;   43.291412    -0.056432    -0.004767    -0.030851     0.976565     2.752444  
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

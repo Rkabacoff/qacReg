@@ -23,13 +23,13 @@ of robustness including:
 \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
 \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, Significance codes}
 \item{k}{number of folds for cross-validation}
+\item{N}{sample size}
 }
 }
 \description{
 Summarize an object of class \code{"mreg"}.
 }
 \examples{
-mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ hp + wt + am, mtcars)
-summary(fit, k=2)
+fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+summary(fit)
 }

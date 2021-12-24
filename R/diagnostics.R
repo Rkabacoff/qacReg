@@ -10,6 +10,6 @@
 #' @return The results of the methods \code{\link{diagnostics.mreg}} or \code{\link{diagnostics.lreg}}
 #' @export
 #' @examples
-#' fit <- mreg(mpg ~ ., mtcars)
+#' fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 #' diagnostics(fit)
 diagnostics <- function(x, ...) UseMethod("diagnostics")

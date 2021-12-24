@@ -20,5 +20,5 @@
 \examples{
 fit <- mreg(mpg ~ wt + hp + disp, data=mtcars)
 sfit <- summary(fit)
-print(sfit)
+print(sfit, digits=5)
 }

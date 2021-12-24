@@ -6,12 +6,12 @@
 #'
 #' @note
 #' The linear model can contain factors but not interactions. Plots are
-#' based on predictors, but only number variables are plotted. Each plot
+#' based on all predictors, but only the numeric variables are plotted. Each plot
 #' has a linear and loess fit line.
 #'
 #' @param x an object of type \code{"mreg"} or \code{"lm"}.
-#' @param alpha numeric; degree of transparency for points.
-#' @param span numeric; the  degree of smoothing for loess lines.
+#' @param alpha numeric; degree of transparency for points (0 to 1, default=0.4)
+#' @param span numeric; the  degree of smoothing for loess lines (default=0.75)
 #'
 #' @export
 #' @import ggplot2
@@ -22,13 +22,20 @@
 #' in the \code{car} package, using \code{ggplot2} rather than
 #' \code{base} graphics.
 #'
+#' @return a \code{ggplot2} graph
+#'
 #' @seealso \link[car]{crPlot}, \link[car]{crPlots}
+#' @examples
+#'mtcars$am <- factor(mtcars$am)
+#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#'ggcrPlots(fit)
+
 #'
 ggcrPlots <- function(x, alpha=.4, span=.75){
 
   # numeric predictors
   findnumeric <- function(x){
-    if(class(x) %in% c("integer", "numeric") &
+    if(class(x)[1] %in% c("integer", "numeric") &
        length(unique(x)) > 2) {
       outcome <- TRUE} else {
         outcome <- FALSE
@@ -66,6 +73,7 @@ ggcrPlots <- function(x, alpha=.4, span=.75){
   p <- wrap_plots(myplots) +
     plot_annotation(title="Components + Residuals Plots",
             subtitle=paste("Assessing linearity of", yname,
-                           "with quantitative predictors"))
+                           "with quantitative predictors")) &
+    theme(plot.subtitle=element_text(size=9))
   return(p)
 }

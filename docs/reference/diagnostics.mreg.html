@@ -98,10 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/diagnostics.html">Regression Diagnostics</a>
+    </li>
+    <li>
       <a href="../articles/logistic.html">Introduction to Logistic Regression</a>
     </li>
     <li>
+      <a href="../articles/performance.html">Evaluating Model Performance</a>
+    </li>
+    <li>
       <a href="../articles/regression.html">Introduction to Linear Regression</a>
+    </li>
+    <li>
+      <a href="../articles/varimp.html">Estimating Variable Importance</a>
     </li>
   </ul>
 </li>
@@ -131,7 +140,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for mreg</span>
-<span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>x</span>, output <span class='op'>=</span> <span class='st'>"brief"</span><span class='op'>)</span></pre>
+<span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0.4</span>, span <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,33 +150,49 @@
       <td><p>an object of class <code><a href='https://rdrr.io/r/base/c.html'>c("mreg", "lm")</a></code></p></td>
     </tr>
     <tr>
-      <th>output</th>
-      <td><p>A parameter with two levels which indicates
-whether to display brief diagnostics or
-extended (additional) diagnostics.</p></td>
+      <th>alpha</th>
+      <td><p>numeric; transparency for plot points (default=0.4)</p></td>
+    </tr>
+    <tr>
+      <th>span</th>
+      <td><p>numeric; smoothing parameter for loess fit lines (default=0.8)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a list containing the <code>ggplot2</code> graphs and statistical tests</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Provides diagnostics including a graph
-for evaluating normality (<code>qqplot</code>),
-, a graph for evaluating linearity (<code><a href='https://rdrr.io/pkg/car/man/crPlots.html'>crPlots</a></code>),
-, a graph for evaluating homoscedasticity (<code><a href='https://rdrr.io/pkg/car/man/spreadLevelPlot.html'>spreadLevelPlot</a></code>)
-as well as a test for heteroscedasticity (<code><a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a></code>)
-with a suggested power transformation when it is found.
-In addition, if <code>output = "extended"</code> it provides
-a test of multicollinearity (<code><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></code>),
-a test for identifying outliers (<code><a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a></code>),
-and a graph for evaluating influential observations
-(<code><a href='https://rdrr.io/pkg/car/man/influencePlot.html'>influencePlot</a></code>).</p>
-<p>If the plots do not look right, you may need to clear your plots
-by clicking the broom in the plots window in the bottom right corner
-of Rstudio</p>
-<p>If " Error in plot.new : figure margins too large" is returned,
-you must expand the plots window in the bottom right pane of
-Rstudio. The error is because this pane is not large enough for the plot,
-so by making the plot area larger the function will work.</p>
+    <p>The <code>diagnostics</code> function is a wrapper for several
+diagnostic graphing functions and tests. The function evaluates
+the following:</p><dl>
+<dt>Normality</dt><dd><p>Normality of the (studentized) residuals is assessed
+via a Q-Q plot (<a href='ggqqPlot.html'>ggqqPlot</a>), and Robust Jarque Bera Test
+(see notes).</p></dd>
+<dt>Linearity</dt><dd><p>Linearity of the explanatory-response relationship
+are assessed via Component + Residual (partial residual) plots
+(<a href='ggcrPlots.html'>ggcrPlots</a>). If there is a single predictor, a scatter plot
+with linear and loess lines is produced.</p></dd>
+<dt>Constant variance</dt><dd><p>Homoscedasticity is evaluated via
+a Spread-Level plot (<a href='ggspreadLevelPlot.html'>ggspreadLevelPlot</a>) and a Scores
+Test for Non-constant Error Variance. (<a href='https://rdrr.io/pkg/car/man/ncvTest.html'>ncvTest</a>),
+If the test is significant, a transformation of the response
+variable to stabilize the variance is offered.</p></dd>
+<dt>Multicollinearity</dt><dd><p>Variance inflation factors (<a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a>)
+are plotted. If there is a single predictor variable, this section
+is skipped.</p></dd>
+<dt>Outliers, leverage, and influence</dt><dd><p>An influence plot
+(<a href='gginfluencePlot.html'>gginfluencePlot</a>) and Bonferroni Outlier Test
+(<a href='https://rdrr.io/pkg/car/man/outlierTest.html'>outlierTest</a>) are provided.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The Robust Jarque Bera Test is based on the test provided is
+the <code>DescTools</code> package. See <a href='https://andrisignorell.github.io/DescTools/reference/JarqueBeraTest.html'>JarqueBeraTest</a>
+for details.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='diagnostics.html'>diagnostics</a></code>, <code><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></code>,
@@ -178,56 +203,25 @@ so by making the plot area larger the function will work.</p>
     <pre class="examples"><div class='input'><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>am</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mreg.html'>mreg</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>am</span> <span class='op'>+</span> <span class='va'>disp</span> <span class='op'>+</span> <span class='va'>hp</span>, <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ----------------------------------- 
-#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics.mreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
-#&gt; Test for Heteroskedasticity:
-#&gt; ----------------------------
-#&gt; Non-constant Variance Score Test 
-#&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 2.170062, Df = 1, p = 0.14072
+</div><div class='output co'>#&gt; <span style='color: #0000BB; font-weight: bold;'>DIAGNOSTICS FOR MULTIPLE REGRESSION</span> 
 #&gt; 
-#&gt;  The test suggests the model may satistfy the Homoskedasticity assumption </div><div class='img'><img src='diagnostics.mreg-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  What power transformation of the dependent variable 
-#&gt;  would make our model have constant conditional variance? 
-#&gt; Suggested Variance-Stabilizing Power Transformation: -0.1166469 </div><div class='input'><span class='fu'><a href='diagnostics.html'>diagnostics</a></span><span class='op'>(</span><span class='va'>fit</span>, output <span class='op'>=</span> <span class='st'>"extended"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ----------------------------------- 
-#&gt; DIAGNOSTICS FOR MULTIPLE REGRESSION 
-#&gt; ----------------------------------- </div><div class='img'><img src='diagnostics.mreg-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ----------------------------
-#&gt; Test for Heteroskedasticity:
-#&gt; ----------------------------
-#&gt; Non-constant Variance Score Test 
-#&gt; Variance formula: ~ fitted.values 
-#&gt; Chisquare = 2.170062, Df = 1, p = 0.14072
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Normality</span> 
+#&gt; Robust Jarque Bera Test for Normality
+#&gt; Chi-square(2) = 3.2899, p &lt; 0.193
 #&gt; 
-#&gt;  The test suggests the model may satistfy the Homoskedasticity assumption </div><div class='img'><img src='diagnostics.mreg-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt;  What power transformation of the dependent variable 
-#&gt;  would make our model have constant conditional variance? 
-#&gt; Suggested Variance-Stabilizing Power Transformation: -0.1166469 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Homoscedasticity</span> </div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='output co'>#&gt; Score Test of Non-Constant Error Variance
+#&gt; Null hypothesis: constant variance
+#&gt; Chi-square(1) = 2.1701 p &lt; 0.1407
 #&gt; 
-#&gt; --------------------
-#&gt; EXTENDED DIAGNOSTICS 
-#&gt; --------------------- 
-#&gt; Is there multicolinearity among any regressors? 
-#&gt;  GVIF Values above 5 suggest there is some multicolinearity 
-#&gt;  GVIF Values above 10 suggest strong multicolinearity 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Multicollinearity</span> 
 #&gt;       wt       am     disp       hp 
 #&gt; 5.963704 2.386005 7.695157 3.381008 
 #&gt; 
-#&gt;  --------------- 
-#&gt;  Are there any outliers? 
+#&gt; <span style='color: #0000BB; font-weight: bold;'>Outliers</span> 
 #&gt; No Studentized residuals with Bonferroni p &lt; 0.05
 #&gt; Largest |rstudent|:
 #&gt;                rstudent unadjusted p-value Bonferroni p
-#&gt; Toyota Corolla 2.459787           0.020867      0.66773
-#&gt; 
-#&gt;  --------------- 
-#&gt;  What are the influential observations? </div><div class='img'><img src='diagnostics.mreg-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;                        StudRes       Hat        CookD
-#&gt; Lincoln Continental 0.01140395 0.2773939 0.0000103687
-#&gt; Chrysler Imperial   2.23729304 0.2314992 0.2626069336
-#&gt; Fiat 128            2.26605360 0.1118334 0.1121404646
-#&gt; Toyota Corolla      2.45978686 0.1089802 0.1246848310
-#&gt; Maserati Bora       1.06462599 0.5032427 0.2285159245</div></pre>
+#&gt; Toyota Corolla 2.459787           0.020867      0.66773</div><div class='img'><img src='diagnostics.mreg-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-4.png' alt='' width='700' height='433' /></div><div class='img'><img src='diagnostics.mreg-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

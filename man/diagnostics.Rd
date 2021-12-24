@@ -22,6 +22,6 @@ diagnostics:
 Run and print regression diagnostics
 }
 \examples{
-fit <- mreg(mpg ~ ., mtcars)
+fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 diagnostics(fit)
 }

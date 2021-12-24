@@ -46,12 +46,9 @@ To see more details and gain better understanding of the ggeffects package see
 \link[https://strengejacke.github.io/ggeffects/]{here}
 }
 \examples{
-mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ hp + wt + am, mtcars)
+fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 plot(fit)
-plot(fit, points=TRUE)
 }
 \seealso{
-\link[ggeffects]{ggeffect}
-\link[ggplot2]{ggplot}
+\link[ggeffects]{ggeffect}, \link[ggplot2]{ggplot}
 }
