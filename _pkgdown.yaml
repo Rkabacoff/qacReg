@@ -1,0 +1,67 @@
+title: qacr
+url: http://rkabacoff.github.io/qacReg
+template:
+  params:
+    bootswatch: cerulean
+reference:
+  - title: Main Functions
+    desc: ~
+    contents:
+      - '`regress`'
+      - '`info`'
+      - '`diagnostics`'
+      - '`plots`'
+      - '`relimp`'
+      - '`performance`'
+  - title: Generic Functions
+    desc: ~
+    contents:
+      - '`diagnostics.glm`'
+      - '`diagnostics.lm`'
+      - '`info.glm`'
+      - '`info.lm`'
+      - '`print.info.glm`'
+      - '`print.info.lm`'
+      - '`performance.glm`'
+      - '`performance.lm`'
+  - title: Plots
+    desc: ~
+    contents:
+      - '`ggcrPlots`'
+      - '`gginfluencePlot`'
+      - '`ggqqPlot`'
+      - '`ggspreadLevelPlot`'
+      - '`ggvifPlot`'
+  - title: Data sets
+    desc: ~
+    contents:
+      - '`auto_mpg`'
+      - '`bikes`'
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Getting Started
+      icon: fas fa-chalkboard-teacher
+      href: articles/qacReg.html
+    - text: "Articles"
+      icon: fas fa-book
+      menu:
+      -  text: Introduction to Linear Regression
+         href: articles/regression.html
+      -  text: Introduction to Logistic Regression
+         href: articles/logistic.html
+      -  text: Regression Diagnostics
+         href: articles/diagnostics.html
+      -  text: Evaluationg Model Performance
+         href: articles/performance.html
+      -  text: Estimating Variable Importance
+         href: articles/varimp.html
+    - icon: fa-file-code-o
+      text: "Reference"
+      href: reference/index.html
+  right:
+    - icon: fa-github fa-lg
+      text: "GitHub"
+      href: https://github.com/rkabacoff/qacReg/

@@ -2,9 +2,9 @@
 % Please edit documentation in R/info.R
 \name{info}
 \alias{info}
-\title{Summary information of lm or glm models}
+\title{Summary information for lm or glm models}
 \usage{
-info(x, ...)
+info(x)
 }
 \arguments{
 \item{x}{an object of type \code{lm} or \code{glm}.}

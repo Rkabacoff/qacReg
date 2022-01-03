@@ -7,7 +7,7 @@
 ggcrPlots(x, alpha = 0.4, span = 0.75)
 }
 \arguments{
-\item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
+\item{x}{an object of type \code{"lm"}.}
 
 \item{alpha}{numeric; degree of transparency for points (0 to 1, default=0.4)}
 
@@ -32,7 +32,7 @@ has a linear and loess fit line.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 ggcrPlots(fit)
 
 }

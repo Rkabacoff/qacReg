@@ -7,7 +7,7 @@
 ggqqPlot(x, reps = 100, conf = 0.95, n.labels = 3, alpha = 0.4)
 }
 \arguments{
-\item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
+\item{x}{an object of class \code{"lm"}.}
 
 \item{reps}{integer; number of bootstrap replications for the
 confidence envelope (default=100)}
@@ -37,7 +37,7 @@ package.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 ggqqPlot(fit)
 }
 \seealso{

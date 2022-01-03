@@ -7,7 +7,7 @@
 gginfluencePlot(x, alpha = 0.4, n.labels = 2)
 }
 \arguments{
-\item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
+\item{x}{an object of type \code{"lm"}.}
 
 \item{alpha}{numeric; transparency of points (0 to 1, default=0.4).}
 
@@ -41,7 +41,7 @@ possibly influential (0.5 <= D < 1), and likely to be influential (D >= 1).
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 gginfluencePlot(fit)
 }
 \seealso{

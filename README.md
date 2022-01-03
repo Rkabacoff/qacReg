@@ -23,10 +23,21 @@ Here is a basic example:
 
 ``` r
 library(qacReg)
-mtcars$cyl <- factor(mtcars$cyl)
-fit <- mreg(mpg ~ hp + wt + cyl, mtcars)
-summary(fit)
+
+# multiple regression (mpg is quantitative)
+fit <- regress(mpg ~ hp + wt + cyl, mtcars)
+info(fit)
 diagnostics(fit)
-plot(fit)
+plots(fit)
+relimp(fit)
+performance(fit)
+
+# logistic regression (am is binary)
+fit <- regress(am ~ hp + wt + mpg, mtcars)
+info(fit)
+diagnostics(fit)
+plots(fit)
+relimp(fit)
+performance(fit)
 ```
 

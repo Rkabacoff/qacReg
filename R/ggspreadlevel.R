@@ -5,7 +5,7 @@
 #' spread on level using the studentized residuals from a linear
 #' model.
 #'
-#' @param x an object of type \code{"mreg"} or \code{"lm"}.
+#' @param x an object of class \code{"lm"}.
 #' @param alpha numeric; degree of transparency for points (0 to 1, default=0.4).
 #' @param n.labels integer; the number of largest residuals to label
 #' (default=3).
@@ -15,6 +15,8 @@
 #' @import ggplot2
 #' @importFrom MASS rlm
 #' @import ggrepel
+#' @importFrom stats na.omit
+#' @importFrom utils tail
 #'
 #' @details
 #' This function is a modification of the \link[car]{spreadLevelPlot} function
@@ -32,12 +34,11 @@
 #'
 #' @examples
 #' mtcars$am <- factor(mtcars$am)
-#' fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#' fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 #' ggspreadLevelPlot(fit)
 
 
 ggspreadLevelPlot <- function(x, alpha=.4, n.labels=3, span=.75){
-  require(ggplot2)
   y <- log(abs(rstudent(x)))
   x <- log(x$fitted)
   df <- data.frame(x=x, y=y)
@@ -45,7 +46,7 @@ ggspreadLevelPlot <- function(x, alpha=.4, n.labels=3, span=.75){
 
    # which points to label
   df$absres <- abs(df$y)
-  df2 <- tail(df[order(df$absres),], n.labels)
+  df2 <- utils::tail(df[order(df$absres),], n.labels)
 
   p <- ggplot(df, aes(x, y)) +
     geom_point(alpha=alpha) +

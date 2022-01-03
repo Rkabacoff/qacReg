@@ -9,12 +9,12 @@ Run and print regression diagnostics}
 diagnostics(x, ...)
 }
 \arguments{
-\item{x}{an object of type \code{mreg} or \code{lreg}.}
+\item{x}{an object of type \code{"lm"} or \code{"glm"}.}
 
 \item{...}{further arguments passed to or from other methods.}
 }
 \value{
-The results of the methods \code{\link{diagnostics.mreg}} or \code{\link{diagnostics.lreg}}
+The results of the methods \code{\link{diagnostics.lm}} or \code{\link{diagnostics.glm}}
 }
 \description{
 diagnostics:
@@ -22,6 +22,6 @@ diagnostics:
 Run and print regression diagnostics
 }
 \examples{
-fit <- mreg(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 diagnostics(fit)
 }

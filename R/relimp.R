@@ -1,7 +1,7 @@
 #' @title Variable Importance
 #'
 #' @description
-#' The function \code{varimp} uses Dominance Analysis (DA) to rank
+#' The function \code{relimp} uses Dominance Analysis (DA) to rank
 #' order the variables in a linear or logistic regression in terms
 #' of relative importance.
 #'
@@ -13,13 +13,14 @@
 #' regression, Estrella's Pseudo R-squared is used (see reference).
 #'
 #' @importFrom dominanceanalysis dominanceAnalysis
+#' @importFrom stats reorder
 #'
 #'
-#' @param x an object of class \code{mreg} or \code{lreg}.
+#' @param x an object of class \code{lm} or \code{glm}.
 #'
 #' @export
 #'
-#' @seealso \link{mreg}, \link{lreg}
+#' @seealso \link{lm}, \link{glm}
 #'
 #' @return a ggplot2 graph
 #'
@@ -32,16 +33,19 @@
 #' data(mtcars)
 #'
 #' # multiple linear regression
-#' fit1 <- mreg(mpg ~ ., mtcars)
-#' varimp(fit1)
+#' fit1 <- lm(mpg ~ ., mtcars)
+#' relimp(fit1)
 #'
 #' # logistic regression
 #' mtcars$am <- factor(mtcars$am)
-#' fit2 <- lreg(am ~ mpg + cyl +disp + drat + carb, mtcars)
-#' varimp(fit2)
-varimp <- function(x){
+#' fit2 <- glm(am ~ mpg + cyl +disp + drat + carb, family=binomial, mtcars)
+#' relimp(fit2)
+relimp <- function(x){
   cat("working ...\n")
-  if (class(x)[1] %in% c("mreg")){
+
+  variable <- r2 <- NULL # for CRAN
+
+  if (class(x)[1] == c("lm")){
     class(x) <- "lm"
     da <- dominanceAnalysis(x)
     da_av<- da$contribution.average$r2
@@ -58,7 +62,7 @@ varimp <- function(x){
             panel.grid.major.y=element_blank()) +
       coord_flip()
   }
-  if(class(x)[1] %in% c("lreg")){
+  if(class(x)[1] == c("glm")){
     class(x) <- "glm"
     da <- dominanceAnalysis(x)
     da_av<- da$contribution.average$r2.e

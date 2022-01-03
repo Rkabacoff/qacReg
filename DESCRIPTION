@@ -23,18 +23,17 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
-    broom,
     car,
     caret,
     effects,
     ggeffects,
     ggplot2,
     patchwork,
-    dplyr,
     ggrepel,
     MASS,
     crayon,
-    dominanceanalysis
+    dominanceanalysis,
+    e1071
 Suggests: 
     rmarkdown,
     knitr

@@ -10,18 +10,19 @@
 #'the sample size (N), Akaike's Information Criterion (AIC), Mean Absolute Error (MAE), ANOVA table (type III SS), and
 #'standardized regression coefficients (B*).
 #'
-#'@param x an object of class "lm"
+#'@param x an object of class code{"lm"}
 #'
 #'@return  a 6-component list
 #' \describe{
 #'   \item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error, Mean Absolute Error}
 #'   \item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
-#'   \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
+#'   \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova} function in the \strong{car} package)}
 #'   \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, significance stars}
 #'   \item{N}{sample size}
 #' }
 #'
 #'@importFrom car Anova
+#'@importFrom stats AIC as.formula coef model.frame pf summary.lm
 #'
 #'@export
 #'
@@ -33,12 +34,12 @@ info.lm <- function(x){
   if(!inherits(x, "lm")) stop("x must  be class 'lm'")
 
   # fit indices
-  model <- summary.lm(x)
+  model <- stats::summary.lm(x)
 
   # missing coefficients
-  sumNA <- sum(is.na(coefficients(x)))
+  sumNA <- sum(is.na(stats::coef(x)))
   if (sumNA > 0){
-    print(coefficients(fit))
+    print(coef(x))
     stop("Degenerate solution: some coefficients are NA.")
   }
 
@@ -47,7 +48,7 @@ info.lm <- function(x){
 
   fit.indices <- data.frame(`R.Squared` = model$r.squared,
                             `Adj.R.Squared` = model$adj.r.squared,
-                            AIC = AIC(x),
+                            AIC = stats::AIC(x),
                             RMSE = sqrt(mean(model$residuals^2)),
                             MAE = mean(abs(model$residuals)),
                             row.names=NULL)
@@ -57,7 +58,7 @@ info.lm <- function(x){
   Ftest <- data.frame(value=F[1],
                       numdf=F[2],
                       dendf=F[3],
-                      p = pf(F[1], F[2],F[3], lower.tail = FALSE),
+                      p = stats::pf(F[1], F[2],F[3], lower.tail = FALSE),
                       row.names=NULL)
 
   # ANOVA Table
@@ -65,17 +66,17 @@ info.lm <- function(x){
     anova.table <- as.data.frame(car::Anova(x, type=3))
 
   # coefficients table
-    coeff <- as.data.frame(summary.lm(x)$coefficients)
+    coeff <- as.data.frame(stats::summary.lm(x)$coefficients)
 
     # standardized coefficients
-    stdata <- model.frame(x)
+    stdata <- stats::model.frame(x)
     for (i in 1:ncol(stdata)){
       if(is.numeric(stdata[[i]])){
         stdata[[i]] <- scale(stdata[[i]])
       }
     }
-    std_fit <- lm(as.formula(x$call), stdata)
-    std_summary <- summary.lm(std_fit)
+    std_fit <- lm(stats::as.formula(x$call), stdata)
+    std_summary <- stats::summary.lm(std_fit)
     std_coeff <- std_summary$coefficients[,1]
 
 

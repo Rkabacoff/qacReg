@@ -9,7 +9,7 @@
 #' based on all predictors, but only the numeric variables are plotted. Each plot
 #' has a linear and loess fit line.
 #'
-#' @param x an object of type \code{"mreg"} or \code{"lm"}.
+#' @param x an object of type \code{"lm"}.
 #' @param alpha numeric; degree of transparency for points (0 to 1, default=0.4)
 #' @param span numeric; the  degree of smoothing for loess lines (default=0.75)
 #'
@@ -27,7 +27,7 @@
 #' @seealso \link[car]{crPlot}, \link[car]{crPlots}
 #' @examples
 #'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#'fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 #'ggcrPlots(fit)
 
 #'
@@ -48,10 +48,11 @@ ggcrPlots <- function(x, alpha=.4, span=.75){
   if(length(vars) < 1) stop("No numeric predictors")
 
   # slopes
-  b <- x$coefficients[vars]
+  b <- x$coef[vars]
 
   myplots <- vector(mode="list", length=length(vars))
   names(myplots) <- vars
+  y <- NULL # for CRAN
   for(i in vars){
     x1 <- x$model[[i]]
     x2 <- x$residuals + b[i]*x1

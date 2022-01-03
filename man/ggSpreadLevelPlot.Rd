@@ -7,7 +7,7 @@
 ggspreadLevelPlot(x, alpha = 0.4, n.labels = 3, span = 0.75)
 }
 \arguments{
-\item{x}{an object of type \code{"mreg"} or \code{"lm"}.}
+\item{x}{an object of class \code{"lm"}.}
 
 \item{alpha}{numeric; degree of transparency for points (0 to 1, default=0.4).}
 
@@ -36,7 +36,7 @@ and a loess fit line are also plotted.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)
-fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 ggspreadLevelPlot(fit)
 }
 \seealso{

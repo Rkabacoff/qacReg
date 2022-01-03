@@ -5,7 +5,7 @@
 #' from a linear model against the theoretical quantiles of
 #' a the normal distribution.
 #'
-#' @param x an object of type \code{"mreg"} or \code{"lm"}.
+#' @param x an object of class \code{"lm"}.
 #' @param reps integer; number of bootstrap replications for the
 #' confidence envelope (default=100)
 #' @param conf numeric; size of confidence interval (default=\code{0.95}).
@@ -17,6 +17,9 @@
 #' @export
 #' @import ggplot2
 #' @importFrom MASS rlm
+#' @importFrom stats coef fitted.values model.matrix na.omit summary.lm
+#' ppoints qt quantile residuals rstudent rnorm update
+#' @importFrom utils tail
 #' @import ggrepel
 #'
 #' @details
@@ -32,19 +35,18 @@
 #'
 #' @examples
 #'mtcars$am <- factor(mtcars$am)
-#'fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#'fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 #'ggqqPlot(fit)
 
 ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3, alpha=.4){
 
-  if(!inherits(x, "mreg") &
-     !inherits(x, "lm")) stop("x must  be class 'mreg' or 'lm'")
-  x <- update(x, na.action = "na.exclude")
+  if(!inherits(x, "lm")) stop("x must  be class 'lm'")
+  x <- stats::update(x, na.action = "na.exclude")
 
-  labels <- names(residuals(x))
-  rstudent <- rstudent(x)
+  labels <- names(stats::residuals(x))
+  rstudent <- stats::rstudent(x)
   index <- seq(along = rstudent)
-  sumry <- summary.lm(x)
+  sumry <- stats::summary.lm(x)
   res.df <- sumry$df[2]
 
   good <- !is.na(rstudent)
@@ -55,26 +57,26 @@ ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3, alpha=.4){
   ord.x <- rstudent[ord]
   ord.lab <- labels[ord]
 
-  P <- ppoints(n)
-  z <- qt(P, df = res.df - 1)
+  P <- stats::ppoints(n)
+  z <- stats::qt(P, df = res.df - 1)
 
   #yhat <- na.omit(fitted.values(x)) # deal with miss rstudent here
-  yhat <- fitted.values(x)[good]
+  yhat <- stats::fitted.values(x)[good]
   S <- sumry$sigma
   Y <- matrix(yhat, n, reps) +
-    matrix(rnorm(n * reps, sd = S), n, reps)
-  X <- model.matrix(x)[good,]
+    matrix(stats::rnorm(n * reps, sd = S), n, reps)
+  X <- stats::model.matrix(x)[good,]
   rstud <- apply(rstudent(lm(Y ~ X - 1)), 2, sort)
 
-  lower <- apply(rstud, 1, quantile, prob = (1 - conf)/2)
-  upper <- apply(rstud, 1, quantile, prob = (1 + conf)/2)
+  lower <- apply(rstud, 1, stats::quantile, prob = (1 - conf)/2)
+  upper <- apply(rstud, 1, stats::quantile, prob = (1 + conf)/2)
   df <- data.frame(labels=ord.lab, z=z, ord.x=ord.x, lower=lower, upper=upper)
 
   # which points to label
   df$absres <- abs(df$ord.x)
-  df2 <- tail(df[order(df$absres),], n.labels)
+  df2 <- utils::tail(df[order(df$absres),], n.labels)
 
-  coef <- coefficients(suppressWarnings(MASS::rlm(ord.x ~ z)))
+  coef <- stats::coef(suppressWarnings(MASS::rlm(ord.x ~ z)))
   a <- coef[1]
   b <- coef[2]
 

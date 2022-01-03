@@ -7,14 +7,14 @@
 \method{info}{lm}(x)
 }
 \arguments{
-\item{x}{an object of class "lm"}
+\item{x}{an object of class code{"lm"}}
 }
 \value{
 a 6-component list
 \describe{
 \item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error, Mean Absolute Error}
 \item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
-\item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova()} function in the \strong{car} package)}
+\item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova} function in the \strong{car} package)}
 \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, significance stars}
 \item{N}{sample size}
 }

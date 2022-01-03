@@ -1,4 +1,4 @@
-#' @title Summary information of lm or glm models
+#' @title Summary information for lm or glm models
 #'
 #'
 #' @description Detailed summary information of a linear or logistic
@@ -12,4 +12,4 @@
 #' @examples
 #' fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 #' info(fit)
-info <- function(x, ...) UseMethod("info")
+info <- function(x) UseMethod("info")

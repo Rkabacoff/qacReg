@@ -15,7 +15,7 @@
 #' points meeting each criterion, for a maximum of 6 labeled points.
 #' Points meeting more than one criterion are only labeled once.
 #'
-#' @param x an object of type \code{"mreg"} or \code{"lm"}.
+#' @param x an object of type \code{"lm"}.
 #' @param n.labels integer; the number of points to label (default=2).
 #' @param alpha numeric; transparency of points (0 to 1, default=0.4).
 #'
@@ -23,6 +23,7 @@
 #' @import ggplot2
 #' @import ggrepel
 #' @import car
+#' @importFrom stats coef cooks.distance hatvalues
 #'
 #' @details
 #' This function is a modification of the \link[car]{influencePlot} function
@@ -39,21 +40,24 @@
 #'
 #' @examples
 #' mtcars$am <- factor(mtcars$am)
-#' fit <- mreg(mpg ~ wt + am + disp + hp, mtcars)
+#' fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
 #' gginfluencePlot(fit)
 
 gginfluencePlot <- function(x, alpha=0.4, n.labels=2){
+
+  cooksd <- influential <- label <- NULL # for CRAN
+
   df <- x$model
 
   df$rstudent <- rstudent(x)
-  df$hat <- hatvalues(x)
-  df$cooksd <- cooks.distance(x)
+  df$hat <- stats::hatvalues(x)
+  df$cooksd <- stats::cooks.distance(x)
   df$influential <- ifelse(df$cooksd < .5, 0,
                           ifelse(df$cooksd < 1, 1, 2))
   df$influential <- factor(df$influential,
                           levels=c(0, 1, 2),
                           labels=c("no","possibly", "likely"))
-  p <- length(coef(x))
+  p <- length(stats::coef(x))
   n <- sum(!is.na(df$rstudent))
 
 
@@ -66,9 +70,6 @@ gginfluencePlot <- function(x, alpha=0.4, n.labels=2){
 
   df2 <- df[which.all, c("hat", "rstudent", "influential")]
   df2$label <- row.names(df2)
-
-  library(ggplot2)
-  library(ggrepel)
 
   p <- ggplot(df,
          aes(x = hat, y = rstudent, size = cooksd,
