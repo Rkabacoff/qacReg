@@ -119,31 +119,6 @@ Run and print regression diagnostics</h1>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">accel</span> <span class="op">+</span> <span class="va">origin</span>, data <span class="op">=</span> <span class="va">auto_mpg</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">diagnostics</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">DIAGNOSTICS FOR MULTIPLE REGRESSION</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Normality</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Robust Jarque Bera Test for Normality</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chi-square(2) = 73.4348, p &lt; &lt; 2.2e-16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Homoscedasticity</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Score Test of Non-Constant Error Variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null hypothesis: constant variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chi-square(1) = 40.5685 p &lt; 1.898e-10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The test suggest non-constant variance.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A sqrt(y) transformation may help to stabilize the variance.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Multicollinearity</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            GVIF Df GVIF^(1/(2*Df))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hp     8.369036  1        2.892929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt     6.299228  1        2.509826</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> accel  2.535632  1        1.592367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> origin 1.629384  2        1.129811</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Outliers</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No Studentized residuals with Bonferroni p &lt; 0.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Largest |rstudent|:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     rstudent unadjusted p-value Bonferroni p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 321 3.646272         0.00030264      0.11864</span>
 <span class="r-plt img"><img src="diagnostics-1.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="diagnostics-2.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="diagnostics-3.png" alt="" width="700" height="433"></span>

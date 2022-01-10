@@ -97,8 +97,9 @@ between each predictor and the outcome, controlling for the other predictors in 
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plots</span><span class="op">(</span>
   <span class="va">x</span>,
   points <span class="op">=</span> <span class="cn">TRUE</span>,
-  dot.size <span class="op">=</span> <span class="fl">1</span>,
-  dot.alpha <span class="op">=</span> <span class="fl">0.5</span>,
+  size <span class="op">=</span> <span class="fl">1</span>,
+  alpha <span class="op">=</span> <span class="fl">0.5</span>,
+  jitter <span class="op">=</span> <span class="fl">0.03</span>,
   ci <span class="op">=</span> <span class="cn">TRUE</span>,
   page <span class="op">=</span> <span class="cn">FALSE</span>,
   <span class="va">...</span>
@@ -111,10 +112,12 @@ between each predictor and the outcome, controlling for the other predictors in 
 <dd><p>an object of class <code>"lm"</code> or <code>"glm"</code></p></dd>
 <dt>points</dt>
 <dd><p>points is TRUE if data points are to be shown, default is FALSE</p></dd>
-<dt>dot.size</dt>
+<dt>size</dt>
 <dd><p>size of data points, default is 1</p></dd>
-<dt>dot.alpha</dt>
+<dt>alpha</dt>
 <dd><p>transparency of data points, default is 0.5</p></dd>
+<dt>jitter</dt>
+<dd><p>ammount of point jitter (from 0 to 1)</p></dd>
 <dt>ci</dt>
 <dd><p>if confidence intervals are to be shown, default is TRUE</p></dd>
 <dt>page</dt>
