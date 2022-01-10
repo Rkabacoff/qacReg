@@ -4,7 +4,7 @@
 \alias{performance.glm}
 \title{Model Performance for Logistic Regression}
 \usage{
-\method{performance}{glm}(x, data, digits = 4, p = 0.5, plot = TRUE, ...)
+\method{performance}{glm}(x, data, digits = 4, p = 0.5, plot = FALSE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{"glm"}.}
@@ -32,5 +32,5 @@ Produce indices of model performance for logistic regression
 \examples{
 # performance on training sample
 fit <- glm(am ~ hp + wt, family=binomial, data = mtcars)
-performance(fit)
+performance(fit, plot=TRUE)
 }

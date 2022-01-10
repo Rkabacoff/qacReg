@@ -27,6 +27,10 @@ print.info.lm <- function(x, digits=3, ...){
       sep="")
 
   heading("Fit Indices")
+  # squared <- "\U00B2"
+  # r2lbl <- paste("R", squared, sep="")
+  # adj_r2lbl <- paste("Adj.", r2lbl, sep="")
+  # names(x$fit.indices) <- c(r2lbl, adj_r2lbl, "AIC", "RMSE", "MAE")
   print(x$fit.indices, digits=digits, row.names=FALSE)
   cat("\n")
 

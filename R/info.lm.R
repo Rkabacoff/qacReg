@@ -23,6 +23,7 @@
 #'
 #'@importFrom car Anova
 #'@importFrom stats AIC as.formula coef model.frame pf summary.lm
+#'@importFrom lm.beta lm.beta
 #'
 #'@export
 #'
@@ -68,16 +69,21 @@ info.lm <- function(x){
   # coefficients table
     coeff <- as.data.frame(stats::summary.lm(x)$coefficients)
 
-    # standardized coefficients
-    stdata <- stats::model.frame(x)
-    for (i in 1:ncol(stdata)){
-      if(is.numeric(stdata[[i]])){
-        stdata[[i]] <- scale(stdata[[i]])
-      }
-    }
-    std_fit <- lm(stats::as.formula(x$call), stdata)
-    std_summary <- stats::summary.lm(std_fit)
-    std_coeff <- std_summary$coefficients[,1]
+    #standardized coefficients
+    # stdata <- stats::model.frame(x)
+    # for (i in 1:ncol(stdata)){
+    #   if(is.numeric(stdata[[i]])){
+    #     stdata[[i]] <- scale(stdata[[i]])
+    #   }
+    # }
+    #
+    # # stick a tryCatch in here for log(mpg)
+    # # look at model.matrix(fit) to get regression below
+    # std_fit <- lm(stats::as.formula(x$call), stdata)
+    # std_summary <- stats::summary.lm(std_fit)
+    # std_coeff <- std_summary$coefficients[,1]
+    #std_coeff <- c(0, stdB(x))
+    std_coeff <- lm.beta::lm.beta(x)$standardized.coefficients
 
 
     coeff <- cbind(coeff, std_coeff)

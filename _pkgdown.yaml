@@ -1,4 +1,4 @@
-title: qacr
+title: qacReg
 url: http://rkabacoff.github.io/qacReg
 template:
   params:
@@ -28,8 +28,10 @@ reference:
     desc: ~
     contents:
       - '`ggcrPlots`'
+      - '`ggliftPlot`'
       - '`gginfluencePlot`'
       - '`ggqqPlot`'
+      - '`ggrocPlot`'
       - '`ggspreadLevelPlot`'
       - '`ggvifPlot`'
   - title: Data sets

@@ -7,8 +7,9 @@
 plots(
   x,
   points = TRUE,
-  dot.size = 1,
-  dot.alpha = 0.5,
+  size = 1,
+  alpha = 0.5,
+  jitter = 0.03,
   ci = TRUE,
   page = FALSE,
   ...
@@ -19,9 +20,11 @@ plots(
 
 \item{points}{points is TRUE if data points are to be shown, default is FALSE}
 
-\item{dot.size}{size of data points, default is 1}
+\item{size}{size of data points, default is 1}
 
-\item{dot.alpha}{transparency of data points, default is 0.5}
+\item{alpha}{transparency of data points, default is 0.5}
+
+\item{jitter}{ammount of point jitter (from 0 to 1)}
 
 \item{ci}{if confidence intervals are to be shown, default is TRUE}
 

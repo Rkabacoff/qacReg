@@ -164,3 +164,12 @@ sigstars <- function(x){
          ifelse(x < 0.01, "**",
                 ifelse(x < 0.05, "*", " ")))
 }
+
+# standardize OLS coefficients
+stdB <- function(x){
+  b <- summary(x)$coef[-1,1]
+  sx <- sapply(x$model[-1], sd, na.rm=TRUE)
+  sy <- sapply(x$model[1], sd, na.rm=TRUE)
+  sdB <- b*sx/sy
+  return(sdB)
+}

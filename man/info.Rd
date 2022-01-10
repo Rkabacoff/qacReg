@@ -17,6 +17,12 @@ Detailed summary information of a linear or logistic
 regression model
 }
 \examples{
+# multiple regression
 fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 info(fit)
+
+# logistic regression
+mtcars$am <- factor(mtcars$am)
+fit2 <- glm(am ~ hp + wt + mpg, family=binomial, mtcars)
+info(fit2)
 }

@@ -12,10 +12,10 @@
 #' @export
 #' @examples
 #' # multiple regression
-#' fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
-#' performance(fit)
+#' fit1 <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+#' performance(fit1)
 #'
 #' # logistic regression
-#' # fit <- lm(am ~ hp + wt, mtcars)
-#' # performance(fit)
+#' fit2 <- glm(am ~ hp + wt, family=binomial, mtcars)
+#' performance(fit2)
 performance <- function(x, ...) UseMethod("performance")

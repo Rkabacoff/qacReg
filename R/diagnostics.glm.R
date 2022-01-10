@@ -52,15 +52,15 @@ diagnostics.glm <- function(x, alpha=.4, span=.8, ...){
   # linearity
   if (length(stats::coef(x)) > 2){
     #crplots <- ggcrPlots(x, alpha=alpha, span=span)
-    ceresPlots(x)
+    crplots <- ggcrPlots(x)
     # print(crplots)
   } else {
     # simple scatter plot
   }
 
   #multicolinearity
-  heading("Multicollinearity")
-  print(car::vif(x))
+  # heading("Multicollinearity")
+  # print(car::vif(x))
   vifplot <- NULL
   if (length(stats::coef(x)) > 2){
     vifplot <- ggvifPlot(x)
@@ -68,22 +68,24 @@ diagnostics.glm <- function(x, alpha=.4, span=.8, ...){
 
 
   #outliers
-  cat("\n")
+  # cat("\n")
 
   influenceplot <- gginfluencePlot(x, alpha)
 
-  heading("Outliers")
-  outliers <- outlierTest(x)
-  print(outliers)
+  # heading("Outliers")
+  # outliers <- outlierTest(x)
+  # print(outliers)
 
   # output graphs
+  oask <- grDevices::devAskNewPage(TRUE)
+  on.exit(grDevices::devAskNewPage(oask))
+  print(crplots)
   print(vifplot)
   print(influenceplot)
 
-  results <- list(
+  results <- list(crplots,
                   vifplot,
-                  influenceplot,
-                  outliers)
+                  influenceplot)
 
   invisible(results)
 }

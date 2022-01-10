@@ -33,7 +33,9 @@ Imports:
     MASS,
     crayon,
     dominanceanalysis,
-    e1071
+    e1071,
+    plotROC,
+    lm.beta
 Suggests: 
     rmarkdown,
     knitr

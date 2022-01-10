@@ -21,8 +21,8 @@
 #' @examples
 #' # performance on training sample
 #' fit <- glm(am ~ hp + wt, family=binomial, data = mtcars)
-#' performance(fit)
-performance.glm <- function(x, data, digits=4, p=0.5, plot=TRUE, ...){
+#' performance(fit, plot=TRUE)
+performance.glm <- function(x, data, digits=4, p=0.5, plot=FALSE, ...){
 
   formula <- stats::as.formula(x$call[[2]])
   dv <- as.factor(x$model[[1]])

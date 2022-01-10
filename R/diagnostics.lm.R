@@ -60,17 +60,17 @@
 diagnostics.lm <- function(x, alpha=.4, span=.8, ...){
 
 
-  heading("DIAGNOSTICS FOR MULTIPLE REGRESSION")
-  cat("\n")
-  heading("Normality")
+  # heading("DIAGNOSTICS FOR MULTIPLE REGRESSION")
+  # cat("\n")
+  # heading("Normality")
 
 
   # normality
   qqplot <- ggqqPlot(x, alpha=alpha)
   # print(qqplot)
 
-  normality.test(x)
-  cat("\n")
+  # normality.test(x)
+  # cat("\n")
 
   # linearity
   if (length(stats::coef(x)) > 2){
@@ -98,36 +98,36 @@ diagnostics.lm <- function(x, alpha=.4, span=.8, ...){
 
 
   # homoscedasticity
-  heading("Homoscedasticity")
+  # heading("Homoscedasticity")
   slplot <- ggspreadLevelPlot(x, alpha=alpha, span=span)
   #print(slplot)
 
-  cat("Score Test of Non-Constant Error Variance\n")
-  ncv <- car::ncvTest(x)
-  cat("Null hypothesis: constant variance\n")
-  cat("Chi-square(" , ncv$Df, ") = ", round(ncv$ChiSquare,4) ,
-      " p < ", format.pval(ncv$p, 4), "\n", sep="")
+  # cat("Score Test of Non-Constant Error Variance\n")
+  # ncv <- car::ncvTest(x)
+  # cat("Null hypothesis: constant variance\n")
+  # cat("Chi-square(" , ncv$Df, ") = ", round(ncv$ChiSquare,4) ,
+  #     " p < ", format.pval(ncv$p, 4), "\n", sep="")
 
-  trans <- NULL
-  if(ncvTest(x)$p < 0.05){
-    cat("The test suggest non-constant variance.\n")
-    resid <- log(abs(rstudent(x)))
-    fitval <- x$fitted.values
-    mod <- suppressWarnings(MASS::rlm(log(resid) ~ log(fitval)))
-    trans <- 1 - (stats::coef(mod))[2]
-    ptrans <- c(2, 1, .5, 0, -.5, -1, -2)
-    ptranslbls <- c("y^2", "y", "sqrt(y)", "log(y)",
-                    "1/sqrt(y)", "1/y", "1/y^2" )
-    pos <- which.min(abs(ptrans-trans))
-    cat("A", ptranslbls[pos], "transformation may",
-        "help to stabilize the variance.\n")
-  }
-
-   cat("\n")
+  # trans <- NULL
+  # if(ncvTest(x)$p < 0.05){
+  #   cat("The test suggest non-constant variance.\n")
+  #   resid <- log(abs(rstudent(x)))
+  #   fitval <- x$fitted.values
+  #   mod <- suppressWarnings(MASS::rlm(log(resid) ~ log(fitval)))
+  #   trans <- 1 - (stats::coef(mod))[2]
+  #   ptrans <- c(2, 1, .5, 0, -.5, -1, -2)
+  #   ptranslbls <- c("y^2", "y", "sqrt(y)", "log(y)",
+  #                   "1/sqrt(y)", "1/y", "1/y^2" )
+  #   pos <- which.min(abs(ptrans-trans))
+  #   cat("A", ptranslbls[pos], "transformation may",
+  #       "help to stabilize the variance.\n")
+  # }
+  #
+  #  cat("\n")
 
   #multicolinearity
-  heading("Multicollinearity")
-  print(car::vif(x))
+  # heading("Multicollinearity")
+  # print(car::vif(x))
   vifplot <- NULL
   if (length(stats::coef(x)) > 2){
     vifplot <- ggvifPlot(x)
@@ -136,14 +136,14 @@ diagnostics.lm <- function(x, alpha=.4, span=.8, ...){
 
 
   #outliers
-  cat("\n")
+  # cat("\n")
 
   influenceplot <- gginfluencePlot(x, alpha)
   #print(influenceplot)
 
-  heading("Outliers")
-  outliers <- outlierTest(x)
-  print(outliers)
+  # heading("Outliers")
+  # outliers <- outlierTest(x)
+  # print(outliers)
 
   # output graphs
   oask <- grDevices::devAskNewPage(TRUE)
@@ -157,11 +157,10 @@ diagnostics.lm <- function(x, alpha=.4, span=.8, ...){
   results <- list(qqplot,
                   crplots,
                   slplot,
-                  ncv,
-                  trans,
+                  # ncv,
+                  # trans,
                   vifplot,
-                  influenceplot,
-                  outliers)
+                  influenceplot)
 
   invisible(results)
 }

@@ -6,8 +6,9 @@
 #'
 #'@param x an object of class \code{"lm"} or \code{"glm"}
 #'@param points points is TRUE if data points are to be shown, default is FALSE
-#'@param dot.size size of data points, default is 1
-#'@param dot.alpha transparency of data points, default is 0.5
+#'@param size size of data points, default is 1
+#'@param jitter ammount of point jitter (from 0 to 1)
+#'@param alpha transparency of data points, default is 0.5
 #'@param ci if confidence intervals are to be shown, default is TRUE
 #'@param page logical. If \code{TRUE}, each graph will appear separately.
 #'@param ... additional arguments to be added to adjust graphic
@@ -47,13 +48,13 @@
 #'plots(fit2)
 
 
-plots <- function(x, points = TRUE, dot.size = 1,
-                  dot.alpha=.5, ci= TRUE, page=FALSE, ...){
+plots <- function(x, points = TRUE, size = 1,
+                  alpha=.5, jitter=.03, ci= TRUE, page=FALSE, ...){
 
   # single predictor
   if (length(names(stats::coef(x))) < 3){
     # scatterplot
-    final <- scatter_plot(x, alpha=dot.alpha)
+    final <- scatter_plot(x, alpha=alpha)
     return(final)
   }
 
@@ -63,7 +64,8 @@ plots <- function(x, points = TRUE, dot.size = 1,
   names(myplots) <- vars
   for(i in vars){
     myplots[[i]] <- plot(ggeffect(x, i), add.data=points,
-                         dot.size=dot.size, dot.alpha=dot.alpha, ci=ci, ...)+ labs(title="")
+                        dot.size=size, jitter=jitter,
+                        dot.alpha=alpha, ci=ci, ...)+ labs(title="")
   }
 
   # produce combined graphs
