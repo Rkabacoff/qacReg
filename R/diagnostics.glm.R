@@ -1,13 +1,16 @@
-#'@title Diagnostics for Logistic Regression
+#'@title Regression Diagnostics for Generalized Linear Models
 #'
 #'@description
 #'
-#'Provides diagnostics tests and graphs for logistic regression
-#'
+#'Provides regression diagnostics for a generalized linear model fit with
+#'\code{\link{glm}} or \code{\link{regression}}. Currently, binary logistic
+#'regression models are supported.
 #'
 #'@param x an object of class \code{c("glm")}
 #'@param alpha numeric; transparency for plot points (default=0.4)
 #'@param span numeric; smoothing parameter for loess fit lines (default=0.8)
+#'@param plot logical; If \code{TRUE} (the default), graphs are printed. Otherwise,
+#'they are returned invisibly.
 #'@param ... not currently used
 #'
 #'@export
@@ -18,36 +21,36 @@
 #'
 #'@details
 #'The \code{diagnostics} function is a wrapper for several
-#'diagnostic graphing functions and tests. The function evaluates
-#'the following:
+#'diagnostic plotting functions:
 #'\describe{
-#'  \item{Linearity}{Linearity of the explanatory-response relationship
-#'  are assessed via Ceres plots}
-#'  (\link[car]{ceresPlots}).
-#'  \item{Multicollinearity}{Variance inflation factors (\link[car]{vif})
-#'  are plotted. If there is a single predictor variable, this section
+#'  \item{Linearity}{Linearity of the explanatory-response relationships
+#'  are assessed via Component + Residual (partial residual) plots
+#'  (\code{\link{ggcrPlots}}). If there is a single predictor, a scatter plot
+#'  with linear and loess lines is produced.}
+#'  \item{Multicollinearity}{Multicollinearity is assessed via variance inflation factors
+#'  (\code{\link{ggvifPlot}}). If there is a single predictor variable, this section
 #'  is skipped.}
-#'  \item{Outliers, leverage, and influence}{An influence plot
-#'  (\link{gginfluencePlot}) and Bonferroni Outlier Test
-#'  (\link[car]{outlierTest}) are provided.}
+#'  \item{Outliers, leverage, and influence}{A influence plot identifies
+#'  outliers and influential observations (\code{\link{gginfluencePlot}}).}
 #'}
+#'
+#'@note
+#'Each function relies heavily on the \code{car} package. See the
+#'help for individual functions for details.
 #'
 #'@seealso \code{\link{diagnostics}}, \code{\link[car]{vif}},
 #' \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}},
-#' \code{\link[car]{ceresPlots}}
+#' \code{\link[car]{crPlots}}
 #'
-#'@return a list containing the \code{ggplot2} graphs and statistical tests
-#'
+#'@return
+#'A three component list containing \code{ggplot2} graphs:
+#'crplots, vifplot, and influenceplot.
 #'@examples
 #'mtcars$cyl <- factor(mtcars$cyl)
 #'fit <- glm(am ~ hp + cyl + wt, family=binomial, mtcars)
 #'diagnostics(fit)
 
-diagnostics.glm <- function(x, alpha=.4, span=.8, ...){
-
-
-  heading("DIAGNOSTICS FOR LOGISTIC REGRESSION")
-  cat("\n")
+diagnostics.glm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
 
   # linearity
   if (length(stats::coef(x)) > 2){
@@ -59,29 +62,22 @@ diagnostics.glm <- function(x, alpha=.4, span=.8, ...){
   }
 
   #multicolinearity
-  # heading("Multicollinearity")
-  # print(car::vif(x))
   vifplot <- NULL
   if (length(stats::coef(x)) > 2){
     vifplot <- ggvifPlot(x)
   }
 
-
   #outliers
-  # cat("\n")
-
   influenceplot <- gginfluencePlot(x, alpha)
 
-  # heading("Outliers")
-  # outliers <- outlierTest(x)
-  # print(outliers)
-
   # output graphs
-  oask <- grDevices::devAskNewPage(TRUE)
-  on.exit(grDevices::devAskNewPage(oask))
-  print(crplots)
-  print(vifplot)
-  print(influenceplot)
+  if(plot){
+    oask <- grDevices::devAskNewPage(TRUE)
+    on.exit(grDevices::devAskNewPage(oask))
+    print(crplots)
+    print(vifplot)
+    print(influenceplot)
+  }
 
   results <- list(crplots,
                   vifplot,

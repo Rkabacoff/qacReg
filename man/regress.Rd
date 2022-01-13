@@ -17,14 +17,14 @@ regress(formula, data, ...)
 an object of class \code{"lm"} or \code{"glm"}.
 }
 \description{
-\code{regress} fits a linear model (multiple regression, ANOVA) or
+\code{regress} fits a multiple linear or
 a logistic regression model, depending on the response variable.
 }
 \details{
-The function is a wrapper for \code{\link{lm}} and \code{\link{glm}}
-functions. If the response variable has two values (either numeric, factor,
-or character), a logistic regression
-model is fit (\code{glm} with \code{family=binomial}).
+The function is a wrapper for the \code{\link{lm}} and \code{\link{glm}}
+functions. If the response variable (numeric, factor,
+or character) has only two possible values, a logistic regression
+model is fit using \code{glm} with \code{family=binomial}.
 Otherwise a linear model (\code{lm}) is returned.
 }
 \examples{
@@ -35,7 +35,8 @@ fit
 # logistic regression
 fit <- regress(am ~ hp + wt, mtcars)
 fit
+
 }
 \seealso{
-\code{\link{lm}}, \code{\link{glm}}
+\code{\link{lm}}, \code{\link{glm}}, \code{link{info}}
 }

@@ -47,15 +47,21 @@ ggcrPlots <- function(x, alpha=.4, span=.75){
   vars <- names(x$model[-1])[index]
   if(length(vars) < 1) stop("No numeric predictors")
 
+  if (any(attr(terms(x), "order") > 1)) {
+    stop("C+R plots not available for models with interactions.")
+  }
+
   # slopes
   b <- x$coef[vars]
 
   myplots <- vector(mode="list", length=length(vars))
   names(myplots) <- vars
+  partial.res <- residuals(x, "partial")
   y <- NULL # for CRAN
   for(i in vars){
-    x1 <- x$model[[i]]
-    x2 <- x$residuals + b[i]*x1
+    x1 <- model.frame(x)[, i]
+    x2 <- partial.res[, i]
+
     df <- data.frame(y = as.numeric(x2),
                      x = as.numeric(x1))
     myplots[[i]] <- ggplot(df, aes(x, y)) +
@@ -66,8 +72,7 @@ ggcrPlots <- function(x, alpha=.4, span=.75){
       geom_smooth(method="loess", formula=y~x,
                   color="indianred2", linetype="solid",
                   se=FALSE, span=span) +
-      labs(y=paste0("slope(", i, ") + resid"),
-           x=i) +
+        labs(y="Component + Resid", x=i) +
       theme_bw() +
       theme(axis.title.y=element_text(size=8))
   }

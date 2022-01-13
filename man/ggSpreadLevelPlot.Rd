@@ -4,7 +4,7 @@
 \alias{ggspreadLevelPlot}
 \title{Spread-Level Plot}
 \usage{
-ggspreadLevelPlot(x, alpha = 0.4, n.labels = 3, span = 0.75)
+ggspreadLevelPlot(x, alpha = 0.4, n.labels = 0, span = 0.75)
 }
 \arguments{
 \item{x}{an object of class \code{"lm"}.}
@@ -12,7 +12,7 @@ ggspreadLevelPlot(x, alpha = 0.4, n.labels = 3, span = 0.75)
 \item{alpha}{numeric; degree of transparency for points (0 to 1, default=0.4).}
 
 \item{n.labels}{integer; the number of largest residuals to label
-(default=3).}
+(default=0).}
 
 \item{span}{numeric; smoothing parameter for loess fit line (default=0.75)}
 }
@@ -30,8 +30,8 @@ in the \code{car} package, using \code{ggplot2} rather than
 \code{base} graphics.
 }
 \note{
-The graph plots the log of the fitted values against the log
-of the absolute studentized residuals. A robust linear fit line
+The graph plots the fitted values against the absolute studentized
+residuals on logarithmic scales. A robust linear fit line
 and a loess fit line are also plotted.
 }
 \examples{

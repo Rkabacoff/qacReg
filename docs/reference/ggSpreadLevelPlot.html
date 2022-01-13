@@ -96,7 +96,7 @@ model.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggspreadLevelPlot</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, n.labels <span class="op">=</span> <span class="fl">3</span>, span <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ggspreadLevelPlot</span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, n.labels <span class="op">=</span> <span class="fl">0</span>, span <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,7 +107,7 @@ model.</p>
 <dd><p>numeric; degree of transparency for points (0 to 1, default=0.4).</p></dd>
 <dt>n.labels</dt>
 <dd><p>integer; the number of largest residuals to label
-(default=3).</p></dd>
+(default=0).</p></dd>
 <dt>span</dt>
 <dd><p>numeric; smoothing parameter for loess fit line (default=0.75)</p></dd>
 </dl></div>
@@ -123,8 +123,8 @@ in the <code>car</code> package, using <code>ggplot2</code> rather than
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>The graph plots the log of the fitted values against the log
-of the absolute studentized residuals. A robust linear fit line
+    <p>The graph plots the fitted values against the absolute studentized
+residuals on logarithmic scales. A robust linear fit line
 and a loess fit line are also plotted.</p>
     </div>
     <div id="see-also">

@@ -1,14 +1,14 @@
 #' @title Regression Analysis
 #'
 #' @description
-#' \code{regress} fits a linear model (multiple regression, ANOVA) or
+#' \code{regress} fits a multiple linear or
 #' a logistic regression model, depending on the response variable.
 #'
 #' @details
-#' The function is a wrapper for \code{\link{lm}} and \code{\link{glm}}
-#' functions. If the response variable has two values (either numeric, factor,
-#' or character), a logistic regression
-#' model is fit (\code{glm} with \code{family=binomial}).
+#' The function is a wrapper for the \code{\link{lm}} and \code{\link{glm}}
+#' functions. If the response variable (numeric, factor,
+#' or character) has only two possible values, a logistic regression
+#' model is fit using \code{glm} with \code{family=binomial}.
 #' Otherwise a linear model (\code{lm}) is returned.
 #'
 #' @param formula on object of class \code{"formula"}
@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @seealso
-#' \code{\link{lm}}, \code{\link{glm}}
+#' \code{\link{lm}}, \code{\link{glm}}, \code{link{info}}
 #'
 #' @examples
 #' # multiple linear regression
@@ -31,24 +31,25 @@
 #' # logistic regression
 #' fit <- regress(am ~ hp + wt, mtcars)
 #' fit
+#'
 regress <- function(formula, data, ...){
 
   dv <- as.character(formula[[2]])
+  dfname <- deparse(substitute(data))
+  form <- deparse(substitute(formula))
 
   if (length(unique(data[[dv]])) == 2){
     #logistic regression
     fit <- glm(formula, family=binomial, data,  ...)
-    fit$call <- str2lang(paste("glm(formula=", deparse(substitute(formula)),
-                               ", family = binomial, data=",
-                               deparse(substitute(data)), ")"))
+    scall <- paste("glm(formula=", form, ",
+                   family = binomial, data=", dfname, ")")
+    fit$call <- str2lang(scall)
     class(fit) <- c("glm", "lm")
   } else {
     #multiple linear regression
     fit <- lm(formula, data, ...)
-    fit$call <- str2lang(paste("lm(formula=",
-                               paste(deparse(substitute(formula)), collapse=""),
-                               ", data=",
-                               deparse(substitute(data)), ")"))
+    scall <- paste("lm(formula=", form, ", data=", dfname, ")")
+    fit$call <- str2lang(scall)
     class(fit) <- "lm"
   }
   return(fit)

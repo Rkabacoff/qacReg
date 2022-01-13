@@ -2,9 +2,9 @@
 % Please edit documentation in R/diagnostics.glm.R
 \name{diagnostics.glm}
 \alias{diagnostics.glm}
-\title{Diagnostics for Logistic Regression}
+\title{Regression Diagnostics for Generalized Linear Models}
 \usage{
-\method{diagnostics}{glm}(x, alpha = 0.4, span = 0.8, ...)
+\method{diagnostics}{glm}(x, alpha = 0.4, span = 0.8, plot = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{c("glm")}}
@@ -13,29 +13,38 @@
 
 \item{span}{numeric; smoothing parameter for loess fit lines (default=0.8)}
 
+\item{plot}{logical; If \code{TRUE} (the default), graphs are printed. Otherwise,
+they are returned invisibly.}
+
 \item{...}{not currently used}
 }
 \value{
-a list containing the \code{ggplot2} graphs and statistical tests
+A three component list containing \code{ggplot2} graphs:
+crplots, vifplot, and influenceplot.
 }
 \description{
-Provides diagnostics tests and graphs for logistic regression
+Provides regression diagnostics for a generalized linear model fit with
+\code{\link{glm}} or \code{\link{regression}}. Currently, binary logistic
+regression models are supported.
 }
 \details{
 The \code{diagnostics} function is a wrapper for several
-diagnostic graphing functions and tests. The function evaluates
-the following:
+diagnostic plotting functions:
 \describe{
-\item{Linearity}{Linearity of the explanatory-response relationship
-are assessed via Ceres plots}
-(\link[car]{ceresPlots}).
-\item{Multicollinearity}{Variance inflation factors (\link[car]{vif})
-are plotted. If there is a single predictor variable, this section
+\item{Linearity}{Linearity of the explanatory-response relationships
+are assessed via Component + Residual (partial residual) plots
+(\code{\link{ggcrPlots}}). If there is a single predictor, a scatter plot
+with linear and loess lines is produced.}
+\item{Multicollinearity}{Multicollinearity is assessed via variance inflation factors
+(\code{\link{ggvifPlot}}). If there is a single predictor variable, this section
 is skipped.}
-\item{Outliers, leverage, and influence}{An influence plot
-(\link{gginfluencePlot}) and Bonferroni Outlier Test
-(\link[car]{outlierTest}) are provided.}
+\item{Outliers, leverage, and influence}{A influence plot identifies
+outliers and influential observations (\code{\link{gginfluencePlot}}).}
 }
+}
+\note{
+Each function relies heavily on the \code{car} package. See the
+help for individual functions for details.
 }
 \examples{
 mtcars$cyl <- factor(mtcars$cyl)
@@ -45,5 +54,5 @@ diagnostics(fit)
 \seealso{
 \code{\link{diagnostics}}, \code{\link[car]{vif}},
 \code{\link[car]{outlierTest}}, \code{\link[car]{influencePlot}},
-\code{\link[car]{ceresPlots}}
+\code{\link[car]{crPlots}}
 }

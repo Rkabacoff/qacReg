@@ -1,30 +1,49 @@
-#'@title Summarise an 'lm' object
+#'@title Model Summary for an 'lm' Object
 #'
 #'@description
-#'Summarize an object of class \code{"lm"}.
+#'Extended summary information for an object of class \code{"lm"}.
 #'
 #'@details
-#'The function \code{info.lm} produces a comprehensive
-#'summary for a linear model fitted with \link{lm} function. In addition
-#'to the standard output from the \link{summary.lm} function, the output includes
-#'the sample size (N), Akaike's Information Criterion (AIC), Mean Absolute Error (MAE), ANOVA table (type III SS), and
-#'standardized regression coefficients (B*).
+#'The function \code{info.lm} produces a summary for a
+#'linear model fitted with the \code{\link{lm}}  or
+#'\code{\link{regress}} function. There are five sections.
 #'
-#'@param x an object of class code{"lm"}
+#'\describe{
+#'  \item{Overall}{Model formula, data frame, and sample size (N).}
+#'  \item{Fit Indices}{R squared, adjusted R squared, Akaike's information
+#'             criterion (AIC), root mean square error (RMSE), and
+#'             mean absolute deviation (MAE).}
+#'  \item{Omnibus Test}{F-statistic, degrees of freedom, p-value.}
+#'  \item{Analysis of Variance}{ANOVA table with type III (marginal)
+#'  effects.}
+#'  \item{Regression Coefficients}{Regression coefficients (B),
+#'        standardized regression coefficients (B*) standard errors (SE),
+#'        t-values, and p-values.}
+#'}
 #'
-#'@return  a 6-component list
-#' \describe{
-#'   \item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error, Mean Absolute Error}
-#'   \item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
-#'   \item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova} function in the \strong{car} package)}
-#'   \item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, significance stars}
-#'   \item{N}{sample size}
+#'The ANOVA table is obtained from the \code{\link[car]{Anova}} function in
+#'the \code{car} package. The standardized regression coefficients are
+#'obtained for the \code{\link[lm.beta]{lm.beta}} function in the
+#'\code{lm.beta} package.
+#'
+#'@param x an object of class \code{"lm"}
+#'
+#'@seealso
+#'\code{\link{print.info.lm}}
+#'
+#'@return
+#'A list of class c(\code{"info.lm"}, \code{"list"}).
+#' \itemize{
+#'   \item{overall}
+#'   \item{fit.indices}
+#'   \item{F.test}
+#'   \item{anova.table}
+#'   \item{coefficient.table}
 #' }
 #'
 #'@importFrom car Anova
 #'@importFrom stats AIC as.formula coef model.frame pf summary.lm
 #'@importFrom lm.beta lm.beta
-#'
 #'@export
 #'
 #'@examples
@@ -37,6 +56,11 @@ info.lm <- function(x){
   # fit indices
   model <- stats::summary.lm(x)
 
+  # no error degrees of freedom
+  if (summary(x)$df[2] == 0){
+    stop("No residual degrees of freedom.")
+  }
+
   # missing coefficients
   sumNA <- sum(is.na(stats::coef(x)))
   if (sumNA > 0){
@@ -47,6 +71,12 @@ info.lm <- function(x){
   # sample size
   N <- nrow(x$model)
 
+  # model overview
+  overall <- c(formula = as.character(x$call["formula"]),
+               data = as.character(x$call["data"]),
+               N = N)
+
+  # fit statistics
   fit.indices <- data.frame(`R.Squared` = model$r.squared,
                             `Adj.R.Squared` = model$adj.r.squared,
                             AIC = stats::AIC(x),
@@ -56,50 +86,32 @@ info.lm <- function(x){
 
   # omnibus test
   F <- model$fstatistic
-  Ftest <- data.frame(value=F[1],
-                      numdf=F[2],
-                      dendf=F[3],
-                      p = stats::pf(F[1], F[2],F[3], lower.tail = FALSE),
-                      row.names=NULL)
+  F.test <- data.frame(value=F[1],
+                       numdf=F[2],
+                       dendf=F[3],
+                       p = stats::pf(F[1], F[2],F[3], lower.tail = FALSE),
+                       row.names=NULL)
 
-  # ANOVA Table
-
-    anova.table <- as.data.frame(car::Anova(x, type=3))
+  # ANOVA table
+  anova.table <- as.data.frame(car::Anova(x, type=3))
 
   # coefficients table
-    coeff <- as.data.frame(stats::summary.lm(x)$coefficients)
+  coeff <- as.data.frame(stats::summary.lm(x)$coefficients)
+  std_coeff <- lm.beta::lm.beta(x)$standardized.coefficients
+  coeff <- cbind(coeff, std_coeff)
+  coeff <- coeff[, c(1, 5, 2, 3, 4)]
+  coeff$signif <- sigstars(coeff$`Pr(>|t|)`)
+  names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)", "")
 
-    #standardized coefficients
-    # stdata <- stats::model.frame(x)
-    # for (i in 1:ncol(stdata)){
-    #   if(is.numeric(stdata[[i]])){
-    #     stdata[[i]] <- scale(stdata[[i]])
-    #   }
-    # }
-    #
-    # # stick a tryCatch in here for log(mpg)
-    # # look at model.matrix(fit) to get regression below
-    # std_fit <- lm(stats::as.formula(x$call), stdata)
-    # std_summary <- stats::summary.lm(std_fit)
-    # std_coeff <- std_summary$coefficients[,1]
-    #std_coeff <- c(0, stdB(x))
-    std_coeff <- lm.beta::lm.beta(x)$standardized.coefficients
-
-
-    coeff <- cbind(coeff, std_coeff)
-    coeff <- coeff[, c(1, 5, 2, 3, 4)]
-    coeff$signif <- ifelse(coeff$`Pr(>|t|)` < .001, "***",
-                           ifelse(coeff$`Pr(>|t|)` < 0.01, "**",
-                                  ifelse(coeff$`Pr(>|t|)` < 0.05, "*", " ")))
-    names(coeff) <- c("B", "B*", "SE", "t", "Pr(>|t|)", "")
-
-    results <- list("fit.indices" = fit.indices,
-                    "Ftest" = Ftest,
-                    "anova.table" = anova.table,
-                    "coefficient.table" = coeff,
-                    "call" = x$call,
-                    "N" = N)
-    class(results) <- c("info.lm", "list")
-    return(results)
+  # output
+  results <- list("overall"= overall,
+                  "fit.indices" = fit.indices,
+                  "F.test" = F.test,
+                  "anova.table" = anova.table,
+                  "coefficient.table" = coeff,
+                  "call" = x$call,
+                  "N" = N)
+  class(results) <- c("info.lm", "list")
+  return(results)
 
 }

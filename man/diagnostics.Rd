@@ -2,9 +2,7 @@
 % Please edit documentation in R/diagnostics.R
 \name{diagnostics}
 \alias{diagnostics}
-\title{diagnostics:
-
-Run and print regression diagnostics}
+\title{Regression Diagnostics}
 \usage{
 diagnostics(x, ...)
 }
@@ -17,11 +15,18 @@ diagnostics(x, ...)
 The results of the methods \code{\link{diagnostics.lm}} or \code{\link{diagnostics.glm}}
 }
 \description{
-diagnostics:
-
-Run and print regression diagnostics
+Regression diagnostics for linear and generalized linear models.
+Currently linear and logistic regression models are supported.
+}
+\details{
+The \code{diagnostics} function produces data visualizations
+(ggplot2 graphs) for regression diagnostics. The plots depend
+on the form of the model (\code{lm} or \code{glm}).
 }
 \examples{
 fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 diagnostics(fit)
+}
+\seealso{
+\code{\link{diagnostics.lm}}, \code{\link{diagnostics.glm}}
 }

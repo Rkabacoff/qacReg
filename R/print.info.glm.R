@@ -21,11 +21,12 @@ print.info.glm <- function(x, digits=4, ...){
 
   heading("LOGISTIC REGRESSION SUMMARY")
 
-  cat("Formula: ", as.character(x$call["formula"]), "\n",
-      "Data   : ", as.character(x$call["data"]), "\n",
-      "N      : ", x$N, "\n\n", sep="")
+  cat("Formula: ", x$overall["formula"], "\n",
+      "Data   : ", x$overall["data"], "\n",
+      "N      : ", x$overall["N"], "\n\n", sep="")
 
-  cat("Predicted category is ", x$target, ".\n\n", sep="")
+
+  cat("Predicted category: ", x$overall["target"], "\n\n", sep="")
 
   heading("Omnibus Test")
   otest <- x$omnibus.test
@@ -34,9 +35,7 @@ print.info.glm <- function(x, digits=4, ...){
                    ifelse(otest$`Pr(>Chi)`[2] < 0.01, "**",
                           ifelse(otest$`Pr(>Chi)`[2] < 0.05, "*", " ")))
 
-  chi <- "\U03A7"
-  squared <- "\U00B2"
-  cat(chi, squared,	"(", otest$Df[2], ") = ",
+  cat("Chi-square(", otest$Df[2], ") = ",
       round(otest$`Deviance`[2], digits),
       ", p = ",
       format.pval(otest$`Pr(>Chi)`[2], digits),
@@ -44,9 +43,12 @@ print.info.glm <- function(x, digits=4, ...){
   cat("\n\n")
 
   heading("Fit Measures")
-  StukelTest <- x$fit.indices[[1]]$`Pr(>Chi)`[2]
-  cat("Stukel's Test: p = ", round(StukelTest, digits), "\n", sep="")
-  cat("Tjura's Psuedo-R", squared, ":" , round(x$fit.indices[[2]], digits), "\n",
+
+  gof <- unlist(x$fit.indices[[1]])
+  cat("Stukel's GOF Test: Chi-square(", gof["Df2"], ") = ",
+      round(gof["Deviance2"], digits), ", p < ",
+      round(gof["Pr(>Chi)2"], digits), "\n", sep="")
+  cat("Tjura's Psuedo-R.squared: " , round(x$fit.indices[[2]], digits), "\n",
       sep="")
   cat("AIC:", round(x$fit.indices[[3]], digits), "\n\n")
 
@@ -64,7 +66,7 @@ print.info.glm <- function(x, digits=4, ...){
   cat("\n")
 
   heading("Odds Ratios (with 95% Confidence Intervals)")
-  print(x$oddsratios, digits=digits, ...)
+  print(x$odds.ratios, digits=digits, ...)
 
 
 }

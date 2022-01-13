@@ -8,7 +8,7 @@
 #' @param x an object of class \code{"lm"}.
 #' @param alpha numeric; degree of transparency for points (0 to 1, default=0.4).
 #' @param n.labels integer; the number of largest residuals to label
-#' (default=3).
+#' (default=0).
 #' @param span numeric; smoothing parameter for loess fit line (default=0.75)
 #'
 #' @export
@@ -24,8 +24,8 @@
 #' \code{base} graphics.
 #'
 #' @note
-#' The graph plots the log of the fitted values against the log
-#' of the absolute studentized residuals. A robust linear fit line
+#' The graph plots the fitted values against the absolute studentized
+#' residuals on logarithmic scales. A robust linear fit line
 #' and a loess fit line are also plotted.
 #'
 #' @seealso \link[car]{spreadLevelPlot}, \link[MASS]{rlm}
@@ -38,11 +38,21 @@
 #' ggspreadLevelPlot(fit)
 
 
-ggspreadLevelPlot <- function(x, alpha=.4, n.labels=3, span=.75){
-  y <- log(abs(rstudent(x)))
-  x <- log(x$fitted)
+ggspreadLevelPlot <- function(x, alpha=.4, n.labels=0, span=.75){
+  y <- abs(rstudent(x))
+  x <- x$fitted
   df <- data.frame(x=x, y=y)
   df <- na.omit(df)
+
+  # remove nonpositive fitted values
+  non.pos <- x <= 0
+  if (any(non.pos)) {
+    df <- df[!non.pos, ]
+    n.non.pos <- sum(non.pos)
+    warning("\n", n.non.pos, " negative",
+            if (n.non.pos > 1) " fitted values"
+      else " fitted value", " removed")
+  }
 
    # which points to label
   df$absres <- abs(df$y)
@@ -55,12 +65,14 @@ ggspreadLevelPlot <- function(x, alpha=.4, n.labels=3, span=.75){
                 span=span) +
     geom_text_repel(data=df2, aes(x=x, y=y, label=row.names(df2)), size=3) +
     theme_bw() +
+    scale_y_continuous(trans="log10") +
+    scale_x_continuous(trans="log10") +
     theme(plot.subtitle=element_text(size=9)) +
-    labs(x=expression(paste(italic("log"),"(Fitted Values)")),
-         y=expression(paste(italic("log"), " |Studentized Residuals|")),
+    labs(x="Fitted Values",
+         y= "Absolute Studentized Residuals",
          title="Spread-Level Plot",
          subtitle="Assessing constant variance",
-         caption="Homoscedastic data should distribute evenly around a horizontal line")
+         caption="Homoscedastic data should distribute around a horizontal line")
   return(p)
   }
 

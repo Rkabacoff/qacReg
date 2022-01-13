@@ -18,7 +18,7 @@
 \code{print} method for class \code{"info.lm"}.
 }
 \examples{
-fit <- lm(mpg ~ wt + hp + disp, data=mtcars)
+fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 sfit <- info(fit)
 print(sfit, digits=5)
 }

@@ -2,54 +2,52 @@
 % Please edit documentation in R/diagnostics.lm.R
 \name{diagnostics.lm}
 \alias{diagnostics.lm}
-\title{Diagnostics for Linear Models}
+\title{Regression Diagnostics for Linear Models}
 \usage{
-\method{diagnostics}{lm}(x, alpha = 0.4, span = 0.8, ...)
+\method{diagnostics}{lm}(x, alpha = 0.4, span = 0.8, plot = TRUE, ...)
 }
 \arguments{
-\item{x}{an object of class \code{c("lm")}}
+\item{x}{an object of class \code{"lm"}}
 
 \item{alpha}{numeric; transparency for plot points (default=0.4)}
 
 \item{span}{numeric; smoothing parameter for loess fit lines (default=0.8)}
 
+\item{plot}{logical; If \code{TRUE} (the default), graphs are printed. Otherwise,
+they are returned invisibly.}
+
 \item{...}{not currently used}
 }
 \value{
-a list containing the \code{ggplot2} graphs and statistical tests
+A five component list containing \code{ggplot2} graphs:
+qqplot, crplots, slplot, vifplot, and influenceplot.
 }
 \description{
-Provides diagnostics tests and graphs for a linear model
+Provides regression diagnostics for a linear models fit with
+\code{\link{lm}} or \code{\link{regression}}.
 }
 \details{
 The \code{diagnostics} function is a wrapper for several
-diagnostic graphing functions and tests. The function evaluates
-the following:
+diagnostic plotting functions:
 \describe{
 \item{Normality}{Normality of the (studentized) residuals is assessed
-via a Q-Q plot (\link{ggqqPlot}), and Robust Jarque Bera Test
-(see notes).}
-\item{Linearity}{Linearity of the explanatory-response relationship
+via a Normal Q-Q plot (\code{\link{ggqqPlot}}).}
+\item{Linearity}{Linearity of the explanatory-response relationships
 are assessed via Component + Residual (partial residual) plots
-(\link{ggcrPlots}). If there is a single predictor, a scatter plot
+(\code{\link{ggcrPlots}}). If there is a single predictor, a scatter plot
 with linear and loess lines is produced.}
 \item{Constant variance}{Homoscedasticity is evaluated via
-a Spread-Level plot (\link{ggspreadLevelPlot}) and a Scores
-Test for Non-constant Error Variance. (\link[car]{ncvTest}),
-If the test is significant, a transformation of the response
-variable to stabilize the variance is offered.}
-\item{Multicollinearity}{Variance inflation factors (\link[car]{vif})
-are plotted. If there is a single predictor variable, this section
+a Spread-Level plot (\code{\link{ggspreadLevelPlot}}).}
+\item{Multicollinearity}{Multicollinearity is assessed via variance inflation factors
+(\code{\link{ggvifPlot}}). If there is a single predictor variable, this section
 is skipped.}
-\item{Outliers, leverage, and influence}{An influence plot
-(\link{gginfluencePlot}) and Bonferroni Outlier Test
-(\link[car]{outlierTest}) are provided.}
+\item{Outliers, leverage, and influence}{A influence plot identifies
+outliers and influential observations (\code{\link{gginfluencePlot}}).}
 }
 }
 \note{
-The Robust Jarque Bera Test is based on the test provided is
-the \code{DescTools} package. See \link[DescTools]{JarqueBeraTest}
-for details.
+Each function relies heavily on the \code{car} package. See the
+help for individual functions for details.
 }
 \examples{
 mtcars$am <- factor(mtcars$am)

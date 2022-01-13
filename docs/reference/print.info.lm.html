@@ -109,35 +109,38 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">disp</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">accel</span> <span class="op">+</span> <span class="va">origin</span>, data <span class="op">=</span> <span class="va">auto_mpg</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">sfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="info.html">info</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sfit</span>, digits<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">MULTIPLE REGRESSION SUMMARY</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model: mpg ~ wt + hp + disp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Data : mtcars</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N    : 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: mpg ~ hp + wt + accel + origin</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Data : auto_mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> N    : 392</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Fit Indices</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  R.Squared Adj.R.Squared    AIC   RMSE   MAE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0.82684       0.80828 158.64 2.4685 1.907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  R.Squared Adj.R.Squared    AIC   RMSE    MAE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.71933       0.71569 2238.3 4.1297 3.1465</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Omnibus Test</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F(3,28) = 44.56552, p &lt; 8.6496e-11  *** </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> F(5,386) = 197.85243, p &lt; &lt; 2.22e-16  *** </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Anova Table (type III tests)</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 Sum Sq DF   F value   Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 2151.94945  1 309.01265 &lt;0.00001 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt            88.50276  1   12.7087  0.00133  **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hp            51.69183  1   7.42277  0.01097   *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> disp           0.05708  1    0.0082  0.92851    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals    194.99067 28                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 Sum Sq  DF   F value   Pr(&gt;F)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 5473.65459   1 316.03813 &lt;0.00001 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hp           220.43105   1  12.72726  0.00041 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          1017.75274   1  58.76306 &lt;0.00001 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> accel          1.11712   1    0.0645  0.79965    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> origin         308.474   2   8.90534  0.00017 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals   6685.36639 386                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">Regression Coefficients</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       B        B*       SE         t   Pr(&gt;|t|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 37.10550527  0.000000 2.110815 17.578756 1.1619e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt          -3.80089058 -0.617064 1.066191 -3.564926 1.3310e-03  **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hp          -0.03115655 -0.354439 0.011436 -2.724476 1.0971e-02   *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> disp        -0.00093701 -0.019269 0.010350 -0.090535 9.2851e-01    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      B        B*         SE        t   Pr(&gt;|t|)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 43.2914124  0.000000 2.43518531 17.77746 4.4061e-52 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hp          -0.0564319 -0.278299 0.01581821 -3.56753 4.0570e-04 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          -0.0047672 -0.518804 0.00062189 -7.66571 1.4565e-13 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> accel       -0.0308513 -0.010905 0.12147681 -0.25397 7.9965e-01    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> origin2      0.9765649  0.047438 0.64390969  1.51662 1.3018e-01    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> origin3      2.7524440  0.141644 0.65373086  4.21036 3.1755e-05 ***</span>
 </code></pre></div>
     </div>
   </div>

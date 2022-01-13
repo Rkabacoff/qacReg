@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.glm.R
 \name{info.glm}
 \alias{info.glm}
-\title{Summarise a logistic regression model}
+\title{Model summary for a "glm" object}
 \usage{
 \method{info}{glm}(x)
 }
@@ -10,27 +10,68 @@
 \item{x}{an object of class "glm"}
 }
 \value{
-The list of class c(\code{"info.glm"}, \code{"list"}).
-\describe{
-\item{omnibus.test}{omnibus chisquare test}
-\item{fit.indices}{goodness of fit measures including Stukel's test, Pseudo R-squared, and Akaike Information Criterion}
-\item{anova.table}{Type-III Analysis of Variance Table}
-\item{coefficient.table}{includes Coefficients, Standardized Coefficients,
-Standard Errors, z-values, and p-values with significant stars}
-\item{oddsratios}{odd's ratios with 95\% confidence intervals}
-\item{N}{sample size}
-\item{target}{category predicted}
+A list of class c(\code{"info.glm"}, \code{"list"}).
+\itemize{
+\item{overall}
+\item{omnibus.test}
+\item{fit.indices}
+\item{anova.table}
+\item{coefficient.table}
+\item{odds.ratios}
 }
 }
 \description{
 Summarize a logistic regression model of class \code{"glm"}.
 }
 \details{
-Put details here
+The function \code{info.glm} produces a summary for a
+logistic regression model fitted with the \code{\link{glm}}  or
+\code{\link{regress}} function. There are six sections.
+
+\describe{
+\item{Overall}{Model formula, data frame, and sample size (N), and predicted
+category.}
+\item{Omnibus Test}{Chi-square statistic, degrees of freedom, p-value.}
+\item{Fit Measures}{Stukel's GOF Test, Tjur's psuedo R squared, and
+Akaike's information criterion (AIC).}
+\item{Analysis of Variance}{ANOVA table with type III (marginal)
+effects.}
+\item{Regression Coefficients}{Regression coefficients (B),
+standard errors (SE), z-values, and p-values.}
+\item{Odds Ratios}{odds ratios with 95\% confidence intervals}
+}
+
+The ANOVA table is obtained from the \code{\link[car]{Anova}} function in
+the \code{car} package. Odds ratios and confidence intervals are obtained
+from the \code{\link[car]{Confint}} function from the \code{car} package.
+
+Tjur's pseudo-R.squared (2009) is defined as the mean absolute difference
+between the mean predicted probability for the positive group
+and the mean predicted probability for the negative group. It ranges
+from zero to one.
+
+Stukel provides a goodness of fit (GOF) fit test for ungrouped
+data, and has better properties than the traditional Hosmer-Lemeshow test
+in simulation studies.  A significant result suggests model misspecification.
+See Allison (2014) for details.
 }
 \examples{
 fit <- regress(am ~ hp + wt + mpg, mtcars)
 info(fit)
+}
+\references{
+Allison, P. D. (2014). "Measures of fit for logistic regression", SAS Global Forum
+\url{https://statisticalhorizons.com/wp-content/uploads/GOFForLogisticRegression-Paper.pdf}
+
+Allison, P. D. (2014). "Another goodness-of-fit test for
+logistic regression".
+\url{https://statisticalhorizons.com/another-goodness-of-fit-test-for-logistic-regression}
+
+Stukel, T. A. (1988). “Generalized Logistic Models.”
+Journal of the American Statistical Association 83:426–431.
+
+Tjur, T. (2009) “Coefficients of determination in logistic regression models—A new proposal: The coefficient of
+discrimination.” The American Statistician 63: 366-372.
 }
 \seealso{
 \code{\link[car]{Anova}}, \code{\link[car]{Confint}}

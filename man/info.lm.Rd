@@ -2,34 +2,53 @@
 % Please edit documentation in R/info.lm.R
 \name{info.lm}
 \alias{info.lm}
-\title{Summarise an 'lm' object}
+\title{Model Summary for an 'lm' Object}
 \usage{
 \method{info}{lm}(x)
 }
 \arguments{
-\item{x}{an object of class code{"lm"}}
+\item{x}{an object of class \code{"lm"}}
 }
 \value{
-a 6-component list
-\describe{
-\item{fit.indices}{includes R-squared, Adjusted R-squared, Akaike's Information Criterion, Root Mean Squared Error, Mean Absolute Error}
-\item{Ftest}{includes F-statistic, Degrees of Freedom, p-value}
-\item{anova.table}{includes a Type-III Analysis of Variance Table (outputted from the \link[car]{Anova} function in the \strong{car} package)}
-\item{coefficient.table}{includes a table of Coefficients, Standardised Coefficients, Standard Errors, t-values, p-values, significance stars}
-\item{N}{sample size}
+A list of class c(\code{"info.lm"}, \code{"list"}).
+\itemize{
+\item{overall}
+\item{fit.indices}
+\item{F.test}
+\item{anova.table}
+\item{coefficient.table}
 }
 }
 \description{
-Summarize an object of class \code{"lm"}.
+Extended summary information for an object of class \code{"lm"}.
 }
 \details{
-The function \code{info.lm} produces a comprehensive
-summary for a linear model fitted with \link{lm} function. In addition
-to the standard output from the \link{summary.lm} function, the output includes
-the sample size (N), Akaike's Information Criterion (AIC), Mean Absolute Error (MAE), ANOVA table (type III SS), and
-standardized regression coefficients (B*).
+The function \code{info.lm} produces a summary for a
+linear model fitted with the \code{\link{lm}}  or
+\code{\link{regress}} function. There are five sections.
+
+\describe{
+\item{Overall}{Model formula, data frame, and sample size (N).}
+\item{Fit Indices}{R squared, adjusted R squared, Akaike's information
+criterion (AIC), root mean square error (RMSE), and
+mean absolute deviation (MAE).}
+\item{Omnibus Test}{F-statistic, degrees of freedom, p-value.}
+\item{Analysis of Variance}{ANOVA table with type III (marginal)
+effects.}
+\item{Regression Coefficients}{Regression coefficients (B),
+standardized regression coefficients (B*) standard errors (SE),
+t-values, and p-values.}
+}
+
+The ANOVA table is obtained from the \code{\link[car]{Anova}} function in
+the \code{car} package. The standardized regression coefficients are
+obtained for the \code{\link[lm.beta]{lm.beta}} function in the
+\code{lm.beta} package.
 }
 \examples{
 fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 info(fit)
+}
+\seealso{
+\code{\link{print.info.lm}}
 }

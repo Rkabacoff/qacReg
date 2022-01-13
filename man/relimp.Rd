@@ -24,11 +24,6 @@ DA analysis uses change in R-squared to assess the average contribution of
 each variable to the set all 1, 2, 3, ..., p variable models. For logistic
 regression, Estrella's Pseudo R-squared is used (see reference).
 }
-\note{
-Estrella, A. (1998). A new measure of fit for equations with
-dichotomous dependent variables. Journal of Business & Economic
-Statistics, 16(2), 198-205.
-}
 \examples{
 data(mtcars)
 
@@ -40,6 +35,19 @@ relimp(fit1)
 mtcars$am <- factor(mtcars$am)
 fit2 <- glm(am ~ mpg + cyl +disp + drat + carb, family=binomial, mtcars)
 relimp(fit2)
+}
+\references{
+Estrella, A. (1998). A new measure of fit for equations with
+dichotomous dependent variables. Journal of Business & Economic
+Statistics, 16(2), 198-205.
+
+Azen, R., & Budescu, D. V. (2003). The dominance analysis approach
+for comparing predictors in multiple regression. Psychological Methods,
+8(2), 129-148.
+
+Azen, R., & Traxel, N. (2009). Using Dominance Analysis to Determine
+Predictor Importance in Logistic Regression.
+Journal of Educational and Behavioral Statistics, 34(3), 319-347.
 }
 \seealso{
 \link{lm}, \link{glm}

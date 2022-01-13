@@ -36,7 +36,7 @@ normality.test <- function (x, digits=4) {
       ", p < ", format.pval(p.value, digits), "\n", sep="")
 }
 
-# scatter plot from qacEDA --------------------
+# scatter plot from qacBase --------------------
 scatter_plot <- function(x,
                     title,
                     outlier=3,
@@ -135,14 +135,10 @@ scatter_plot <- function(x,
 
 # pretty print car::Anova.lm results------------------
 printAnova <- function(x, digits){
-  x$`Sum Sq` <- round(x$`Sum Sq`, digits)
+  x$`Sum Sq`  <- round(x$`Sum Sq`, digits)
   x$`F value` <- round(x$`F value`, digits)
-  x$`Pr(>F)` <- round(x$`Pr(>F)`, digits)
+  x$`Pr(>F)`  <- round(x$`Pr(>F)`, digits)
   x$significant <- sigstars(x$`Pr(>F)`)
-
-    # ifelse(x$`Pr(>F)` < .001, "***",
-    #                       ifelse(x$`Pr(>F)` < 0.01, "**",
-    #                              ifelse(x$`Pr(>F)` < 0.05, "*", " ")))
 
   nas <- is.na(x)
   x[] <- sapply(seq_len(ncol(x)), function(i) {
@@ -163,13 +159,4 @@ sigstars <- function(x){
   ifelse(x < .001, "***",
          ifelse(x < 0.01, "**",
                 ifelse(x < 0.05, "*", " ")))
-}
-
-# standardize OLS coefficients
-stdB <- function(x){
-  b <- summary(x)$coef[-1,1]
-  sx <- sapply(x$model[-1], sd, na.rm=TRUE)
-  sy <- sapply(x$model[1], sd, na.rm=TRUE)
-  sdB <- b*sx/sy
-  return(sdB)
 }

@@ -1,14 +1,26 @@
-#' @title Summary information for lm or glm models
+#' @title Extended model summary
 #'
 #'
-#' @description Detailed summary information of a linear or logistic
-#' regression model
+#' @description
+#' Extended summary information for model fits. Currently linear and logistic
+#' regression models are supported.
 #'
+#' @details
+#' \code{info} is a generic S3 function providing detailed model information.
+#' The goal is to provide more extensive information than currently
+#' produced by \code{\link{summary}}. See the related methods for
+#' details.
 #'
-#' @param x an object of type \code{lm} or \code{glm}.
+#' @seealso
+#' \code{\link{info.lm}}, \code{\link{info.glm}}.
 #'
-#' @return The results of the methods \code{\link{info.lm}} or \code{\link{info.glm}}
+#' @param x an object of type \code{lm} or \code{glm}. If \code{glm}, then
+#' \code{family} must be \code{binomial}.
+#'
+#' @return A \code{list} produced by \code{\link{info.lm}} or
+#' \code{\link{info.glm}}.
 #' @export
+#'
 #' @examples
 #' # multiple regression
 #' fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
@@ -18,4 +30,6 @@
 #' mtcars$am <- factor(mtcars$am)
 #' fit2 <- glm(am ~ hp + wt + mpg, family=binomial, mtcars)
 #' info(fit2)
-info <- function(x) UseMethod("info")
+info <- function(x){
+  UseMethod("info")
+}
