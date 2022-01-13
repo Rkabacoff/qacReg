@@ -19,7 +19,8 @@ remotes::install_github("rkabacoff/qacReg")
 
 ## Example
 
-Here is a basic example:
+Here are two basic examples. Read the Getting Started vignettes
+for more information.
 
 ``` r
 library(qacReg)
