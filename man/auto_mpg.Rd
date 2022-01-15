@@ -5,16 +5,15 @@
 \alias{auto_mpg}
 \title{Auto MPG Data Set}
 \format{
-A data frame with 392 rows and 9 variables:
+A data frame with 388 rows and 9 variables:
 \describe{
-\item{\code{carname}}{character; car name.}
 \item{\code{mpg}}{numeric; miles per gallon.}
-\item{\code{cyl}}{factor; number of cylinders.}
+\item{\code{cyl}}{numeric; number of cylinders.}
 \item{\code{disp}}{numeric; engine displacement.}
 \item{\code{hp}}{numeric; horse power.}
 \item{\code{wt}}{numeric; weight.}
 \item{\code{accel}}{numeric; acceleration.}
-\item{\code{year}}{factor; make year.}
+\item{\code{year}}{numeric; make year.}
 \item{\code{origin}}{factor; origin.}
 }
 }
@@ -31,6 +30,8 @@ City-cyle fuel consumption in miles per gallon, predicted from
 3 multivalued discrete variables and 5 continuous variables.
 }
 \note{
-Missing values have been removed from the original data set.
+Row names are the car names with appended year. Four cases with
+duplicate row names were deleted. Six cases with missing values
+were also deleted.
 }
 \keyword{datasets}

@@ -99,14 +99,11 @@
 
     <div id="format">
     <h2>Format</h2>
-    <p>A data frame with 392 rows and 9 variables:</p><dl><dt><code>carname</code></dt>
-<dd><p>character; car name.</p></dd>
-
-<dt><code>mpg</code></dt>
+    <p>A data frame with 388 rows and 9 variables:</p><dl><dt><code>mpg</code></dt>
 <dd><p>numeric; miles per gallon.</p></dd>
 
 <dt><code>cyl</code></dt>
-<dd><p>factor; number of cylinders.</p></dd>
+<dd><p>numeric; number of cylinders.</p></dd>
 
 <dt><code>disp</code></dt>
 <dd><p>numeric; engine displacement.</p></dd>
@@ -121,7 +118,7 @@
 <dd><p>numeric; acceleration.</p></dd>
 
 <dt><code>year</code></dt>
-<dd><p>factor; make year.</p></dd>
+<dd><p>numeric; make year.</p></dd>
 
 <dt><code>origin</code></dt>
 <dd><p>factor; origin.</p></dd>
@@ -136,7 +133,9 @@ StatLib library which is maintained at Carnegie Mellon University. The dataset w
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p>Missing values have been removed from the original data set.</p>
+    <p>Row names are the car names with appended year. Four cases with
+duplicate row names were deleted. Six cases with missing values
+were also deleted.</p>
     </div>
 
   </div>
