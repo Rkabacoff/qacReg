@@ -35,7 +35,8 @@ Imports:
     dominanceanalysis,
     e1071,
     plotROC,
-    lm.beta
+    lm.beta,
+    sjPlot
 Suggests: 
     rmarkdown,
     knitr

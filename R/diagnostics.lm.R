@@ -52,9 +52,8 @@
 #'qqplot, crplots, slplot, vifplot, and influenceplot.
 #'
 #'@examples
-#'mtcars$am <- factor(mtcars$am)
-#'fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#'diagnostics(fit)
+#' fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+#' diagnostics(fit)
 
 diagnostics.lm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
 

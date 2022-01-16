@@ -56,7 +56,7 @@ in simulation studies.  A significant result suggests model misspecification.
 See Allison (2014) for details.
 }
 \examples{
-fit <- regress(am ~ hp + wt + mpg, mtcars)
+fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 info(fit)
 }
 \references{

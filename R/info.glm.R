@@ -69,10 +69,8 @@
 #'@export
 #'
 #'@examples
-#'fit <- regress(am ~ hp + wt + mpg, mtcars)
-#'info(fit)
-
-
+#' fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
+#' info(fit)
 info.glm <- function(x){
 
   checkargs <- is.logistic(x)

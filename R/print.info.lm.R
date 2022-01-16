@@ -1,4 +1,4 @@
-#' @title Print Summary of a Linear Model Fit
+#' @title Print "info.lm" Object
 #'
 #' @description
 #' \code{print} method for class \code{"info.lm"}.

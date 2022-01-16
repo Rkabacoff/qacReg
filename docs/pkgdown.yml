@@ -2,13 +2,9 @@ pandoc: 2.11.4
 pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
-  diagnostics: diagnostics.html
   logistic: logistic.html
-  performance: performance.html
-  qacReg: qacReg.html
   regression: regression.html
-  varimp: varimp.html
-last_built: 2022-01-14T20:21Z
+last_built: 2022-01-16T04:09Z
 urls:
   reference: http://rkabacoff.github.io/qacReg/reference
   article: http://rkabacoff.github.io/qacReg/articles

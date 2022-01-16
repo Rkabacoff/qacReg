@@ -3,8 +3,7 @@
 # qacReg
 
 
-The **qacReg** provides easy access to multiple linear regression and logistic regression
-with enhanced performance metrics, visualizations, and diagnostics.
+The **qacReg** provides easy access to linear and logistic regression with enhanced performance metrics, visualizations, and diagnostics. 
 
 ## Installation
 
@@ -17,28 +16,22 @@ if(!require(remotes)){
 remotes::install_github("rkabacoff/qacReg")
 ```
 
-## Example
+## Workflow
 
-Here are two basic examples. Read the Getting Started vignettes
-for more information.
+The package supports a simple workflow embodied in 6 functions:
 
-``` r
-library(qacReg)
-
-# multiple regression (mpg is quantitative)
-fit <- regress(mpg ~ hp + wt + cyl, mtcars)
-info(fit)
-diagnostics(fit)
-plots(fit)
-relimp(fit)
-performance(fit)
-
-# logistic regression (am is binary)
-fit <- regress(am ~ hp + wt + mpg, mtcars)
-info(fit)
-diagnostics(fit)
-plots(fit)
-relimp(fit)
-performance(fit)
-```
-
+ ```r
+ library(qacReg)
+ model <- regress(formula, data)       # fit a linear or logistic model
+ info(model)                           # review detailed results
+ diagnostics(model)                    # perform regression diagnostics
+ plots(model)                          # visualize conditional relationships
+ relimp(model)                         # assess variable importance
+ performance(model)                    # evaluate performance metrics
+ ```
+ See the **Vignettes** for examples.
+ 
+### Why a duck?
+ 
+**qacReg** is on of a suite of packages developed in the [*Quantitative
+Analysis Center*](https://www.wesleyan.edu/qac) (QAC) at Wesleyan University. **QAC = QUACK**. It seemed appropriate at the time.

@@ -1,8 +1,8 @@
 ---
-title: "Introduction to Logistic Regression"
+title: "qacReg for Logistic Regression"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to Logistic Regression}
+  %\VignetteIndexEntry{qacReg for Logistic Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

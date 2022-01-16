@@ -47,36 +47,20 @@
      
   </a>
 </li>
-<li>
-  <a href="articles/qacReg.html">
-    <span class="fas fa-chalkboard-teacher"></span>
-     
-    Getting Started
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fas fa-book"></span>
      
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/regression.html">Introduction to Linear Regression</a>
+      <a href="articles/regression.html">qacReg for Linear Regression</a>
     </li>
     <li>
-      <a href="articles/logistic.html">Introduction to Logistic Regression</a>
-    </li>
-    <li>
-      <a href="articles/diagnostics.html">Regression Diagnostics</a>
-    </li>
-    <li>
-      <a href="articles/performance.html">Evaluationg Model Performance</a>
-    </li>
-    <li>
-      <a href="articles/varimp.html">Estimating Variable Importance</a>
+      <a href="articles/logistic.html">qacReg for Logistic Regression</a>
     </li>
   </ul>
 </li>
@@ -84,11 +68,18 @@
   <a href="reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    Reference
+    Functions
   </a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://www.wesleyan.edu/qac" class="external-link">
+    <span class="fas fa-chalkboard-teacher"></span>
+     
+    QAC
+  </a>
+</li>
 <li>
   <a href="https://github.com/rkabacoff/qacReg/" class="external-link">
     <span class="fa fa-github fa-lg"></span>
@@ -113,7 +104,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="qacreg">qacReg<a class="anchor" aria-label="anchor" href="#qacreg"></a>
 </h1></div>
-<p>The <strong>qacReg</strong> provides easy access to multiple linear regression and logistic regression with enhanced performance metrics, visualizations, and diagnostics.</p>
+<p>The <strong>qacReg</strong> provides easy access to linear and logistic regression with enhanced performance metrics, visualizations, and diagnostics.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -125,27 +116,23 @@
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rkabacoff/qacReg"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="workflow">Workflow<a class="anchor" aria-label="anchor" href="#workflow"></a>
 </h2>
-<p>Here are two basic examples. Read the Getting Started vignettes for more information.</p>
+<p>The package supports a simple workflow embodied in 6 functions:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">qacReg</span><span class="op">)</span>
-
-<span class="co"># multiple regression (mpg is quantitative)</span>
-<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/regress.html">regress</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">cyl</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="reference/info.html">info</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/diagnostics.html">diagnostics</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/relimp.html">relimp</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/performance.html">performance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-
-<span class="co"># logistic regression (am is binary)</span>
-<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/regress.html">regress</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="reference/info.html">info</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/diagnostics.html">diagnostics</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/relimp.html">relimp</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
-<span class="fu"><a href="reference/performance.html">performance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/regress.html">regress</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span>       <span class="co"># fit a linear or logistic model</span>
+<span class="fu"><a href="reference/info.html">info</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>                           <span class="co"># review detailed results</span>
+<span class="fu"><a href="reference/diagnostics.html">diagnostics</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>                    <span class="co"># perform regression diagnostics</span>
+<span class="fu"><a href="reference/plots.html">plots</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>                          <span class="co"># visualize conditional relationships</span>
+<span class="fu"><a href="reference/relimp.html">relimp</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>                         <span class="co"># assess variable importance</span>
+<span class="fu"><a href="reference/performance.html">performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>                    <span class="co"># evaluate performance metrics</span></code></pre></div>
+<p>See the <strong>Vignettes</strong> for examples.</p>
+<div class="section level3">
+<h3 id="why-a-duck">Why a duck?<a class="anchor" aria-label="anchor" href="#why-a-duck"></a>
+</h3>
+<p><strong>qacReg</strong> is on of a suite of packages developed in the <a href="https://www.wesleyan.edu/qac" class="external-link"><em>Quantitative Analysis Center</em></a> (QAC) at Wesleyan University. <strong>QAC = QUACK</strong>. It seemed appropriate at the time.</p>
+</div>
 </div>
 </div>
 

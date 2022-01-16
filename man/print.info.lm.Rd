@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.info.lm.R
 \name{print.info.lm}
 \alias{print.info.lm}
-\title{Print Summary of a Linear Model Fit}
+\title{Print "info.lm" Object}
 \usage{
 \method{print}{info.lm}(x, digits = 3, ...)
 }

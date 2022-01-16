@@ -47,8 +47,7 @@ Each function relies heavily on the \code{car} package. See the
 help for individual functions for details.
 }
 \examples{
-mtcars$cyl <- factor(mtcars$cyl)
-fit <- glm(am ~ hp + cyl + wt, family=binomial, mtcars)
+fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 diagnostics(fit)
 }
 \seealso{

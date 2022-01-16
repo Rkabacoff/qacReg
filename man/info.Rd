@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.R
 \name{info}
 \alias{info}
-\title{Extended model summary}
+\title{Extended Model Summary}
 \usage{
 info(x)
 }
@@ -15,7 +15,7 @@ A \code{list} produced by \code{\link{info.lm}} or
 \code{\link{info.glm}}.
 }
 \description{
-Extended summary information for model fits. Currently linear and logistic
+Extended summary information for a model fit. Currently linear and logistic
 regression models are supported.
 }
 \details{
@@ -25,13 +25,16 @@ produced by \code{\link{summary}}. See the related methods for
 details.
 }
 \examples{
-# multiple regression
+#######################
+# multiple regression #
+#######################
 fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 info(fit)
 
-# logistic regression
-mtcars$am <- factor(mtcars$am)
-fit2 <- glm(am ~ hp + wt + mpg, family=binomial, mtcars)
+#######################
+# logistic regression #
+#######################
+fit2 <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 info(fit2)
 }
 \seealso{

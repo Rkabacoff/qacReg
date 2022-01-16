@@ -4,7 +4,7 @@
 \alias{performance.lm}
 \title{Model Performance for Linear Models}
 \usage{
-\method{performance}{lm}(x, data, digits = 4, N = 20, ...)
+\method{performance}{lm}(x, data, digits = 4, ...)
 }
 \arguments{
 \item{x}{an object of class \code{"lm"}.}
@@ -13,15 +13,16 @@
 
 \item{digits}{integer; number of digits to print (default=4).}
 
-\item{N}{integer; number of bootstrap replications (default=20).}
-
 \item{...}{not currently used}
 }
 \value{
 The results of the methods \code{\link{performance.lm}}
 }
 \description{
-Model Performance for Linear Models
+\code{performance} calculates the r-squared, root mean square error (RMSE),
+and mean absolute error (MAE) applying the model to a data frame. If
+a data frame is not specified, the model is evaluated on the
+training data (resubstitution).
 }
 \details{
 Produce indices of model performance for linear models

@@ -50,8 +50,7 @@ Each function relies heavily on the \code{car} package. See the
 help for individual functions for details.
 }
 \examples{
-mtcars$am <- factor(mtcars$am)
-fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
+fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 diagnostics(fit)
 }
 \seealso{

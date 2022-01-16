@@ -1,4 +1,4 @@
-#'@title Print Summary of a Logistic Regression Model Fit
+#'@title Print "info.glm" Object
 #'
 #'@description \code{print} method for class \code{"info.glm"}.
 #'
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' fit <- glm(am ~ wt + hp + disp, family=binomial, data=mtcars)
+#' fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 #' sfit <- info(fit)
 #' print(sfit, digits=5)
 print.info.glm <- function(x, digits=4, ...){
@@ -48,7 +48,7 @@ print.info.glm <- function(x, digits=4, ...){
   cat("Stukel's GOF Test: Chi-square(", gof["Df2"], ") = ",
       round(gof["Deviance2"], digits), ", p < ",
       round(gof["Pr(>Chi)2"], digits), "\n", sep="")
-  cat("Tjura's Psuedo-R.squared: " , round(x$fit.indices[[2]], digits), "\n",
+  cat("Tjur's Psuedo-R.squared: " , round(x$fit.indices[[2]], digits), "\n",
       sep="")
   cat("AIC:", round(x$fit.indices[[3]], digits), "\n\n")
 

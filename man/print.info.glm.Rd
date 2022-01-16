@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.info.glm.R
 \name{print.info.glm}
 \alias{print.info.glm}
-\title{Print Summary of a Logistic Regression Model Fit}
+\title{Print "info.glm" Object}
 \usage{
 \method{print}{info.glm}(x, digits = 4, ...)
 }
@@ -18,7 +18,7 @@
 \code{print} method for class \code{"info.glm"}.
 }
 \examples{
-fit <- glm(am ~ wt + hp + disp, family=binomial, data=mtcars)
+fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 sfit <- info(fit)
 print(sfit, digits=5)
 }

@@ -18,23 +18,29 @@ order the variables in a linear or logistic regression in terms
 of relative importance.
 }
 \details{
-The function is a wrapper for the \link[dominanceanalysis]{dominanceAnalysis}
+The function is a wrapper for the \code{\link[dominanceanalysis]{dominanceAnalysis}}
 function in the \code{dominanceanalyis} package. For linear regression
 DA analysis uses change in R-squared to assess the average contribution of
 each variable to the set all 1, 2, 3, ..., p variable models. For logistic
-regression, Estrella's Pseudo R-squared is used (see reference).
+regression, Estrella's Pseudo R-squared is used (see references).
+
+Results are graphed as horizontal dot plots.
 }
 \examples{
 data(mtcars)
 
-# multiple linear regression
-fit1 <- lm(mpg ~ ., mtcars)
-relimp(fit1)
+#######################
+# Multiple regression #
+#######################
+fit <- lm(mpg ~ ., data = auto_mpg)
+relimp(fit)
 
-# logistic regression
-mtcars$am <- factor(mtcars$am)
-fit2 <- glm(am ~ mpg + cyl +disp + drat + carb, family=binomial, mtcars)
+#######################
+# Logistic regression #
+#######################
+fit2 <- glm(caesarian ~ ., family = binomial, data = caesarian)
 relimp(fit2)
+
 }
 \references{
 Estrella, A. (1998). A new measure of fit for equations with
@@ -50,5 +56,5 @@ Predictor Importance in Logistic Regression.
 Journal of Educational and Behavioral Statistics, 34(3), 319-347.
 }
 \seealso{
-\link{lm}, \link{glm}
+\code{\link[dominanceanalysis]{dominanceAnalysis}}
 }

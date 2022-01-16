@@ -2,9 +2,7 @@
 % Please edit documentation in R/performance.R
 \name{performance}
 \alias{performance}
-\title{Model Performance
-
-Produce indices of model performance}
+\title{Model Performance}
 \usage{
 performance(x, ...)
 }
@@ -18,16 +16,23 @@ The results of the methods \code{\link{performance.lm}} or
 \code{\link{performance.glm}}
 }
 \description{
-Model Performance
-
-Produce indices of model performance
+Indices of model performance for linear and logistic regression
+models.
+}
+\details{
+details go here.
 }
 \examples{
-# multiple regression
-fit1 <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
-performance(fit1)
+#######################
+# multiple regression #
+#######################
+fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
+performance(fit)
 
-# logistic regression
-fit2 <- glm(am ~ hp + wt, family=binomial, mtcars)
+#######################
+# logistic regression #
+#######################
+fit2 <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 performance(fit2)
+
 }

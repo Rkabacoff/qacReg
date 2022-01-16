@@ -6,8 +6,7 @@
 #'
 #' @details
 #' The function is a wrapper for the \code{\link{lm}} and \code{\link{glm}}
-#' functions. If the response variable (numeric, factor,
-#' or character) has only two possible values, a logistic regression
+#' functions. If the response variable has only two possible values, a logistic regression
 #' model is fit using \code{glm} with \code{family=binomial}.
 #' Otherwise a linear model (\code{lm}) is returned.
 #'
@@ -21,7 +20,7 @@
 #' @export
 #'
 #' @seealso
-#' \code{\link{lm}}, \code{\link{glm}}, \code{link{info}}
+#' \code{\link{lm}}, \code{\link{glm}}, \code{\link{info}}
 #'
 #' @examples
 #' # multiple linear regression

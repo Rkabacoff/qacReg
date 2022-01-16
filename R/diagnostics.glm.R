@@ -46,9 +46,8 @@
 #'A three component list containing \code{ggplot2} graphs:
 #'crplots, vifplot, and influenceplot.
 #'@examples
-#'mtcars$cyl <- factor(mtcars$cyl)
-#'fit <- glm(am ~ hp + cyl + wt, family=binomial, mtcars)
-#'diagnostics(fit)
+#' fit <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
+#' diagnostics(fit)
 
 diagnostics.glm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
 

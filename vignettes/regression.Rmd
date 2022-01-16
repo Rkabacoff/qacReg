@@ -1,8 +1,8 @@
 ---
-title: "Introduction to Linear Regression"
+title: "qacReg for Linear Regression"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to Linear Regression}
+  %\VignetteIndexEntry{qacReg for Linear Regression}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

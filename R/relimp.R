@@ -7,11 +7,13 @@
 #'
 #'
 #' @details
-#' The function is a wrapper for the \link[dominanceanalysis]{dominanceAnalysis}
+#' The function is a wrapper for the \code{\link[dominanceanalysis]{dominanceAnalysis}}
 #' function in the \code{dominanceanalyis} package. For linear regression
 #' DA analysis uses change in R-squared to assess the average contribution of
 #' each variable to the set all 1, 2, 3, ..., p variable models. For logistic
-#' regression, Estrella's Pseudo R-squared is used (see reference).
+#' regression, Estrella's Pseudo R-squared is used (see references).
+#'
+#' Results are graphed as horizontal dot plots.
 #'
 #' @importFrom dominanceanalysis dominanceAnalysis
 #' @importFrom stats reorder
@@ -21,7 +23,7 @@
 #'
 #' @export
 #'
-#' @seealso \link{lm}, \link{glm}
+#' @seealso \code{\link[dominanceanalysis]{dominanceAnalysis}}
 #'
 #' @return a ggplot2 graph
 #'
@@ -40,14 +42,18 @@
 #' @examples
 #' data(mtcars)
 #'
-#' # multiple linear regression
-#' fit1 <- lm(mpg ~ ., mtcars)
-#' relimp(fit1)
+#'#######################
+#'# Multiple regression #
+#'#######################
+#'fit <- lm(mpg ~ ., data = auto_mpg)
+#'relimp(fit)
 #'
-#' # logistic regression
-#' mtcars$am <- factor(mtcars$am)
-#' fit2 <- glm(am ~ mpg + cyl +disp + drat + carb, family=binomial, mtcars)
-#' relimp(fit2)
+#'#######################
+#'# Logistic regression #
+#'#######################
+#'fit2 <- glm(caesarian ~ ., family = binomial, data = caesarian)
+#'relimp(fit2)
+#'
 relimp <- function(x){
   cat("working ...\n")
 
