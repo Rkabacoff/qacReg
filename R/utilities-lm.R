@@ -160,3 +160,33 @@ sigstars <- function(x){
          ifelse(x < 0.01, "**",
                 ifelse(x < 0.05, "*", " ")))
 }
+
+std_df <- function (data, mean = 0, sd = 1,
+                         include_dummy = TRUE) {
+  if (!is.data.frame(data))
+    stop("data must be a data frame")
+  std <- function(x) {
+    number <- is.numeric(x)
+    values <- unique(x)
+    values <- values[order(values)]
+    cond1 <- length(values) == 2
+    cond2 <- values[1] == 0
+    cond3 <- values[2] == 1
+    dummy <- cond1 & cond2 & cond3
+    if (include_dummy) {
+      doit <- number
+    }
+    else {
+      doit <- number & !dummy
+    }
+    if (doit) {
+      x <- (x - mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
+      x <- x * sd + mean
+    }
+    return(x)
+  }
+  for (i in 1:ncol(data)) {
+    data[, i] <- std(data[[i]])
+  }
+  return(data)
+}

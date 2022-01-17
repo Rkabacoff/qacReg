@@ -28,6 +28,7 @@ reference:
     desc: ~
     contents:
       - '`ggcrPlots`'
+      - '`ggforestPlot`'
       - '`ggliftPlot`'
       - '`gginfluencePlot`'
       - '`ggqqPlot`'
@@ -52,7 +53,7 @@ navbar:
       -  text: qacReg for Logistic Regression
          href: articles/logistic.html
     - icon: fa-file-code-o
-      text: "Functions"
+      text: "Reference"
       href: reference/index.html
   right:
     - icon: fas fa-chalkboard-teacher
