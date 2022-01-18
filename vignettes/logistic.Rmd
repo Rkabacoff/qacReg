@@ -9,11 +9,62 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = TRUE, message=FALSE, warning=FALSE,
   comment = "#>"
 )
 ```
 
+This short vignette demonstrates many of the functions in the **qacReg** package. In this analysis, we'll develop a model for predicting births by caesarian from patient characteristics uing the `caesarian` data frame.
+
+Model fitting is normally an iterative process. We'll skip this to keep things simple.
+
+# Fit the model
 ```{r setup}
 library(qacReg)
+data(caesarian)
+
+fit <- glm(caesarian ~ ., family = binomial, data = caesarian)
+
+# or
+# fit <- regress(caesarian ~ ., data = caesarian)
 ```
+
+# Examine the model
+
+```{r}
+info(fit)
+```
+
+
+# Perform regression diagnostics
+
+```{r}
+diagnostics(fit)
+```
+
+
+# Visual the model parameters
+
+```{r}
+ggforestPlot(fit)
+```
+
+```{r, fig.height=7}
+plots(fit)
+```
+
+
+# Evaluate variable importance
+
+```{r}
+relimp(fit)
+```
+
+
+# Assess model predictive performance
+
+```{r}
+performance(fit)
+```
+
+

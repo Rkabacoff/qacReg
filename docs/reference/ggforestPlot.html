@@ -48,7 +48,7 @@ given "lm" or "glm" model.'><!-- mathjax --><script src="https://cdnjs.cloudflar
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    Functions
+    Reference
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -119,15 +119,16 @@ in the same order as they appear in the model.</p>
 <span class="r-in"><span class="co"># multiple regression #</span></span>
 <span class="r-in"><span class="co">#######################</span></span>
 <span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">auto_mpg</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">forestPlot</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in forestPlot(fit):</span> could not find function "forestPlot"</span>
+<span class="r-in"><span class="fu">ggforestPlot</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="ggforestPlot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">#######################</span></span>
 <span class="r-in"><span class="co"># logistic regression #</span></span>
 <span class="r-in"><span class="co">#######################</span></span>
 <span class="r-in"><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">caesarian</span> <span class="op">~</span> <span class="va">.</span>, family <span class="op">=</span> <span class="va">binomial</span>, data <span class="op">=</span> <span class="va">caesarian</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">forestPlot</span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in forestPlot(fit2):</span> could not find function "forestPlot"</span>
+<span class="r-in"><span class="fu">ggforestPlot</span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Waiting for profiling to be done...</span>
+<span class="r-plt img"><img src="ggforestPlot-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

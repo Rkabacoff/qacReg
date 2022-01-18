@@ -66,7 +66,7 @@
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    Functions
+    Reference
   </a>
 </li>
       </ul>
@@ -108,13 +108,107 @@
 
     
     
+<p>This short vignette demonstrates many of the functions in the <strong>qacReg</strong> package. In this analysis, we’ll develop a model for predicting fuel efficiency from car characteristics using the <code>auto_mpg</code> data frame.</p>
+<p>Model fitting is normally an iterative process. We’ll skip this to keep things simple.</p>
+<div class="section level1">
+<h1 id="fit-the-model">Fit the model<a class="anchor" aria-label="anchor" href="#fit-the-model"></a>
+</h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">qacReg</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">qacReg</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">auto_mpg</span><span class="op">)</span>
+
+<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">auto_mpg</span><span class="op">)</span>
+
+<span class="co"># or</span>
+<span class="co"># fit &lt;- regress(mpg ~ ., data = auto_mpg)</span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="examine-the-model">Examine the model<a class="anchor" aria-label="anchor" href="#examine-the-model"></a>
+</h1>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/info.html">info</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">MULTIPLE REGRESSION SUMMARY</span> </span>
+<span class="co">#&gt; Model: mpg ~ .</span>
+<span class="co">#&gt; Data : auto_mpg</span>
+<span class="co">#&gt; N    : 388</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">Fit Indices</span> </span>
+<span class="co">#&gt;  R.Squared Adj.R.Squared  AIC RMSE MAE</span>
+<span class="co">#&gt;      0.824         0.821 2040 3.27 2.5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">Omnibus Test</span> </span>
+<span class="co">#&gt; F(8,379) = 222.481, p &lt; &lt;2e-16  *** </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">Anova Table (type III tests)</span> </span>
+<span class="co">#&gt;               Sum Sq  DF F value Pr(&gt;F)    </span>
+<span class="co">#&gt; (Intercept)   166.28   1  15.211 &lt;0.001 ***</span>
+<span class="co">#&gt; cyl           24.392   1   2.231  0.136    </span>
+<span class="co">#&gt; disp         109.393   1  10.007  0.002  **</span>
+<span class="co">#&gt; hp            17.858   1   1.634  0.202    </span>
+<span class="co">#&gt; wt          1160.521   1  106.16 &lt;0.001 ***</span>
+<span class="co">#&gt; accel          7.599   1   0.695  0.405    </span>
+<span class="co">#&gt; year        2471.376   1 226.073 &lt;0.001 ***</span>
+<span class="co">#&gt; origin       355.806   2  16.274 &lt;0.001 ***</span>
+<span class="co">#&gt; Residuals   4143.146 379                   </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">Regression Coefficients</span> </span>
+<span class="co">#&gt;                     B      B*       SE       t Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept) -18.29959  0.0000 4.692103  -3.900 1.14e-04 ***</span>
+<span class="co">#&gt; cyl          -0.48327 -0.1056 0.323528  -1.494 1.36e-01    </span>
+<span class="co">#&gt; disp          0.02450  0.3290 0.007746   3.163 1.69e-03  **</span>
+<span class="co">#&gt; hp           -0.01754 -0.0867 0.013725  -1.278 2.02e-01    </span>
+<span class="co">#&gt; wt           -0.00683 -0.7409 0.000663 -10.303 4.12e-22 ***</span>
+<span class="co">#&gt; accel         0.08242  0.0292 0.098848   0.834 4.05e-01    </span>
+<span class="co">#&gt; year          0.78281  0.3688 0.052063  15.036 2.11e-40 ***</span>
+<span class="co">#&gt; origin2       2.62905  0.1282 0.568612   4.624 5.18e-06 ***</span>
+<span class="co">#&gt; origin3       2.88572  0.1483 0.556654   5.184 3.54e-07 ***</span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="perform-regression-diagnostics">Perform regression diagnostics<a class="anchor" aria-label="anchor" href="#perform-regression-diagnostics"></a>
+</h1>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/diagnostics.html">diagnostics</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+<p><img src="regression_files/figure-html/unnamed-chunk-3-1.png" width="700"><img src="regression_files/figure-html/unnamed-chunk-3-2.png" width="700"><img src="regression_files/figure-html/unnamed-chunk-3-3.png" width="700"><img src="regression_files/figure-html/unnamed-chunk-3-4.png" width="700"><img src="regression_files/figure-html/unnamed-chunk-3-5.png" width="700"></p>
+</div>
+<div class="section level1">
+<h1 id="visual-the-model-parameters">Visual the model parameters<a class="anchor" aria-label="anchor" href="#visual-the-model-parameters"></a>
+</h1>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/ggforestPlot.html">ggforestPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+<p><img src="regression_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plots.html">plots</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
+<p><img src="regression_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+</div>
+<div class="section level1">
+<h1 id="evaluate-variable-importance">Evaluate variable importance<a class="anchor" aria-label="anchor" href="#evaluate-variable-importance"></a>
+</h1>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/relimp.html">relimp</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
+<span class="co">#&gt; working ...</span></code></pre></div>
+<p><img src="regression_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+</div>
+<div class="section level1">
+<h1 id="assess-model-predictive-performance">Assess model predictive performance<a class="anchor" aria-label="anchor" href="#assess-model-predictive-performance"></a>
+</h1>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/performance.html">performance</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #0000BB; font-weight: bold;">Multiple Regression Performance</span> </span>
+<span class="co">#&gt; Data:  auto_mpg </span>
+<span class="co">#&gt; N:     388 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model: lm(formula = mpg ~ ., data = auto_mpg) </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     RMSE Rsquared      MAE </span>
+<span class="co">#&gt;   3.2678   0.8244   2.5047</span></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

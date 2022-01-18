@@ -21,13 +21,13 @@
 #' # multiple regression #
 #' #######################
 #' fit <- lm(mpg ~ ., data = auto_mpg)
-#' forestPlot(fit)
+#' ggforestPlot(fit)
 #'
 #' #######################
 #' # logistic regression #
 #' #######################
 #' fit2 <- glm(caesarian ~ ., family = binomial, data = caesarian)
-#' forestPlot(fit2)
+#' ggforestPlot(fit2)
 ggforestPlot <- function(x, digits=2, ci=.95){
 
   dvname <- names(x$model)[1]
