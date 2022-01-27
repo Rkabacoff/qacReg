@@ -1,4 +1,4 @@
-#'@title Print "info.glm" Object
+#'@title Print an "info.glm" Object
 #'
 #'@description \code{print} method for class \code{"info.glm"}.
 #'

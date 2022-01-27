@@ -31,9 +31,9 @@
 #' @examples
 #' mtcars$am <- factor(mtcars$am)
 #' fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#' ggvifPlot(fit)
+#' vif_plot(fit)
 
-ggvifPlot <- function(x){
+vif_plot <- function(x){
   if (length(stats::coef(x)) < 3){
     stop("You need more than 1 predictor to calculate VIFs")
   }

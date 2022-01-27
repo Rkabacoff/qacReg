@@ -35,10 +35,10 @@
 #' @examples
 #' mtcars$am <- factor(mtcars$am)
 #' fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#' ggspreadLevelPlot(fit)
+#' spread_plot(fit)
 
 
-ggspreadLevelPlot <- function(x, alpha=.4, n.labels=0, span=.75){
+spread_plot <- function(x, alpha=.4, n.labels=0, span=.75){
   y <- abs(rstudent(x))
   x <- x$fitted
   df <- data.frame(x=x, y=y)

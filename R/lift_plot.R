@@ -16,9 +16,9 @@
 #' # logistic regression example
 #' fit <- glm(caesarian ~ ., family=binomial, data = caesarian)
 #' pred <- predict(fit, newdata=caesarian, type="response")
-#' results <- ggliftPlot(caesarian$caesarian, pred, positive="yes")
+#' results <- lift_plot(caesarian$caesarian, pred, positive="yes")
 #' print(results)
-ggliftPlot <- function(actual, prob, positive="yes"){
+lift_plot <- function(actual, prob, positive="yes"){
 
   # bind global variables for CRAN
   Letters <- prob_positive <- decile <- nresp <- NULL

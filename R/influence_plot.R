@@ -41,9 +41,9 @@
 #' @examples
 #' mtcars$am <- factor(mtcars$am)
 #' fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#' gginfluencePlot(fit)
+#' influence_plot(fit)
 
-gginfluencePlot <- function(x, alpha=0.4, n.labels=2){
+influence_plot <- function(x, alpha=0.4, n.labels=2){
 
   cooksd <- influential <- label <- NULL # for CRAN
 

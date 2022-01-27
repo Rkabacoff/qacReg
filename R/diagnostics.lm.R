@@ -25,18 +25,18 @@
 #'diagnostic plotting functions:
 #'\describe{
 #'  \item{Normality}{Normality of the (studentized) residuals is assessed
-#'  via a Normal Q-Q plot (\code{\link{ggqqPlot}}).}
+#'  via a Normal Q-Q plot (\code{\link{qq_plot}}).}
 #'  \item{Linearity}{Linearity of the explanatory-response relationships
 #'  are assessed via Component + Residual (partial residual) plots
-#'  (\code{\link{ggcrPlots}}). If there is a single predictor, a scatter plot
+#'  (\code{\link{cr_plots}}). If there is a single predictor, a scatter plot
 #'  with linear and loess lines is produced.}
 #'  \item{Constant variance}{Homoscedasticity is evaluated via
-#'  a Spread-Level plot (\code{\link{ggspreadLevelPlot}}).}
+#'  a Spread-Level plot (\code{\link{spread_plot}}).}
 #'  \item{Multicollinearity}{Multicollinearity is assessed via variance inflation factors
-#'  (\code{\link{ggvifPlot}}). If there is a single predictor variable, this section
+#'  (\code{\link{vif_plot}}). If there is a single predictor variable, this section
 #'  is skipped.}
 #'  \item{Outliers, leverage, and influence}{A influence plot identifies
-#'  outliers and influential observations (\code{\link{gginfluencePlot}}).}
+#'  outliers and influential observations (\code{\link{influence_plot}}).}
 #'}
 #'
 #'@note
@@ -59,12 +59,12 @@ diagnostics.lm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
 
 
   # normality
-  qqplot <- ggqqPlot(x, alpha=alpha)
+  qqplot <- qq_plot(x, alpha=alpha)
 
 
   # linearity
   if (length(stats::coef(x)) > 2){
-    crplots <- ggcrPlots(x, alpha=alpha, span=span)
+    crplots <- cr_plots(x, alpha=alpha, span=span)
   } else {
     # simple scatter plot
     yvar <- names(x$model)[1]
@@ -86,17 +86,17 @@ diagnostics.lm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
 
 
   # homoscedasticity
-  slplot <- ggspreadLevelPlot(x, alpha=alpha, span=span)
+  slplot <- spread_plot(x, alpha=alpha, span=span)
 
 
   #multicolinearity
   vifplot <- NULL
   if (length(stats::coef(x)) > 2){
-    vifplot <- ggvifPlot(x)
+    vifplot <- vif_plot(x)
     #print(vifplot)
   }
 
-  influenceplot <- gginfluencePlot(x, alpha)
+  influenceplot <- influence_plot(x, alpha)
 
   # output graphs
   if(plot){

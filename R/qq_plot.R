@@ -36,9 +36,9 @@
 #' @examples
 #'mtcars$am <- factor(mtcars$am)
 #'fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#'ggqqPlot(fit)
+#'qq_plot(fit)
 
-ggqqPlot <- function(x, reps=100, conf=0.95, n.labels=3, alpha=.4){
+qq_plot <- function(x, reps=100, conf=0.95, n.labels=3, alpha=.4){
 
   if(!inherits(x, "lm")) stop("x must  be class 'lm'")
   x <- stats::update(x, na.action = "na.exclude")

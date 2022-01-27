@@ -46,11 +46,11 @@ diagnostics(fit)
 # Visual the model parameters
 
 ```{r}
-ggforestPlot(fit)
+forest_plot(fit)
 ```
 
 ```{r, fig.height=7}
-plots(fit)
+me_plots(fit)
 ```
 
 

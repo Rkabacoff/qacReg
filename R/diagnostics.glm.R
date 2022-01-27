@@ -25,13 +25,13 @@
 #'\describe{
 #'  \item{Linearity}{Linearity of the explanatory-response relationships
 #'  are assessed via Component + Residual (partial residual) plots
-#'  (\code{\link{ggcrPlots}}). If there is a single predictor, a scatter plot
+#'  (\code{\link{cr_plots}}). If there is a single predictor, a scatter plot
 #'  with linear and loess lines is produced.}
 #'  \item{Multicollinearity}{Multicollinearity is assessed via variance inflation factors
-#'  (\code{\link{ggvifPlot}}). If there is a single predictor variable, this section
+#'  (\code{\link{vif_plot}}). If there is a single predictor variable, this section
 #'  is skipped.}
 #'  \item{Outliers, leverage, and influence}{A influence plot identifies
-#'  outliers and influential observations (\code{\link{gginfluencePlot}}).}
+#'  outliers and influential observations (\code{\link{influence_plot}}).}
 #'}
 #'
 #'@note
@@ -54,7 +54,7 @@ diagnostics.glm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
   # linearity
   if (length(stats::coef(x)) > 2){
     #crplots <- ggcrPlots(x, alpha=alpha, span=span)
-    crplots <- ggcrPlots(x)
+    crplots <- cr_plots(x)
     # print(crplots)
   } else {
     # simple scatter plot
@@ -63,11 +63,11 @@ diagnostics.glm <- function(x, alpha=.4, span=.8, plot=TRUE, ...){
   #multicolinearity
   vifplot <- NULL
   if (length(stats::coef(x)) > 2){
-    vifplot <- ggvifPlot(x)
+    vifplot <- vif_plot(x)
   }
 
   #outliers
-  influenceplot <- gginfluencePlot(x, alpha)
+  influenceplot <- influence_plot(x, alpha)
 
   # output graphs
   if(plot){

@@ -46,6 +46,9 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/caesarian.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/cr_plots.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.glm.html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/forestPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/forest_plot.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/ggcrPlots.html</loc>
@@ -97,6 +103,9 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/index.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/influence_plot.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/info.glm.html</loc>
   </url>
   <url>
@@ -106,7 +115,13 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/info.lm.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/lift_plot.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/lreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/me_plots.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/mreg.html</loc>
@@ -142,10 +157,19 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/print_table.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/qq_plot.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/regress.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/relimp.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/roc_plot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/spread_plot.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/summary.lreg.html</loc>
@@ -155,5 +179,8 @@
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/varimp.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/vif_plot.html</loc>
   </url>
 </urlset>

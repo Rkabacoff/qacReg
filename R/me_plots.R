@@ -37,7 +37,7 @@
 #'Otherwise, individual plots are printed.
 #'
 #'@section Limitations:
-#'The \code{plots} function can not handle models that include
+#'The \code{me_plots} function can not handle models that include
 #'\code{as.factor} or \code{factor} in their formulas. Create the modified
 #'variables prior to fitting the model
 #'(e.g., \code{mtcars$cyl <- factor(mtcars$cyl)}).
@@ -64,16 +64,16 @@
 #'# Multiple regression #
 #'#######################
 #'fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
-#'plots(fit)
+#'me_plots(fit)
 #'
 #'#######################
 #'# Logistic regression #
 #'#######################
 #'fit2 <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
-#'plots(fit2)
+#'me_plots(fit2)
 
 
-plots <- function(x, points = FALSE, size = 1,
+me_plots <- function(x, points = FALSE, size = 1,
                   alpha=.2, jitter=.03, ci= TRUE, page=FALSE, ...){
 
   # single predictor
@@ -86,10 +86,10 @@ plots <- function(x, points = FALSE, size = 1,
   # create plots
   # check model
   if(any(grepl("factor\\(", names(x$model)))){
-    stop("Unable to handle the factors in the model formula.\nSee ?plots.")
+    stop("Unable to handle the factors in the model formula.\nSee ?me_plots.")
   }
   if(any(grepl("\\:", x$call[[2]]))){
-    stop("Unable to handle the interactions.\nSee ?plots.")
+    stop("Unable to handle the interactions.\nSee ?me_plots.")
   }
 
   # all variables except dv
@@ -113,7 +113,7 @@ plots <- function(x, points = FALSE, size = 1,
     }
 
     final <- wrap_plots(myplots) +
-      plot_annotation(title="Effects Plots", caption=caption) &
+      plot_annotation(title="Marginal Effects Plots", caption=caption) &
       theme(plot.caption=element_text(size=8))
     return(final)
   }

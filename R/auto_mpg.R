@@ -1,7 +1,7 @@
 #' @title Auto MPG Data Set
 #'
 #' @description
-#' Predicting city-cycle feul consumption (miles per gallon) from
+#' Predicting city-cycle fuel consumption (miles per gallon) from
 #' automobile characteristics.
 #'
 #' @note

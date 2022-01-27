@@ -26,7 +26,7 @@ StatLib library which is maintained at Carnegie Mellon University. The dataset w
 auto_mpg
 }
 \description{
-Predicting city-cycle feul consumption (miles per gallon) from
+Predicting city-cycle fuel consumption (miles per gallon) from
 automobile characteristics.
 }
 \note{

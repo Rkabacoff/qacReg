@@ -29,10 +29,10 @@
 #' @examples
 #'mtcars$am <- factor(mtcars$am)
 #'fit <- lm(mpg ~ wt + am + disp + hp, mtcars)
-#'ggcrPlots(fit)
+#'cr_plots(fit)
 
 #'
-ggcrPlots <- function(x, alpha=.4, span=.75){
+cr_plots <- function(x, alpha=.4, span=.75){
 
   # numeric predictors
   findnumeric <- function(x){

@@ -16,8 +16,8 @@
 #' # logistic regression
 #' fit <- glm(caesarian ~ ., family=binomial, caesarian)
 #' prob <- predict(fit, newdata=caesarian, type="response")
-#' ggrocPlot(caesarian$caesarian, prob, positive="yes")
-ggrocPlot <- function(actual, prob, positive, n.cuts=20,
+#' roc_plot(caesarian$caesarian, prob, positive="yes")
+roc_plot <- function(actual, prob, positive, n.cuts=20,
                      labelsize=3, digits=2){
 
   outcome <- as.character(actual)

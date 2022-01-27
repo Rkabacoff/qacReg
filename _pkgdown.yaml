@@ -10,10 +10,10 @@ reference:
       - '`regress`'
       - '`info`'
       - '`diagnostics`'
-      - '`plots`'
+      - '`me_plots`'
       - '`relimp`'
       - '`performance`'
-  - title: Generic Functions
+  - title: Methods
     desc: ~
     contents:
       - '`diagnostics.glm`'
@@ -24,17 +24,18 @@ reference:
       - '`print.info.lm`'
       - '`performance.glm`'
       - '`performance.lm`'
-  - title: Plotting Functions
+  - title: Plots
     desc: ~
     contents:
-      - '`ggcrPlots`'
-      - '`ggforestPlot`'
-      - '`ggliftPlot`'
-      - '`gginfluencePlot`'
-      - '`ggqqPlot`'
-      - '`ggrocPlot`'
-      - '`ggspreadLevelPlot`'
-      - '`ggvifPlot`'
+      - '`cr_plots`'
+      - '`forest_plot`'
+      - '`influence_plot`'
+      - '`lift_plot`'
+      - '`me_plots`'
+      - '`qq_plot`'
+      - '`roc_plot`'
+      - '`spread_plot`'
+      - '`vif_plot`'
   - title: Data sets
     desc: ~
     contents:
