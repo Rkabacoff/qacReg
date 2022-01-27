@@ -27,7 +27,7 @@ The package supports a simple workflow embodied in 6 functions:
  diagnostics(model)                    # perform regression diagnostics
  plots(model)                          # visualize conditional relationships
  relimp(model)                         # assess variable importance
- performance(model)                    # evaluate performance metrics
+ performance(model)                    # evaluate predictive performance
  ```
  See the **Vignettes** for examples.
  

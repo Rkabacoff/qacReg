@@ -4,7 +4,7 @@
 \alias{ggrocPlot}
 \title{Receiver Operating Characteristic curve}
 \usage{
-ggrocPlot(actual, prob, positive, n.cuts = 20, labelsize = 3, labelround = 2)
+ggrocPlot(actual, prob, positive, n.cuts = 20, labelsize = 3, digits = 2)
 }
 \arguments{
 \item{actual}{actual class.}
@@ -17,7 +17,7 @@ ggrocPlot(actual, prob, positive, n.cuts = 20, labelsize = 3, labelround = 2)
 
 \item{labelsize}{size of cutpoint labels}
 
-\item{labelround}{number of decimal digits in the cutpoint labels}
+\item{digits}{number of decimal digits in the cutpoint labels}
 }
 \value{
 a ggplot2 graph
@@ -27,7 +27,7 @@ Plot a receiver operating characteristic curve for a binary predictive model
 }
 \examples{
 # logistic regression
-fit <- glm(am ~ hp + wt, family=binomial, mtcars)
-prob <- predict(fit, newdata=mtcars, type="response")
-ggrocPlot(mtcars$am, prob, positive="1")
+fit <- glm(caesarian ~ ., family=binomial, caesarian)
+prob <- predict(fit, newdata=caesarian, type="response")
+ggrocPlot(caesarian$caesarian, prob, positive="yes")
 }

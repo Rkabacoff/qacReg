@@ -16,6 +16,7 @@
 #' @export
 #' @import ggplot2
 #' @import patchwork
+#' @importFrom stats terms
 #'
 #' @details
 #' This function is a modification of the \link[car]{crPlots} function

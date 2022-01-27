@@ -24,7 +24,7 @@ qqplot, crplots, slplot, vifplot, and influenceplot.
 }
 \description{
 Provides regression diagnostics for a linear models fit with
-\code{\link{lm}} or \code{\link{regression}}.
+\code{\link{lm}} or \code{\link{regress}}.
 }
 \details{
 The \code{diagnostics} function is a wrapper for several

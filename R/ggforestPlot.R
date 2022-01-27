@@ -10,6 +10,7 @@
 #' displays odds ratios and their confidence intervals. Effects are plotted
 #' in the same order as they appear in the model.
 #'
+#' @importFrom stats confint
 #' @export
 #' @param x object of class "lm" or "glm"
 #' @param digits number of decimal digits to display

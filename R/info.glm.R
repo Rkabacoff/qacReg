@@ -1,4 +1,4 @@
-#'@title Model summary for a "glm" object
+#'@title Model summary for a "glm" Object
 #'
 #'@description
 #'Summarize a logistic regression model of class \code{"glm"}.

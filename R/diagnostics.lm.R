@@ -3,7 +3,7 @@
 #'@description
 #'
 #'Provides regression diagnostics for a linear models fit with
-#'\code{\link{lm}} or \code{\link{regression}}.
+#'\code{\link{lm}} or \code{\link{regress}}.
 #'
 #'
 #'@param x an object of class \code{"lm"}

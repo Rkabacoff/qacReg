@@ -2,8 +2,8 @@
 #'
 #'
 #' @description
-#' Regression diagnostics for linear and generalized linear models.
-#' Currently linear and logistic regression models are supported.
+#' \code{diagnostics} is a generic function for producing regression
+#' diagnostics. Currently linear and logistic regression models are supported.
 #'
 #' @details
 #' The \code{diagnostics} function produces data visualizations

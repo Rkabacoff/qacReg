@@ -1,6 +1,6 @@
 Package: qacReg
 Title: Multiple Regression and Logistic Regression
-Version: 0.0.1
+Version: 0.0.5
 Authors@R: 
     c(person(given = "Kabacoff",
            family = "Robert",

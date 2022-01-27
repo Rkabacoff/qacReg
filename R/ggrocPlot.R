@@ -7,18 +7,18 @@
 #' @param positive label for the target class
 #' @param n.cuts number of probability cut-points to plot
 #' @param labelsize size of cutpoint labels
-#' @param labelround number of decimal digits in the cutpoint labels
+#' @param digits number of decimal digits in the cutpoint labels
 #' @export
 #' @import ggplot2
 #' @import plotROC
 #' @return a ggplot2 graph
 #' @examples
 #' # logistic regression
-#' fit <- glm(am ~ hp + wt, family=binomial, mtcars)
-#' prob <- predict(fit, newdata=mtcars, type="response")
-#' ggrocPlot(mtcars$am, prob, positive="1")
+#' fit <- glm(caesarian ~ ., family=binomial, caesarian)
+#' prob <- predict(fit, newdata=caesarian, type="response")
+#' ggrocPlot(caesarian$caesarian, prob, positive="yes")
 ggrocPlot <- function(actual, prob, positive, n.cuts=20,
-                     labelsize=3, labelround=2){
+                     labelsize=3, digits=2){
 
   outcome <- as.character(actual)
   # check positive outcome
@@ -39,8 +39,8 @@ ggrocPlot <- function(actual, prob, positive, n.cuts=20,
                    m = prob)
 
   p <- ggplot(df, aes(d=.data[["d"]], m=.data[["m"]])) +
-    geom_roc(n.cuts=n.cuts, labelsize=labelsize, fill="red", alpha=.5,
-             labelround=labelround, size=.5) +
+    geom_roc(n.cuts=n.cuts, labelsize=labelsize, alpha=.5,
+             labelround=digits, size=.5) +
     geom_abline(intercept=0, slope=1, color="red", linetype="dashed") +
     theme_bw() +
     labs(title="ROC Plot",

@@ -24,7 +24,7 @@ crplots, vifplot, and influenceplot.
 }
 \description{
 Provides regression diagnostics for a generalized linear model fit with
-\code{\link{glm}} or \code{\link{regression}}. Currently, binary logistic
+\code{\link{glm}} or \code{\link{regress}}. Currently, binary logistic
 regression models are supported.
 }
 \details{

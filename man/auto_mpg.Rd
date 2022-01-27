@@ -26,11 +26,11 @@ StatLib library which is maintained at Carnegie Mellon University. The dataset w
 auto_mpg
 }
 \description{
-City-cyle fuel consumption in miles per gallon, predicted from
-3 multivalued discrete variables and 5 continuous variables.
+Predicting city-cycle feul consumption (miles per gallon) from
+automobile characteristics.
 }
 \note{
-Row names are the car names with appended year. Four cases with
+Row names are the automobile names with appended year. Four cases with
 duplicate row names were deleted. Six cases with missing values
 were also deleted.
 }

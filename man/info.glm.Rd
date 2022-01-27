@@ -2,7 +2,7 @@
 % Please edit documentation in R/info.glm.R
 \name{info.glm}
 \alias{info.glm}
-\title{Model summary for a "glm" object}
+\title{Model summary for a "glm" Object}
 \usage{
 \method{info}{glm}(x)
 }
