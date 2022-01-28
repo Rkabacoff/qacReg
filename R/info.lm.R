@@ -43,7 +43,6 @@
 #'
 #'@importFrom car Anova
 #'@importFrom stats AIC as.formula coef model.frame pf summary.lm
-#'@importFrom lm.beta lm.beta
 #'@export
 #'
 #'@examples
@@ -95,9 +94,17 @@ info.lm <- function(x){
   # ANOVA table
   anova.table <- as.data.frame(car::Anova(x, type=3))
 
+  # fit model to standardized data
+  IV <- as.data.frame(model.matrix(x))
+  IV <- as.matrix(std_df(IV)[-1])
+  DV <- as.numeric(scale(x$model[1]))
+
+  xstd <- lm( DV ~ IV)
+  std_coeff <- coef(xstd)
+  std_coeff[1] <- 0
+
   # coefficients table
   coeff <- as.data.frame(stats::summary.lm(x)$coefficients)
-  std_coeff <- lm.beta::lm.beta(x)$standardized.coefficients
   coeff <- cbind(coeff, std_coeff)
   coeff <- coeff[, c(1, 5, 2, 3, 4)]
   coeff$signif <- sigstars(coeff$`Pr(>|t|)`)

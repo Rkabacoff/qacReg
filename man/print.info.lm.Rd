@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.info.lm.R
 \name{print.info.lm}
 \alias{print.info.lm}
-\title{Print "info.lm" Object}
+\title{Print an "info.lm" Object}
 \usage{
 \method{print}{info.lm}(x, digits = 3, ...)
 }

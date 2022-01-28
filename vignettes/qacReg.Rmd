@@ -1,0 +1,64 @@
+---
+title: "Getting Started with qacReg"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with qacReg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(qacReg)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(knitr)
+library(dplyr)
+library(kableExtra)
+d <- data.frame(
+  Function=c( "**regress**(*formula*, *data*)", 
+              "**info**(*model*)", 
+              "**diagnostics**(*model*)",  
+              "**me_plots**(*model*)", 
+              "**relimp**(*model*)", 
+              "**performance**(*model*)"),
+  Description=c("Fits a multiple linear or a logistic regression
+                model, depending on the number of unique values in the response variable",
+                
+                "For a linear model, prints an overall summary,
+                fit indices (R2, adj-R2, RMSE, MSE), omnibus F test,
+                ANOVA table (type III SS), and a regression
+                coefficients table that includes raw and
+                standardized coefficients, SEs, t-tests, and
+                p-values. \n\nFor a logistic regression 
+                model, this prints an overall summary, omnibus
+                chi-square test, fit measures (Stukel's GOF test,
+                Tjur's Pseudo R2), ANOVA table (type III SS),
+                regression coefficients (raw coefficients, SEs,
+                z-values, p-values), and odds rations with 95%
+                confidence intervals.",
+                "For a linear model, creates plots to evaluate
+                the normality of the residuals, linearity between
+                predictors and response variable, homogeneity of 
+                variance, multicolinearity, outliers, and
+                influential observations.\n\nFor a logistic
+                regression model, it creates plots to linearity 
+                between predictors and log-odds, multicolinearity, 
+                outliers, and influential observations.", 
+                "Generates one or more graphs displaying the 
+                relationship between each predictor and the outcome,
+                controlling for the other predictors in the model", 
+                "description", 
+                "description"))
+
+kbl(d) %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.info.glm.R
 \name{print.info.glm}
 \alias{print.info.glm}
-\title{Print "info.glm" Object}
+\title{Print an "info.glm" Object}
 \usage{
 \method{print}{info.glm}(x, digits = 4, ...)
 }

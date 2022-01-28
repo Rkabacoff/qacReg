@@ -1,4 +1,4 @@
-![](duck.png)
+![](qacReg.png)
 
 # qacReg
 
@@ -25,7 +25,7 @@ The package supports a simple workflow embodied in 6 functions:
  model <- regress(formula, data)       # fit a linear or logistic model
  info(model)                           # review detailed results
  diagnostics(model)                    # perform regression diagnostics
- me_plots(model)                        # visualize conditional relationships
+ me_plots(model)                       # visualize conditional relationships
  relimp(model)                         # assess variable importance
  performance(model)                    # evaluate predictive performance
  ```

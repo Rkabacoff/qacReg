@@ -14,9 +14,11 @@ Authors@R:
     person("Sreewastav", "Preksha", role = "ctb"),
     person("Westfahl", "Grant Isaac", role = "ctb")
     )
-Description: This package performs either multiple linear regression or
-    logistic regression and includes extensive performance metrics,
-    plots and diagnostics.
+Description: Performs either multiple linear regression or
+    logistic regression and provides extensive  model fit and predictive performance metrics,
+    data visualizations and regression diagnostics. While many of these functions are available in
+    other packages (particularly John Fox's car package), qacReg functions provide a simple, 
+    yet comprehensive workflow, and produce results as ggplot2 graphs.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -34,8 +36,7 @@ Imports:
     crayon,
     dominanceanalysis,
     e1071,
-    plotROC,
-    lm.beta
+    plotROC
 Suggests: 
     rmarkdown,
     knitr

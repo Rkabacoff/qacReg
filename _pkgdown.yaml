@@ -46,12 +46,15 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
+    - text: Getting Started
+      icon: fas fa-chalkboard-teacher
+      href: articles/qacReg.html
     - text: "Vignettes"
       icon: fas fa-book
       menu:
-      -  text: qacReg for Linear Regression
+      -  text: Linear Regression
          href: articles/regression.html
-      -  text: qacReg for Logistic Regression
+      -  text: Logistic Regression
          href: articles/logistic.html
     - icon: fa-file-code-o
       text: "Reference"
