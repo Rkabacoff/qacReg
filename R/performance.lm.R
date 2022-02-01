@@ -1,10 +1,10 @@
 #' @title Model Performance for Linear Models
 #'
 #'
-#' @details
+#' @description
 #' Produce indices of model performance for linear models
 #'
-#' @description
+#' @details
 #' \code{performance} calculates the r-squared, root mean square error (RMSE),
 #' and mean absolute error (MAE) applying the model to a data frame. If
 #' a data frame is not specified, the model is evaluated on the

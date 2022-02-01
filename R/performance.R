@@ -2,10 +2,18 @@
 #'
 #' @description
 #' Indices of model performance for linear and logistic regression
-#' models.
+#' models. The output depends on the form of the model
+#' (linear or logistic regression).
 #'
 #' @details
-#' details go here.
+#' The \code{performance} function can be used to evaluate the predictive
+#' performance of a model with new data. If a data frame is not
+#' specified, the performance is evaluated on the training data
+#' (i.e., the data contained in the \code{model} component of the \code{lm} or
+#' \code{glm} object).
+#'
+#' @seealso
+#' \code{\link{performance.lm}}, \code{\link{performance.glm}}
 #'
 #' @param x an object of type \code{"lm"} or \code{"glm"}.
 #' @param ... further arguments passed to or from other methods.
