@@ -5,11 +5,19 @@
 #' Produce indices of model performance for logistic regression
 #'
 #' @details
+#' \code{performance.glm} applies to model to the data specified to
+#' produce the predicted probability of being "positive" for each case.
+#' If the predicted probability is greater then \code{p}, the case is
+#' classified as "positive", "not positive" otherwise. Performance
+#' metrics are based on the actual and predicted classifications.
 #'
-#'
+#' The function returns general information
+#' about the model, a confusion matrix, statistics from
+#' the \code{caret} package function \code{\link[caret]{confusionMatrix}}, and
+#' a graph visualizing the results.
 #'
 #' @param x an object of class \code{"glm"}.
-#' @param data a data frame. If no dataset is provided, the model training
+#' @param data a data frame. If no data frame is provided, the model training
 #' data is used.
 #' @param digits integer; number of digits to print (default=4).
 #' @param p numeric; probability cutoff for classifying cases (default = 0.5)
@@ -21,11 +29,13 @@
 #'
 #' @return The results of the methods \code{\link{performance.glm}}
 #' @export
+#' @seealso \code{\link[caret]{confusionMatrix}}, \code{\link{roc_plot}},
+#' \code{\link{lift_plot}}.
 #' @examples
 #' # performance on training sample
-#' fit <- glm(am ~ hp + wt, family=binomial, data = mtcars)
+#' fit <- regress(caesarian ~ ., data = caesarian)
 #' performance(fit, plot=TRUE)
-performance.glm <- function(x, data, digits=4, p=0.5, plot=FALSE, ...){
+performance.glm <- function(x, data, digits=4, p=0.5, plot=TRUE, ...){
 
   formula <- stats::as.formula(x$call[[2]])
   dv <- as.factor(x$model[[1]])
@@ -96,7 +106,10 @@ performance.glm <- function(x, data, digits=4, p=0.5, plot=FALSE, ...){
   cat("      precision = pos pred value.\n")
 
   # plot results
-  print(binaryPlot(stats))
+  if(plot){
+    print(binaryPlot(stats))
+  }
+
 
  invisible(stats)
 }

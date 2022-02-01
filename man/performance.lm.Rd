@@ -16,19 +16,23 @@
 \item{...}{not currently used}
 }
 \value{
-The results of the methods \code{\link{performance.lm}}
+A vector of performance estimates (RMSE, Rsquared, and MAE).
 }
 \description{
+Produce indices of model performance for linear models
+}
+\details{
 \code{performance} calculates the r-squared, root mean square error (RMSE),
 and mean absolute error (MAE) applying the model to a data frame. If
 a data frame is not specified, the model is evaluated on the
-training data (resubstitution).
-}
-\details{
-Produce indices of model performance for linear models
+training data (resubstitution). Results are provided by the
+\code{\link[caret]{postResample}} function.
 }
 \examples{
 # performance on training sample
 fit <- lm(mpg ~ hp + wt + accel + origin, data = auto_mpg)
 performance(fit)
+}
+\seealso{
+\code{\link[caret]{postResample}}
 }

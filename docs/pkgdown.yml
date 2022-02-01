@@ -1,11 +1,11 @@
 pandoc: 2.11.4
-pkgdown: 2.0.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   logistic: logistic.html
   qacReg: qacReg.html
   regression: regression.html
-last_built: 2022-01-28T00:13Z
+last_built: 2022-02-01T16:17Z
 urls:
   reference: http://rkabacoff.github.io/qacReg/reference
   article: http://rkabacoff.github.io/qacReg/articles

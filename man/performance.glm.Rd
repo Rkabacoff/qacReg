@@ -4,12 +4,12 @@
 \alias{performance.glm}
 \title{Model Performance for Logistic Regression}
 \usage{
-\method{performance}{glm}(x, data, digits = 4, p = 0.5, plot = FALSE, ...)
+\method{performance}{glm}(x, data, digits = 4, p = 0.5, plot = TRUE, ...)
 }
 \arguments{
 \item{x}{an object of class \code{"glm"}.}
 
-\item{data}{a data frame. If no dataset is provided, the model training
+\item{data}{a data frame. If no data frame is provided, the model training
 data is used.}
 
 \item{digits}{integer; number of digits to print (default=4).}
@@ -24,13 +24,26 @@ data is used.}
 The results of the methods \code{\link{performance.glm}}
 }
 \description{
-Model Performance for Logistic Regression
+Produce indices of model performance for logistic regression
 }
 \details{
-Produce indices of model performance for logistic regression
+\code{performance.glm} applies to model to the data specified to
+produce predicted probability of being a "positive" case. If the
+predicted probability is greater then \code{p}, the case is
+classified as "positive", "not positive" otherwise. Performance
+metrics are based on the actual and predicted classifications.
+
+The function returns general information
+about the model, a confusion matrix, statistics from
+the \code{caret} package function \code{\link[caret]{confusionMatrix}}, and
+a graph visualizing the results.
 }
 \examples{
 # performance on training sample
-fit <- glm(am ~ hp + wt, family=binomial, data = mtcars)
+fit <- regress(caesarian ~ ., data = caesarian)
 performance(fit, plot=TRUE)
+}
+\seealso{
+\code{\link[caret]{confusionMatrix}}, \code{\link{roc_plot}},
+\code{\link{lift_plot}}.
 }

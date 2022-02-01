@@ -17,10 +17,15 @@ The results of the methods \code{\link{performance.lm}} or
 }
 \description{
 Indices of model performance for linear and logistic regression
-models.
+models. The output depends on the form of the model
+(linear or logistic regression).
 }
 \details{
-details go here.
+The \code{performance} function can be used to evaluate the predictive
+performance of a model with new data. If a data frame is not
+specified, the performance is evaluated on the training data
+(i.e., the data contained in the \code{model} component of the \code{lm} or
+\code{glm} object).
 }
 \examples{
 #######################
@@ -35,4 +40,7 @@ performance(fit)
 fit2 <- glm(caesarian ~ age + bp + delivery.time, family = binomial, data = caesarian)
 performance(fit2)
 
+}
+\seealso{
+\code{\link{performance.lm}}, \code{\link{performance.glm}}
 }
