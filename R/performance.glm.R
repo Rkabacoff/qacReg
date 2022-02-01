@@ -1,8 +1,11 @@
 #' @title Model Performance for Logistic Regression
 #'
 #'
-#' @details
+#' @description
 #' Produce indices of model performance for logistic regression
+#'
+#' @details
+#'
 #'
 #'
 #' @param x an object of class \code{"glm"}.
