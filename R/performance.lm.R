@@ -6,20 +6,21 @@
 #'
 #' @details
 #' \code{performance} calculates the r-squared, root mean square error (RMSE),
-#' and mean absolute error (MAE) applying the model to a data frame. If
-#' a data frame is not specified, the model is evaluated on the
-#' training data (resubstitution). Results are provided by the
-#' \code{\link[caret]{postResample}} function.
+#' and mean absolute error (MAE) when applying the given linear model to a
+#' data frame. If a data frame is not specified, the model is evaluated on the
+#' training data (i.e., resubstitution). Results are provided by the
+#' \code{\link[caret]{postResample}} function from the caret package.
 #'
 #' @param x an object of class \code{"lm"}.
-#' @param data a data frame.
+#' @param data a data frame. If no data frame is provided, the model training
+#' data is used.
 #' @param digits integer; number of digits to print (default=4).
 #' @param ... not currently used
 #'
 #' @import caret
 #' @importFrom stats predict
 #'
-#' @return A vector of performance estimates (RMSE, Rsquared, and MAE).
+#' @return A vector of performance statistics (RMSE, Rsquared, and MAE).
 #' @export
 #' @seealso \code{\link[caret]{postResample}}
 #' @examples

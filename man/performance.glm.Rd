@@ -28,8 +28,8 @@ Produce indices of model performance for logistic regression
 }
 \details{
 \code{performance.glm} applies to model to the data specified to
-produce predicted probability of being a "positive" case. If the
-predicted probability is greater then \code{p}, the case is
+produce the predicted probability of being "positive" for each case.
+If the predicted probability is greater then \code{p}, the case is
 classified as "positive", "not positive" otherwise. Performance
 metrics are based on the actual and predicted classifications.
 

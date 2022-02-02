@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/404.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/diagnostics.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/logistic.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/performance.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/qacReg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/regression.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/articles/varimp.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/authors.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/index.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/LICENSE.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/auto_mpg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/bikes.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/caesarian.html</loc>
@@ -13,25 +49,67 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/cr_plots.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.html</loc>
+    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.glm.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.glm.html</loc>
+    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.lm.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.lreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/diagnostics.mreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/dummy.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/forestPlot.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/forest_plot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggcrPlots.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggforestPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/gginfluencePlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggliftPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggqqPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggrocPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggSpreadLevelPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggvif.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggvifPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/index.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/influence_plot.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/info.html</loc>
+    <loc>http://rkabacoff.github.io/qacReg/reference/info.glm.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/info.glm.html</loc>
+    <loc>http://rkabacoff.github.io/qacReg/reference/info.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/info.lm.html</loc>
@@ -40,22 +118,43 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/lift_plot.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/lreg.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/me_plots.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/performance.html</loc>
+    <loc>http://rkabacoff.github.io/qacReg/reference/mreg.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/performance.glm.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/performance.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/performance.lm.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/plot.lreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/plot.mreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/plots.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/print.info.glm.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/print.info.lm.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/print.summary.mreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/print_table.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/qq_plot.html</loc>
@@ -73,15 +172,15 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/spread_plot.html</loc>
   </url>
   <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/summary.lreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/summary.mreg.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/varimp.html</loc>
+  </url>
+  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/vif_plot.html</loc>
-  </url>
-  <url>
-    <loc>http://rkabacoff.github.io/qacReg/articles/logistic.html</loc>
-  </url>
-  <url>
-    <loc>http://rkabacoff.github.io/qacReg/articles/qacReg.html</loc>
-  </url>
-  <url>
-    <loc>http://rkabacoff.github.io/qacReg/articles/regression.html</loc>
   </url>
 </urlset>
