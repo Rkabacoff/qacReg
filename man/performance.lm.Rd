@@ -9,24 +9,25 @@
 \arguments{
 \item{x}{an object of class \code{"lm"}.}
 
-\item{data}{a data frame.}
+\item{data}{a data frame. If no data frame is provided, the model training
+data is used.}
 
 \item{digits}{integer; number of digits to print (default=4).}
 
 \item{...}{not currently used}
 }
 \value{
-A vector of performance estimates (RMSE, Rsquared, and MAE).
+A vector of performance statistics (RMSE, Rsquared, and MAE).
 }
 \description{
 Produce indices of model performance for linear models
 }
 \details{
 \code{performance} calculates the r-squared, root mean square error (RMSE),
-and mean absolute error (MAE) applying the model to a data frame. If
-a data frame is not specified, the model is evaluated on the
-training data (resubstitution). Results are provided by the
-\code{\link[caret]{postResample}} function.
+and mean absolute error (MAE) when applying the given linear model to a
+data frame. If a data frame is not specified, the model is evaluated on the
+training data (i.e., resubstitution). Results are provided by the
+\code{\link[caret]{postResample}} function from the caret package.
 }
 \examples{
 # performance on training sample

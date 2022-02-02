@@ -18,6 +18,11 @@ knitr::opts_chunk$set(
 library(qacReg)
 ```
 
+The **qacReg** package provide functions that offer a simple workflow for fitting and evaluating multiple linear or logistic regression models. 
+
+Actual model fitting is usually an iterative approach. However, the functions in
+the table below will help you to approach the process in a more structured fashion.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(knitr)
 library(dplyr)
@@ -30,7 +35,7 @@ d <- data.frame(
               "**relimp**(*model*)", 
               "**performance**(*model*)"),
   Description=c("Fits a multiple linear or a logistic regression
-                model, depending on the number of unique values in the response variable",
+                model, depending on the number of unique values in the response variable.",
                 
                 "For a linear model, prints an overall summary,
                 fit indices (R2, adj-R2, RMSE, MSE), omnibus F test,
@@ -49,14 +54,18 @@ d <- data.frame(
                 predictors and response variable, homogeneity of 
                 variance, multicolinearity, outliers, and
                 influential observations.\n\nFor a logistic
-                regression model, it creates plots to linearity 
-                between predictors and log-odds, multicolinearity, 
-                outliers, and influential observations.", 
-                "Generates one or more graphs displaying the 
+                regression model, it creates plots to evaluate linearity 
+                between predictors and log-odds of the binary outcome,
+                as well as the presence of multicolinearity, outliers, and 
+                influential observations.", 
+                "Generates one or more marginal effects graphs displaying the 
                 relationship between each predictor and the outcome,
                 controlling for the other predictors in the model", 
-                "description", 
-                "description"))
+                "Applies Dominance Analysis (DA) to rank order the variables in a linear or logistic regression in terms of relative importance.", 
+                "Provides indices of predictive performance for linear and logistic regression models. The statistics can be calculated for the training
+                or test data set. \n\nFor linear regression, RMSE, MEA, and Rsquare are provided. For logistic regression output includes
+                a confustion matrix and category based statistics (such as sensitivity, specificity, etc.). A visualization of the results is also 
+                provided."))
 
 kbl(d) %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 

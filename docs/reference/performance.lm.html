@@ -99,7 +99,8 @@
     <dl><dt>x</dt>
 <dd><p>an object of class <code>"lm"</code>.</p></dd>
 <dt>data</dt>
-<dd><p>a data frame.</p></dd>
+<dd><p>a data frame. If no data frame is provided, the model training
+data is used.</p></dd>
 <dt>digits</dt>
 <dd><p>integer; number of digits to print (default=4).</p></dd>
 <dt>...</dt>
@@ -107,15 +108,15 @@
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of performance estimates (RMSE, Rsquared, and MAE).</p>
+    <p>A vector of performance statistics (RMSE, Rsquared, and MAE).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
     <p><code>performance</code> calculates the r-squared, root mean square error (RMSE),
-and mean absolute error (MAE) applying the model to a data frame. If
-a data frame is not specified, the model is evaluated on the
-training data (resubstitution). Results are provided by the
-<code><a href="https://rdrr.io/pkg/caret/man/postResample.html" class="external-link">postResample</a></code> function.</p>
+and mean absolute error (MAE) when applying the given linear model to a
+data frame. If a data frame is not specified, the model is evaluated on the
+training data (i.e., resubstitution). Results are provided by the
+<code><a href="https://rdrr.io/pkg/caret/man/postResample.html" class="external-link">postResample</a></code> function from the caret package.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>

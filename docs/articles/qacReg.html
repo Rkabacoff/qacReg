@@ -118,6 +118,8 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">qacReg</span><span class="op">)</span></code></pre></div>
+<p>The <strong>qacReg</strong> package provide functions that offer a simple workflow for fitting and evaluating multiple linear or logistic regression models.</p>
+<p>Actual model fitting is usually an iterative approach. However, the functions in the table below will help you to approach the process in a more structured fashion.</p>
 <table class="table table table-striped" style="width: auto !important; ">
 <thead><tr>
 <th style="text-align:left;">
@@ -133,7 +135,7 @@ Description
 <strong>regress</strong>(<em>formula</em>, <em>data</em>)
 </td>
 <td style="text-align:left;">
-Fits a multiple linear or a logistic regression model, depending on the number of unique values in the response variable
+Fits a multiple linear or a logistic regression model, depending on the number of unique values in the response variable.
 </td>
 </tr>
 <tr>
@@ -151,7 +153,7 @@ For a logistic regression model, this prints an overall summary, omnibus chi-squ
 </td>
 <td style="text-align:left;">
 <p>For a linear model, creates plots to evaluate the normality of the residuals, linearity between predictors and response variable, homogeneity of variance, multicolinearity, outliers, and influential observations.</p>
-For a logistic regression model, it creates plots to linearity between predictors and log-odds, multicolinearity, outliers, and influential observations.
+For a logistic regression model, it creates plots to evaluate linearity between predictors and log-odds of the binary outcome, as well as the presence of multicolinearity, outliers, and influential observations.
 </td>
 </tr>
 <tr>
@@ -159,7 +161,7 @@ For a logistic regression model, it creates plots to linearity between predictor
 <strong>me_plots</strong>(<em>model</em>)
 </td>
 <td style="text-align:left;">
-Generates one or more graphs displaying the relationship between each predictor and the outcome, controlling for the other predictors in the model
+Generates one or more marginal effects graphs displaying the relationship between each predictor and the outcome, controlling for the other predictors in the model
 </td>
 </tr>
 <tr>
@@ -167,7 +169,7 @@ Generates one or more graphs displaying the relationship between each predictor 
 <strong>relimp</strong>(<em>model</em>)
 </td>
 <td style="text-align:left;">
-description
+Applies Dominance Analysis (DA) to rank order the variables in a linear or logistic regression in terms of relative importance.
 </td>
 </tr>
 <tr>
@@ -175,7 +177,8 @@ description
 <strong>performance</strong>(<em>model</em>)
 </td>
 <td style="text-align:left;">
-description
+<p>Provides indices of predictive performance for linear and logistic regression models. The statistics can be calculated for the training or test data sets.</p>
+For linear regression, RMSE, MEA, and Rsquare are provided. For logistic regression output includes a confustion matrix and category based statistics (such as sensitivity, specificity, etc.). A visualization of the results is also provided.
 </td>
 </tr>
 </tbody>
