@@ -67,7 +67,25 @@ d <- data.frame(
                 a confustion matrix and category based statistics (such as sensitivity, specificity, etc.). A visualization of the results is also 
                 provided."))
 
+
+
 kbl(d) %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 
 ```
+## Additional functions
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+d <- data.frame(
+  Function=c( "**forest_plot**(*model*)", 
+              "**roc_plot**(*actual*, *prob*)", 
+              "**lift_plot**(*actual*, *prob*)"),
+  Description=c("description",
+                "description",
+                "description"))
+                
+kbl(d) %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+
+```
+
+
 
