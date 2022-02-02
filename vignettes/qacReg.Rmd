@@ -79,13 +79,15 @@ d <- data.frame(
   Function=c( "**forest_plot**(*model*)", 
               "**roc_plot**(*actual*, *prob*)", 
               "**lift_plot**(*actual*, *prob*)"),
-  Description=c("description",
-                "description",
-                "description"))
+  Description=c('Display a forest plot of regression parameters for a given "lm" or "glm" model.',
+                "Plot a receiver operating characteristic curve for a binary predictive model.",
+                "Creates lift and gain charts for binary classification problems."))
                 
 kbl(d) %>% kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 
 ```
+
+See the **Vignettes** and **Reference** sections for examples.
 
 
 
