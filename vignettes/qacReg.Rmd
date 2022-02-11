@@ -56,7 +56,7 @@ d <- data.frame(
                 influential observations.\n\nFor a logistic
                 regression model, it creates plots to evaluate linearity 
                 between predictors and log-odds of the binary outcome,
-                as well as the presence of multicolinearity, outliers, and 
+                as well as multicolinearity, outliers, and 
                 influential observations.", 
                 "Generates one or more marginal effects graphs displaying the 
                 relationship between each predictor and the outcome,
@@ -79,7 +79,7 @@ d <- data.frame(
   Function=c( "**forest_plot**(*model*)", 
               "**roc_plot**(*actual*, *prob*)", 
               "**lift_plot**(*actual*, *prob*)"),
-  Description=c('Display a forest plot of regression parameters for a given "lm" or "glm" model.',
+  Description=c('Display a forest plot of regression parameters for a linear model  or odds rations for a logistic regression model.',
                 "Plot a receiver operating characteristic curve for a binary predictive model.",
                 "Creates lift and gain charts for binary classification problems."))
                 
