@@ -19,6 +19,7 @@ In this analysis, we'll develop a model for predicting births by caesarian from 
 Model fitting is normally an iterative process. We'll skip this to keep things simple.
 
 ### Fit the model
+
 ```{r setup}
 library(qacReg)
 data(caesarian)
@@ -67,4 +68,19 @@ relimp(fit)
 performance(fit)
 ```
 
+### Additional output
+
+#### ROC Plot
+
+```{r}
+pred <- predict(fit, caesarian, type="response")
+roc_plot(caesarian$caesarian, pred, positive="yes")
+
+```
+
+#### Lift and Gain Charts
+
+```{r}
+lift_plot(caesarian$caesarian, pred, positive="yes")
+```
 

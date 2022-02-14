@@ -245,6 +245,35 @@
 <span class="co">#&gt;       precision = pos pred value.</span></code></pre></div>
 <p><img src="logistic_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
+<div class="section level3">
+<h3 id="additional-output">Additional output<a class="anchor" aria-label="anchor" href="#additional-output"></a>
+</h3>
+<div class="section level4">
+<h4 id="roc-plot">ROC Plot<a class="anchor" aria-label="anchor" href="#roc-plot"></a>
+</h4>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">caesarian</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/roc_plot.html">roc_plot</a></span><span class="op">(</span><span class="va">caesarian</span><span class="op">$</span><span class="va">caesarian</span>, <span class="va">pred</span>, positive<span class="op">=</span><span class="st">"yes"</span><span class="op">)</span></code></pre></div>
+<p><img src="logistic_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+</div>
+<div class="section level4">
+<h4 id="lift-and-gain-charts">Lift and Gain Charts<a class="anchor" aria-label="anchor" href="#lift-and-gain-charts"></a>
+</h4>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/lift_plot.html">lift_plot</a></span><span class="op">(</span><span class="va">caesarian</span><span class="op">$</span><span class="va">caesarian</span>, <span class="va">pred</span>, positive<span class="op">=</span><span class="st">"yes"</span><span class="op">)</span></code></pre></div>
+<p><img src="logistic_files/figure-html/unnamed-chunk-9-1.png" width="700"><img src="logistic_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
+<pre><code><span class="co">#&gt;   decile ncases nresp cumresp pctevents   gain  cumlift</span>
+<span class="co">#&gt; 1     10      8     8       8     17.39  17.39 1.739000</span>
+<span class="co">#&gt; 3     20      8     7      15     15.22  32.61 1.630500</span>
+<span class="co">#&gt; 4     30      8     7      22     15.22  47.83 1.594333</span>
+<span class="co">#&gt; 5     40      8     7      29     15.22  63.05 1.576250</span>
+<span class="co">#&gt; 6     50      8     2      31      4.35  67.40 1.348000</span>
+<span class="co">#&gt; 7     60      8     4      35      8.70  76.10 1.268333</span>
+<span class="co">#&gt; 8     70      8     3      38      6.52  82.62 1.180286</span>
+<span class="co">#&gt; 9     80      8     6      44     13.04  95.66 1.195750</span>
+<span class="co">#&gt; 2    100      8     2      46      4.35 100.01 1.000100</span></code></pre>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

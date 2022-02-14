@@ -4,12 +4,6 @@
     <loc>http://rkabacoff.github.io/qacReg/404.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>http://rkabacoff.github.io/qacReg/LICENSE.html</loc>
-  </url>
-  <url>
     <loc>http://rkabacoff.github.io/qacReg/articles/diagnostics.html</loc>
   </url>
   <url>
@@ -35,6 +29,12 @@
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/index.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/LICENSE.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/auto_mpg.html</loc>
@@ -73,9 +73,6 @@
     <loc>http://rkabacoff.github.io/qacReg/reference/forest_plot.html</loc>
   </url>
   <url>
-    <loc>http://rkabacoff.github.io/qacReg/reference/ggSpreadLevelPlot.html</loc>
-  </url>
-  <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/ggcrPlots.html</loc>
   </url>
   <url>
@@ -92,6 +89,9 @@
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/ggrocPlot.html</loc>
+  </url>
+  <url>
+    <loc>http://rkabacoff.github.io/qacReg/reference/ggSpreadLevelPlot.html</loc>
   </url>
   <url>
     <loc>http://rkabacoff.github.io/qacReg/reference/ggvif.html</loc>
