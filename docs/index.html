@@ -57,7 +57,7 @@
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fas fa-book"></span>
      
     Vignettes
@@ -119,9 +119,18 @@
 </h2>
 <p>You can install the development version of qacReg using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+<code class="sourceCode R"><span class="co"># install remotes package if necessary</span>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="op">}</span>
+
+<span class="co"># install dominanceanalysis package from CRAN archive</span>
+<span class="va">archive</span> <span class="op">&lt;-</span> <span class="st">"https://cran.r-project.org/src/contrib/Archive"</span>
+<span class="va">pkg</span> <span class="op">&lt;-</span> <span class="st">"dominanceanalysis/dominanceanalysis_2.0.0.tar.gz"</span>
+<span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">archive</span>, <span class="va">pkg</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">file</span>, repos <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+
+<span class="co"># install qacReg package from github</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rkabacoff/qacReg"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -185,7 +194,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
