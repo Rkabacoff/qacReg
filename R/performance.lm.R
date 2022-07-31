@@ -1,6 +1,4 @@
 #' @title Model Performance for Linear Models
-#'
-#'
 #' @description
 #' Produce indices of model performance for linear models
 #'

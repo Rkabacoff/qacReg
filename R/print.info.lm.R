@@ -1,5 +1,4 @@
 #' @title Print an "info.lm" Object
-#'
 #' @description
 #' \code{print} method for class \code{"info.lm"}.
 #'

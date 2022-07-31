@@ -1,6 +1,4 @@
 #' @title Regression Diagnostics
-#'
-#'
 #' @description
 #' \code{diagnostics} is a generic function for producing regression
 #' diagnostics. Currently linear and logistic regression models are supported.

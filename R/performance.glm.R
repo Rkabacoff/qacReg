@@ -1,6 +1,4 @@
 #' @title Model Performance for Logistic Regression
-#'
-#'
 #' @description
 #' Produce indices of model performance for logistic regression
 #'

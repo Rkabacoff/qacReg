@@ -1,6 +1,4 @@
 #' @title Extended Model Summary
-#'
-#'
 #' @description
 #' Extended summary information for a model fit. Currently linear and logistic
 #' regression models are supported.
