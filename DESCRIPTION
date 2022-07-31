@@ -32,7 +32,6 @@ Imports:
     ggplot2,
     patchwork,
     ggrepel,
-    MASS,
     crayon,
     dominanceanalysis,
     e1071,
